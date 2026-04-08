@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Parcours IA Filière Bois — Kosmio × Xylofutur</title>
+<meta name="description" content="L'IA prend racine dans vos ateliers. Un parcours en 3 niveaux pour les entreprises de la filière bois : comprendre, diagnostiquer, déployer l'IA — sans jargon, à votre rythme, avec un ROI mesurable." />
+<link rel="stylesheet" href="design-system/tokens.css" />
+<style>
+  /* ============ Layout helpers ============ */
+  .wrap { max-width: var(--container-xl); margin-inline:auto; padding-inline: var(--gutter-mobile); }
+  @media (min-width:768px){ .wrap{ padding-inline: var(--gutter-tablet);} }
+  @media (min-width:1024px){ .wrap{ padding-inline: var(--gutter-desktop);} }
+
+  /* ============ Header ============ */
+  header.site {
+    position: sticky; top:0; z-index:50;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid rgba(201,191,177,0.4);
+  }
+  header.site .wrap { display:flex; align-items:center; justify-content:space-between; height:72px; }
+  .brand { display:flex; align-items:center; gap:var(--space-3); font-family:var(--font-display); font-weight:700; letter-spacing:var(--tracking-tight); color:var(--ink-900); text-decoration:none;}
+  .brand .dot { width:14px;height:14px;border-radius:50%; background:var(--xf-green-500); box-shadow: 0 0 0 4px var(--xf-green-50);}
+  .brand small { font-family:var(--font-mono); font-size:.7rem; font-weight:600; color:var(--grey-600); letter-spacing:var(--tracking-mono); text-transform:uppercase;}
+  nav.primary { display:none; gap: var(--space-6);}
+  nav.primary a { color: var(--ink-700); text-decoration:none; font-weight:500; font-size:.95rem;}
+  nav.primary a:hover { color: var(--xf-green-600); }
+  @media (min-width:1024px){ nav.primary{ display:flex; } }
+
+  /* ============ HERO ============ */
+  .hero {
+    position:relative; overflow:hidden;
+    background: radial-gradient(1200px 600px at 80% -10%, rgba(0,177,148,0.18), transparent 60%),
+                radial-gradient(900px 500px at 0% 100%, rgba(186,135,72,0.18), transparent 60%),
+                var(--ink-900);
+    color: var(--white);
+    padding-block: clamp(4rem, 10vw, 9rem);
+  }
+  .hero .wrap { position:relative; z-index:2; display:grid; gap:var(--space-7); grid-template-columns:1fr;}
+  @media (min-width:1024px){ .hero .wrap { grid-template-columns: 1.4fr .9fr; align-items:center;} }
+  .hero .eyebrow { color: var(--xf-green-500); }
+  .hero .eyebrow::before { background: var(--xf-green-500); }
+  .hero h1 {
+    color: var(--white);
+    font-size: var(--text-display-1);
+    line-height: var(--lh-display);
+    letter-spacing: var(--tracking-tight);
+    margin: var(--space-5) 0 var(--space-5);
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--xf-green-500);
+    background: linear-gradient(120deg, var(--xf-green-500), var(--xf-gold-500));
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero p.lead {
+    font-size: var(--text-lead);
+    color: rgba(255,255,255,0.78);
+    max-width: 38ch;
+    margin: 0 0 var(--space-7);
+  }
+  .hero .ctas { display:flex; flex-wrap:wrap; gap:var(--space-4);}
+  .hero .signature { margin-top: var(--space-7); font-family:var(--font-mono); font-size:.75rem; color: rgba(255,255,255,0.55); letter-spacing:var(--tracking-mono); text-transform:uppercase;}
+  .hero .signature b { color: var(--xf-gold-500); }
+
+  /* ===== Tree art ===== */
+  .tree {
+    position: relative; width:100%; aspect-ratio: 1/1; max-width:480px; margin-inline:auto;
+  }
+  .tree svg { width:100%; height:100%; overflow: visible;}
+  .leaf {
+    transform-origin: center;
+    animation: sway 6s var(--ease-in-out) infinite;
+  }
+  .leaf:nth-child(2n){ animation-duration: 7.5s; animation-delay:-1s;}
+  .leaf:nth-child(3n){ animation-duration: 9s; animation-delay:-2s;}
+  @keyframes sway {
+    0%,100% { transform: translateY(0) rotate(0); }
+    50%     { transform: translateY(-6px) rotate(2deg); }
+  }
+  .chip {
+    position:absolute; width:10px; height:6px; border-radius:2px;
+    background: var(--xf-gold-500); opacity:.0;
+    animation: chip 6s linear infinite;
+  }
+  @keyframes chip {
+    0% { opacity:0; transform: translate(0,0) rotate(0);}
+    10% { opacity:.9;}
+    100% { opacity:0; transform: translate(var(--tx,80px), 220px) rotate(540deg); }
+  }
+
+  /* ============ Marquee ============ */
+  .marquee {
+    background: var(--xf-green-500); color:#fff;
+    padding: var(--space-4) 0;
+    overflow:hidden; border-block: 1px solid rgba(0,0,0,0.08);
+  }
+  .marquee__track {
+    display:flex; gap: var(--space-7); white-space:nowrap;
+    animation: scroll 35s linear infinite;
+    font-family: var(--font-mono); font-weight:700; text-transform:uppercase; letter-spacing: var(--tracking-mono); font-size:.8rem;
+  }
+  .marquee__track span::before { content:"🌲"; margin-right: var(--space-3); }
+  @keyframes scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+  /* ============ Sections common ============ */
+  section { padding-block: clamp(4rem, 8vw, 8rem); }
+  .section-head { max-width: 56rem; margin-bottom: var(--space-8); }
+  .section-head h2 { font-size: var(--text-h1); margin-top: var(--space-4); }
+
+  /* ============ Stats (pourquoi maintenant) ============ */
+  .why { background: var(--xf-sand-100); }
+  .stats { display:grid; gap: var(--space-6); grid-template-columns:1fr; }
+  @media (min-width:768px){ .stats { grid-template-columns: repeat(3, 1fr);} }
+  .stat {
+    background:#fff; border:1px solid var(--grey-300); border-radius: var(--radius-lg);
+    padding: var(--space-7); position:relative; overflow:hidden;
+    transition: transform .3s var(--ease-out), box-shadow .3s var(--ease-out);
+  }
+  .stat:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .stat::after {
+    content:""; position:absolute; right:-30px; bottom:-30px; width:120px;height:120px;
+    background: var(--xf-green-50); border-radius:50%;
+  }
+  .stat .num {
+    font-family: var(--font-display); font-weight:700; color: var(--xf-green-600);
+    font-size: clamp(3rem, 6vw, 4.5rem); line-height:1; letter-spacing: var(--tracking-tight);
+    position:relative; z-index:1;
+  }
+  .stat p { position:relative; z-index:1; color: var(--ink-700); margin: var(--space-4) 0 0;}
+
+  /* ============ Levels ============ */
+  .levels-grid { display:grid; gap: var(--space-6); grid-template-columns:1fr; }
+  @media (min-width:900px){ .levels-grid { grid-template-columns: repeat(3, 1fr);} }
+  .level-card {
+    background:#fff;
+    transition: transform .35s var(--ease-out), box-shadow .35s var(--ease-out);
+  }
+  .level-card .badge {
+    display:inline-block; padding: 4px 10px; border-radius: var(--radius-pill);
+    font-family: var(--font-mono); font-size:.65rem; font-weight:700; text-transform:uppercase;
+    letter-spacing: var(--tracking-mono); margin-bottom: var(--space-4);
+    background: var(--xf-green-50); color: var(--xf-green-600);
+  }
+  .level-card[data-level="1"] .badge { background: var(--km-sage-50); color: var(--km-sage-600); }
+  .level-card[data-level="3"] .badge { background: var(--xf-gold-50); color: var(--xf-gold-600); }
+  .level-card h3 { font-size: var(--text-h3); margin-bottom: var(--space-3); }
+  .level-card p { color: var(--ink-700); margin-bottom: var(--space-5);}
+  .level-card .price { font-family: var(--font-display); font-weight:700; font-size: 1.5rem; color: var(--ink-900);}
+  .level-card .price small { font-family: var(--font-body); font-weight:500; font-size:.85rem; color: var(--grey-600); display:block;}
+  .level-card ul { list-style:none; padding:0; margin: var(--space-5) 0; }
+  .level-card ul li { display:flex; align-items:flex-start; gap:var(--space-3); padding:var(--space-2) 0; color: var(--ink-700); font-size:.95rem;}
+  .level-card ul li::before { content:"→"; flex:none; color: var(--xf-green-500); font-weight:700;}
+  .level-card .cta { margin-top: var(--space-5); display:inline-flex; align-items:center; gap:var(--space-3);
+                     color: var(--xf-green-600); font-weight:600; text-decoration:none; font-size:.95rem;}
+  .level-card .cta:hover { color: var(--xf-green-500); }
+
+  /* ============ Pour qui ============ */
+  .for-who { background: var(--xf-sand-100); }
+  .for-who .grid { display:grid; gap: var(--space-8); grid-template-columns:1fr; align-items:center;}
+  @media (min-width:900px){ .for-who .grid { grid-template-columns: 1.1fr .9fr;} }
+  .for-who ul { list-style:none; padding:0; margin: var(--space-6) 0 0; display:grid; gap: var(--space-3);}
+  .for-who li { display:flex; gap:var(--space-4); align-items:center; padding: var(--space-4) var(--space-5); background:#fff; border-radius: var(--radius-md); border-left: 4px solid var(--xf-green-500); }
+  .for-who li::before { content:"→"; color: var(--xf-green-500); font-weight:700;}
+  .for-who li sup { font-size: 0.65em; vertical-align: super; line-height: 0; margin: 0 1px 0 0; }
+  .for-who .visual {
+    aspect-ratio: 4/5; border-radius: var(--radius-lg);
+    background-image: url('assets/bois-ia.png');
+    background-size: cover; background-position: center;
+    position:relative; overflow:hidden;
+    box-shadow: var(--shadow-lg);
+  }
+  .for-who .visual::after {
+    content:""; position:absolute; inset:0;
+    background: linear-gradient(180deg, rgba(15,24,32,0) 40%, rgba(15,24,32,0.85) 100%);
+  }
+  .for-who .visual span {
+    position:absolute; z-index:2; bottom: var(--space-6); left: var(--space-6); right: var(--space-6);
+    color:#fff; font-family: var(--font-display); font-size: 1.6rem; font-weight:700; line-height:1.1;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+  }
+
+  /* ============ Méthode 4 étapes ============ */
+  .steps { display:grid; gap: var(--space-5); grid-template-columns:1fr; }
+  @media (min-width:768px){ .steps { grid-template-columns: repeat(2, 1fr);} }
+  @media (min-width:1100px){ .steps { grid-template-columns: repeat(4, 1fr);} }
+  .step {
+    background:#fff; border:1px solid var(--grey-300); border-radius: var(--radius-lg);
+    padding: var(--space-6); position:relative; overflow:hidden;
+    transition: transform .3s var(--ease-out);
+  }
+  .step:hover { transform: translateY(-4px); }
+  .step .num {
+    font-family: var(--font-mono); font-size:.75rem; font-weight:700; color: var(--xf-green-600);
+    letter-spacing: var(--tracking-mono);
+  }
+  .step h4 { font-family: var(--font-display); font-size:1.25rem; margin: var(--space-3) 0 var(--space-3);}
+  .step p { color: var(--ink-700); font-size: .95rem; margin:0;}
+  .step .ico { font-size: 2rem; margin-bottom: var(--space-3); display:block;}
+
+  /* ============ Témoignage ============ */
+  .testimonial { background: var(--xf-sand-100); }
+  .testimonial .grid { display:grid; gap: var(--space-6); grid-template-columns:1fr; margin-top: var(--space-7);}
+  @media (min-width: 900px){ .testimonial .grid { grid-template-columns: 1fr 1fr; gap: var(--space-7);} }
+  .testimonial .card {
+    background:#fff; border:1px solid var(--grey-300); border-radius: var(--radius-lg);
+    padding: var(--space-7);
+    display:flex; flex-direction:column;
+    transition: transform .3s var(--ease-out), box-shadow .3s var(--ease-out);
+  }
+  .testimonial .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg);}
+  .testimonial .quote {
+    font-family: var(--font-display); font-weight:700;
+    font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+    line-height: 1.35; letter-spacing: var(--tracking-tight);
+    flex: 1; margin: 0 0 var(--space-6);
+  }
+  .testimonial .quote::before { content:"« "; color: var(--xf-green-500);}
+  .testimonial .quote::after  { content:" »"; color: var(--xf-green-500);}
+  .testimonial .who { display:flex; align-items:center; gap: var(--space-4);}
+  .testimonial .avatar { width:56px;height:56px;border-radius:50%; background: linear-gradient(135deg, var(--xf-gold-500), var(--km-sage-500)); flex:none;}
+  .testimonial .who b { display:block; }
+  .testimonial .who span { color: var(--grey-600); font-size:.9rem;}
+
+  /* ============ FAQ ============ */
+  .faq { background: var(--xf-sand-100); }
+  .faq details {
+    background:#fff; border:1px solid var(--grey-300); border-radius: var(--radius-md);
+    padding: var(--space-5) var(--space-6); margin-bottom: var(--space-3); cursor:pointer;
+    transition: border-color .2s ease;
+  }
+  .faq details[open]{ border-color: var(--xf-green-500); }
+  .faq summary { font-family: var(--font-display); font-weight:700; font-size: 1.1rem; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:var(--space-4);}
+  .faq summary::-webkit-details-marker { display:none; }
+  .faq summary::after { content:"+"; font-size: 1.6rem; color: var(--xf-green-500); transition: transform .3s ease;}
+  .faq details[open] summary::after { transform: rotate(45deg); }
+  .faq details p { margin: var(--space-4) 0 0; color: var(--ink-700); }
+
+  /* ============ CTA final ============ */
+  .final {
+    background:
+      radial-gradient(800px 400px at 90% 100%, rgba(186,135,72,0.25), transparent 60%),
+      radial-gradient(800px 400px at 10% 0%, rgba(0,177,148,0.25), transparent 60%),
+      var(--ink-900);
+    color:#fff;
+  }
+  .final h2 { color:#fff; font-size: var(--text-display-2); }
+  .final .grid { display:grid; gap: var(--space-6); grid-template-columns:1fr; margin-top: var(--space-8);}
+  @media (min-width:768px){ .final .grid { grid-template-columns: 1fr 1fr;} }
+  .contact-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: var(--radius-lg);
+    padding: var(--space-7);
+  }
+  .contact-card h3 { color:#fff; font-size: 1.4rem; margin-bottom: var(--space-3);}
+  .contact-card p { color: rgba(255,255,255,0.7); margin: var(--space-2) 0;}
+  .contact-card a { color: var(--xf-green-500);}
+
+  /* ============ Footer ============ */
+  footer.site {
+    background: #0f1820; color: rgba(255,255,255,0.6);
+    padding: var(--space-8) 0 var(--space-6);
+    font-size: .85rem;
+  }
+  footer.site .wrap { display:flex; flex-wrap:wrap; gap: var(--space-5); justify-content:space-between; align-items:center;}
+  footer.site a { color: rgba(255,255,255,0.8);}
+
+  /* ============ Reveal on scroll ============ */
+  .reveal { opacity:0; transform: translateY(20px); transition: opacity .8s var(--ease-out), transform .8s var(--ease-out);}
+  .reveal.in { opacity:1; transform:none;}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a href="#" class="brand">
+      <span class="dot"></span>
+      Parcours&nbsp;IA&nbsp;Bois <small>Kosmio × Xylofutur</small>
+    </a>
+    <nav class="primary" aria-label="Principal">
+      <a href="#offre">L'offre</a>
+      <a href="#methode">Méthode</a>
+      <a href="#cas">Cas d'usage</a>
+      <a href="#tarifs">Tarifs</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn btn--primary btn--sm" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">Réserver un échange →</a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Kosmio ✕ Xylofutur · Spécialistes filière bois</span>
+      <h1>L'IA appliquée aux <em>vrais sujets</em> de la filière bois.</h1>
+      <p class="lead">L'IA pragmatique. On part de vos opérations et on met en place des cas d'usage qui fonctionnent vraiment, dans vos outils existants.</p>
+      <div class="ctas">
+        <a class="btn btn--primary btn--lg" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">Diagnostiquer mes opportunités IA →</a>
+        <a class="btn btn--secondary btn--lg" href="#cas" style="color:#fff;border-color:#fff;">Voir des cas d'usage concrets</a>
+      </div>
+      <div class="signature">Recommandé par <b>Xylofutur</b> · Tarifs préférentiels adhérents · Financement OPCO</div>
+    </div>
+
+    <div class="tree" aria-hidden="true">
+      <svg viewBox="0 0 400 400">
+        <!-- sol -->
+        <ellipse cx="200" cy="370" rx="160" ry="14" fill="rgba(186,135,72,0.25)"/>
+        <!-- tronc -->
+        <path d="M195 370 Q190 250 200 180 Q210 140 198 90" stroke="#BA8748" stroke-width="14" stroke-linecap="round" fill="none"/>
+        <!-- branches -->
+        <path d="M200 220 Q170 200 140 195" stroke="#BA8748" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path d="M200 180 Q235 165 270 160" stroke="#BA8748" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path d="M200 140 Q175 120 155 115" stroke="#BA8748" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <!-- feuillage / bulles "IA" -->
+        <g>
+          <circle class="leaf" cx="200" cy="90" r="58" fill="#00B194"/>
+          <circle class="leaf" cx="140" cy="170" r="42" fill="#009982"/>
+          <circle class="leaf" cx="270" cy="135" r="48" fill="#00B194"/>
+          <circle class="leaf" cx="155" cy="95" r="32" fill="#7C9E98"/>
+          <circle class="leaf" cx="245" cy="75" r="28" fill="#65857F"/>
+        </g>
+        <!-- petites étincelles "IA" -->
+        <g fill="#F8EFE2">
+          <circle class="leaf" cx="200" cy="80" r="3"/>
+          <circle class="leaf" cx="180" cy="105" r="2"/>
+          <circle class="leaf" cx="225" cy="70" r="2.5"/>
+          <circle class="leaf" cx="260" cy="120" r="2"/>
+        </g>
+        <text x="200" y="98" text-anchor="middle" font-family="Helvetica,Arial" font-weight="700" font-size="34" fill="#fff">IA</text>
+      </svg>
+      <span class="chip" style="left:46%; --tx:60px; animation-delay:0s;"></span>
+      <span class="chip" style="left:50%; --tx:-80px; animation-delay:-2s;"></span>
+      <span class="chip" style="left:54%; --tx:40px; animation-delay:-4s;"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>Devis : 45 min → 4 min</span><span>Appels d'offres : 5 jours → 1 jour</span><span>Synthèse prod auto le lundi 8h</span><span>Veille marché bois quotidienne</span><span>Procédures qualité rédigées seules</span>
+    <span>Devis : 45 min → 4 min</span><span>Appels d'offres : 5 jours → 1 jour</span><span>Synthèse prod auto le lundi 8h</span><span>Veille marché bois quotidienne</span><span>Procédures qualité rédigées seules</span>
+  </div>
+</div>
+
+<!-- ============ POURQUOI MAINTENANT ============ -->
+<section class="why" id="contexte">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Pourquoi maintenant</span>
+      <h2>Vous avez déjà perdu un vendredi soir cette semaine. <em style="color:var(--xf-green-600);">Au suivant ?</em></h2>
+      <p class="t-lead">On parle scieries, contremaîtres, devis client, OF en retard. Pas data lakes, pas MLOps, pas transformation digitale. On vient, on regarde ce qui vous coûte du temps, on automatise, on s'en va.</p>
+    </div>
+    <div class="stats">
+      <div class="stat reveal"><div class="num">−41 min</div><p>Un devis rédigé en <b>4 min au lieu de 45</b>. Gain mesuré sur un négoce bois de 22 salariés, 6 semaines après le sprint.</p></div>
+      <div class="stat reveal"><div class="num">1 jour</div><p>Pour répondre à un appel d'offres public au lieu de 5. Relecture humaine gardée. La machine fait la structure, vous gardez la voix.</p></div>
+      <div class="stat reveal"><div class="num">0 €</div><p>De licence ChatGPT Enterprise. On construit avec les outils que vous avez déjà, ou on les choisit pour vous à votre place.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OFFRE EN 3 NIVEAUX ============ -->
+<section id="offre">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">L'offre</span>
+      <h2>Trois façons d'entrer. <em style="color:var(--xf-green-600);">Un seul objectif : du ROI avant Noël.</em></h2>
+      <p class="t-lead">Vous choisissez votre porte d'entrée en fonction de votre contexte. On ne vous pousse jamais au niveau supérieur tant que celui d'avant n'a pas produit ses effets.</p>
+    </div>
+
+    <div class="levels-grid">
+      <article class="level-card reveal" data-level="1">
+        <span class="badge">01 · Découvrir</span>
+        <div class="level-card__numeral">01</div>
+        <h3>La journée qui démystifie</h3>
+        <p>Une journée, pas de slides inutiles. Vous repartez avec 5 cas d'usage chiffrés pour votre boîte et les 3 premiers à activer lundi.</p>
+        <ul>
+          <li>Repartez avec 5 cas d'usage chiffrés pour votre entreprise</li>
+          <li>Des exemples pris dans des scieries, pas dans la Silicon Valley</li>
+          <li>Votre équipe sait quoi faire lundi matin</li>
+        </ul>
+        <div class="price">890 € HT <small>par participant · financé à 100% OPCO</small></div>
+        <a class="cta" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">Réserver une session →</a>
+      </article>
+
+      <article class="level-card reveal" data-level="2">
+        <span class="badge">02 · Diagnostiquer</span>
+        <div class="level-card__numeral">02</div>
+        <h3>Le plan sur 12 mois</h3>
+        <p>Une journée chez vous, trois semaines de travail, un plan chiffré. Vous savez exactement par quoi commencer et combien vous allez économiser.</p>
+        <ul>
+          <li>Le montant précis que vous allez économiser en 12 mois</li>
+          <li>Les 3 cas d'usage prioritaires pour VOTRE boîte</li>
+          <li>Un plan d'action mois par mois, sans jargon</li>
+        </ul>
+        <div class="price">3 500 € HT <small>forfait · 2 975 € HT adhérents Xylofutur</small></div>
+        <a class="cta" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">Demander un diagnostic →</a>
+      </article>
+
+      <article class="level-card reveal" data-level="3">
+        <span class="badge">03 · Déployer</span>
+        <div class="level-card__numeral">03</div>
+        <h3>Votre premier cas en production</h3>
+        <p>On prend un cas d'usage prioritaire et on le met en production en 6 semaines. Votre équipe apprend en faisant. On part quand vous êtes autonome.</p>
+        <ul>
+          <li>Un cas d'usage en production en 6 semaines chrono</li>
+          <li>Votre équipe formée en faisant, pas en écoutant</li>
+          <li>On part quand vous savez faire sans nous</li>
+        </ul>
+        <div class="price">dès 950 €/mois <small>6 mois minimum · on arrête quand vous voulez</small></div>
+        <a class="cta" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">Parler de mon projet →</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ POUR QUI ============ -->
+<section class="for-who">
+  <div class="wrap grid">
+    <div class="reveal">
+      <span class="eyebrow">Pour qui ?</span>
+      <h2 style="margin-top:var(--space-4);">Si vous n'avez pas de DSI, <em style="color:var(--xf-green-600);">c'est exactement pour vous.</em></h2>
+      <p class="t-lead">On ne travaille qu'avec la filière bois. On connaît votre ERP, vos contremaîtres, vos marges, vos contraintes de main d'œuvre. Et on sait faire la différence entre un chêne et un douglas — ça compte plus qu'on ne le pense.</p>
+      <ul>
+        <li>Scieries et 1<sup>re</sup>&nbsp;transformation</li>
+        <li>Négoces et distribution bois &amp; matériaux</li>
+        <li>2<sup>e</sup>&nbsp;transformation et menuiseries industrielles</li>
+        <li>Bureaux d'études et architectes bois</li>
+        <li>Coopératives forestières</li>
+      </ul>
+    </div>
+    <div class="visual reveal" aria-hidden="true"><span>Le bois sait travailler.<br>L'IA aussi.</span></div>
+  </div>
+</section>
+
+<!-- ============ MÉTHODE ============ -->
+<section id="methode">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Notre méthode</span>
+      <h2>4 temps pour ne casser ni votre quotidien, <em style="color:var(--xf-green-600);">ni votre budget.</em></h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><span class="ico">🌱</span><div class="num">01 · Comprendre</div><h4>Autodiagnostic</h4><p>20 questions pour situer votre maturité IA et cadrer les attentes de la direction.</p></div>
+      <div class="step reveal"><span class="ico">🧭</span><div class="num">02 · Cibler</div><h4>Séance sur site</h4><p>Une journée chez vous pour cartographier les cas d'usage et prioriser ceux qui rapportent vite.</p></div>
+      <div class="step reveal"><span class="ico">⚙️</span><div class="num">03 · Tester</div><h4>Sprint MVP</h4><p>3 à 6 semaines pour faire tourner un premier cas d'usage en conditions réelles.</p></div>
+      <div class="step reveal"><span class="ico">🌳</span><div class="num">04 · Déployer</div><h4>Équipe pilote</h4><p>On forme votre équipe, on mesure l'impact, on capitalise sur le suivant.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CAS D'USAGE (snapshot) ============ -->
+<section id="cas" class="why">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Cas d'usage filière bois</span>
+      <h2>Du devis client à la veille marché, <em style="color:var(--xf-green-600);">l'IA travaille déjà pour vos pairs.</em></h2>
+    </div>
+    <div class="stats">
+      <div class="stat reveal"><div class="num" style="font-size:2rem;">📨 → 📄</div><p><b>Devis générés en 4 minutes</b> à partir d'une demande client par email, contre 45 min en moyenne aujourd'hui.</p></div>
+      <div class="stat reveal"><div class="num" style="font-size:2rem;">📊</div><p><b>Synthèse hebdo automatique</b> de vos indicateurs production, prête le lundi 8h dans la boîte mail du dirigeant.</p></div>
+      <div class="stat reveal"><div class="num" style="font-size:2rem;">🏛️</div><p><b>Réponses aux appels d'offres publics</b> structurées en 1 jour au lieu de 5, avec relecture humaine.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TÉMOIGNAGES ============ -->
+<section class="testimonial">
+  <div class="wrap">
+    <span class="eyebrow">Ils en parlent</span>
+    <div class="grid">
+      <div class="card reveal">
+        <p class="quote">Les offres de formation se développent de toutes parts alors que la digitalisation reste un enjeu stratégique de taille pour la filière. On a choisi de concevoir cette offre IA pour répondre précisément aux besoins des acteurs, à tous les niveaux de la chaîne de valeur.</p>
+        <div class="who">
+          <div class="avatar" aria-hidden="true"></div>
+          <div><b>Charlotte Perrier</b><span>Directrice · Xylofutur</span></div>
+        </div>
+      </div>
+      <div class="card reveal">
+        <p class="quote">Les possibilités de l'IA sont énormes. On a mis en place un plan très concret pour accélérer la prise de mesure, faciliter le travail de notre BE et accélérer la production des devis. Cerise sur le gâteau : nos partenaires et clients ont maintenant accès aux passeports produits de nos agencements, intégrables dans leur BIM.</p>
+        <div class="who">
+          <div class="avatar" aria-hidden="true" style="background:linear-gradient(135deg,var(--km-sage-500),var(--xf-green-500));"></div>
+          <div><b>Thomas P.</b><span>Agencements et escaliers bois</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TARIFS RÉSUMÉ ============ -->
+<section id="tarifs">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Tarifs</span>
+      <h2>Trois engagements. <em style="color:var(--xf-green-600);">Trois budgets.</em></h2>
+      <p class="t-lead">Tous nos formats sont éligibles aux financements OPCO et France Travail. Tarifs préférentiels pour les adhérents Xylofutur (-15% sur le diagnostic).</p>
+    </div>
+    <div class="levels-grid">
+      <div class="level-card reveal" data-level="1"><div class="level-card__numeral">01</div><h3>Découvrir</h3><div class="price">890 € HT</div><p style="margin-top:var(--space-4);">Par participant · OPCO mobilisable · Sessions inter ou intra entreprise</p></div>
+      <div class="level-card reveal" data-level="2"><div class="level-card__numeral">02</div><h3>Diagnostiquer</h3><div class="price">3 500 € HT</div><p style="margin-top:var(--space-4);">Forfait · 1 séance site + livrables · -15% adhérents Xylofutur</p></div>
+      <div class="level-card reveal" data-level="3"><div class="level-card__numeral">03</div><h3>Déployer</h3><div class="price">dès 950 €/mois</div><p style="margin-top:var(--space-4);">Engagement 6 mois min. · Devis personnalisé selon le périmètre</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq">
+  <div class="wrap" style="max-width: 56rem;">
+    <div class="section-head reveal">
+      <span class="eyebrow">Questions fréquentes</span>
+      <h2>Vous vous demandez sûrement…</h2>
+    </div>
+    <details class="reveal"><summary>Combien ça va me coûter vraiment, tout compris, si je vais jusqu'au bout ?</summary><p>Le parcours complet (formation + diagnostic + 6 mois de déploiement) tourne entre 12 et 18 k€ HT selon le périmètre. OPCO et crédit d'impôt formation dirigeant peuvent couvrir jusqu'à 70 % selon votre situation. On chiffre précisément avant de signer, pas après.</p></details>
+    <details class="reveal"><summary>Et si ça foire, qu'est-ce qu'il me reste ?</summary><p>Sur le diagnostic : la cartographie et la roadmap sont à vous, utilisables avec n'importe quel prestataire. Sur le déploiement : chaque sprint de 6 semaines est un livrable indépendant, vous pouvez arrêter à chaque fin de sprint sans rien devoir.</p></details>
+    <details class="reveal"><summary>Vous faites ça depuis combien de temps dans le bois ?</summary><p>Kosmio accompagne la filière bois depuis 2024, en partenariat avec Xylofutur depuis 2025. Avant, 10 ans d'intégration de systèmes dans l'industrie (dont agroalimentaire et métallurgie), donc on connaît les contraintes d'atelier — pas juste celles des bureaux.</p></details>
+    <details class="reveal"><summary>Mes salariés vont prendre peur, comment on gère ?</summary><p>On ne fait jamais d'IA sur le dos des équipes. Notre méthode part toujours des irritants qu'ils vivent (devis, reporting, paperasse) pour leur rendre du temps. Dans 100 % des déploiements à date, l'équipe pilote a demandé à étendre l'outil.</p></details>
+    <details class="reveal"><summary>Mon entreprise est petite (moins de 10 salariés), est-ce pour moi ?</summary><p>Oui — peut-être encore plus. Une TPE qui récupère 5 h par semaine sur ses devis change son quotidien. On a un format allégé pour les &lt; 10 salariés, demandez-le.</p></details>
+    <details class="reveal"><summary>Faut-il déjà utiliser ChatGPT pour démarrer ?</summary><p>Non. Le niveau 01 est fait pour ceux qui n'ont jamais touché un outil d'IA. On part de zéro, sans culpabiliser personne.</p></details>
+  </div>
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+<section class="final" id="contact">
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--xf-green-500);">Et après ?</span>
+    <h2 style="margin-top:var(--space-5);">30 minutes. Votre contexte. <em style="background:linear-gradient(120deg,var(--xf-green-500),var(--xf-gold-500));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-style:italic;">Zéro slide.</em></h2>
+    <p class="t-lead" style="color:rgba(255,255,255,0.7); max-width:50ch;">On écoute votre situation, on vous dit honnêtement si on peut aider — et si non, on vous oriente vers quelqu'un d'autre. Pas de pitch, pas de relance commerciale agressive, promis.</p>
+
+    <div class="grid">
+      <div class="contact-card">
+        <h3>Kosmio</h3>
+        <p>Mathieu Pesin · Stratège IA & automatisation</p>
+        <p><a href="mailto:mathieu@kosm.io">mathieu@kosm.io</a></p>
+        <p><a href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">Réserver 30 minutes →</a></p>
+      </div>
+      <div class="contact-card">
+        <h3>Xylofutur</h3>
+        <p>Pôle de compétitivité Forêt-Bois-Papier</p>
+        <p>Charlotte Perrier · Cheffe de projets innovation</p>
+        <p><a href="https://xylofutur.fr">xylofutur.fr →</a></p>
+      </div>
+    </div>
+
+    <div style="margin-top: var(--space-8);">
+      <a class="btn btn--primary btn--lg" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">📅 Réserver 30 minutes</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div>© 2026 Kosmio × Xylofutur · Parcours IA Filière Bois</div>
+    <div><a href="#">Mentions légales</a> · <a href="#">Confidentialité</a> · <a href="#">CGV</a></div>
+  </div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
