@@ -4,7 +4,26 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Parcours IA Filière Bois — Kosmio × Xylofutur</title>
-<meta name="description" content="L'IA prend racine dans vos ateliers. Un parcours en 3 niveaux pour les entreprises de la filière bois : comprendre, diagnostiquer, déployer l'IA — sans jargon, à votre rythme, avec un ROI mesurable." />
+<meta name="description" content="Vos devis en 4 min, vos appels d'offres en 1 jour. Un parcours IA en 4 étapes pour la filière bois : comprendre, former, diagnostiquer, déployer — sans jargon, à votre rythme, avec un ROI mesurable." />
+
+<!-- OG / LinkedIn -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Parcours IA Filière Bois — Kosmio × Xylofutur" />
+<meta property="og:description" content="Vos devis en 4 min, vos appels d'offres en 1 jour. Un parcours IA concret pour les entreprises de la filière bois." />
+<meta property="og:url" content="https://ia-bois.kosm.io/" />
+<meta property="og:image" content="https://ia-bois.kosm.io/assets/og-cover.png" />
+<meta property="og:locale" content="fr_FR" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="canonical" href="https://ia-bois.kosm.io/" />
+
+<!-- Favicon -->
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@600;700&display=swap">
+
 <link rel="stylesheet" href="design-system/tokens.css" />
 <style>
   /* ============ Layout helpers ============ */
@@ -27,6 +46,76 @@
   nav.primary a { color: var(--ink-700); text-decoration:none; font-weight:500; font-size:.95rem;}
   nav.primary a:hover { color: var(--xf-green-600); }
   @media (min-width:1024px){ nav.primary{ display:flex; } }
+
+  /* ============ Hamburger mobile ============ */
+  .nav-toggle {
+    display:flex; align-items:center; justify-content:center;
+    width:40px; height:40px; border:none; background:none; cursor:pointer;
+    color: var(--ink-900);
+  }
+  @media (min-width:1024px){ .nav-toggle { display:none; } }
+  nav.primary.primary--open {
+    display:flex; flex-direction:column; gap:0;
+    position:absolute; top:72px; left:0; right:0;
+    background:rgba(255,255,255,0.97); backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(201,191,177,0.4);
+    padding: var(--space-4) var(--space-5);
+    z-index:49;
+  }
+  nav.primary.primary--open a {
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--grey-300);
+    font-size: 1.05rem;
+  }
+  nav.primary.primary--open a:last-child { border-bottom:none; }
+
+  /* ============ SR only ============ */
+  .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+  /* ============ Sticky CTA mobile ============ */
+  .sticky-cta {
+    position:fixed; bottom:0; left:0; right:0; z-index:40;
+    background: var(--ink-900); padding: var(--space-3) var(--space-4);
+    transform: translateY(100%); transition: transform .3s var(--ease-out);
+    display:flex; justify-content:center; align-items:center;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+  }
+  .sticky-cta.visible { transform: translateY(0); }
+  .sticky-cta .btn { width:100%; max-width:400px; justify-content:center; }
+  @media (min-width:1024px){ .sticky-cta { display:none; } }
+
+  /* ============ Cas d'usage grid ============ */
+  .uc-grid {
+    display:grid; gap:var(--space-5);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width:600px){ .uc-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width:1000px){ .uc-grid { grid-template-columns: repeat(3, 1fr); } }
+  .uc-card {
+    background:#fff; border:1px solid var(--grey-300); border-radius:var(--radius-lg);
+    padding:var(--space-6);
+    transition: transform .3s var(--ease-out), box-shadow .3s var(--ease-out);
+  }
+  .uc-card:hover { transform:translateY(-3px); box-shadow:var(--shadow-md); }
+  .uc-card__label {
+    font-family:var(--font-mono); font-size:.65rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:var(--tracking-mono);
+  }
+  .uc-card__title {
+    font-family:var(--font-display); font-size:1.1rem; font-weight:700;
+    margin:var(--space-2) 0 var(--space-3);
+  }
+  .uc-card__desc {
+    font-size:.9rem; color:var(--ink-700); line-height:1.5;
+    margin:0 0 var(--space-4);
+  }
+  .uc-card__metric {
+    font-family:var(--font-display); font-weight:700; font-size:1.4rem;
+  }
+  .uc-card__unit { font-size:.8rem; color:var(--grey-600); }
+
+  /* ============ Testimonial grid inside proof ============ */
+  @media (min-width:900px){ .testimonial-grid { grid-template-columns: 1fr 1fr !important; } }
 
   /* ============ HERO ============ */
   .hero {
@@ -108,6 +197,8 @@
   section { padding-block: clamp(4rem, 8vw, 8rem); }
   .section-head { max-width: 56rem; margin-bottom: var(--space-8); }
   .section-head h2 { font-size: var(--text-h1); margin-top: var(--space-4); }
+  .section-head h2 em, h2 em { font-style: italic; color: var(--xf-green-600); }
+  .level-card--featured { /* same size as others in 2x2 grid */ }
 
   /* ============ Stats (pourquoi maintenant) ============ */
   .why { background: var(--xf-sand-100); }
@@ -132,7 +223,7 @@
 
   /* ============ Levels ============ */
   .levels-grid { display:grid; gap: var(--space-6); grid-template-columns:1fr; }
-  @media (min-width:900px){ .levels-grid { grid-template-columns: repeat(3, 1fr);} }
+  @media (min-width:768px){ .levels-grid { grid-template-columns: repeat(2, 1fr);} }
   .level-card {
     background:#fff;
     transition: transform .35s var(--ease-out), box-shadow .35s var(--ease-out);
@@ -280,13 +371,16 @@
       <span class="dot"></span>
       IA &amp; Automatisation
     </a>
-    <nav class="primary" aria-label="Principal">
-      <a href="#offre">L'offre</a>
+    <nav class="primary" id="nav-primary" aria-label="Principal">
       <a href="#methode">Méthode</a>
-      <a href="#cas">Cas d'usage</a>
-      <a href="#tarifs">Tarifs</a>
+      <a href="#etudes">Résultats terrain</a>
+      <a href="#offre">Offre &amp; tarifs</a>
+      <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
     </nav>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-primary" aria-label="Menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
     <a class="btn btn--primary btn--sm" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">Réserver un échange →</a>
   </div>
 </header>
@@ -295,14 +389,14 @@
 <section class="hero">
   <div class="wrap">
     <div>
-      <span class="eyebrow">Kosmio ✕ Xylofutur · Spécialistes filière bois</span>
-      <h1>L'IA appliquée aux <em>vrais sujets</em> de la filière bois.</h1>
-      <p class="lead">De la forêt au chantier, on structure vos flux d'information et on automatise les tâches qui vous freinent. Pragmatique, dans vos outils, avec vos équipes. Sans projet vitrine.</p>
+      <span class="eyebrow">Kosmio ✕ Xylofutur · Au service de la filière bois</span>
+      <h1>Moins de paperasse, plus de temps <em>pour votre vrai métier.</em></h1>
+      <p class="lead">Devis, appels d'offres, CCTP, traçabilité, reporting : on vous aide à simplifier ce qui vous ralentit au quotidien, avec des outils adaptés à votre façon de travailler. Pas besoin de tout changer.</p>
       <div class="ctas">
-        <a class="btn btn--primary btn--lg" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">Diagnostiquer mes opportunités IA →</a>
-        <a class="btn btn--secondary btn--lg" href="#cas" style="color:#fff;border-color:#fff;">Voir des cas d'usage concrets</a>
+        <a class="btn btn--primary btn--lg" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">En discuter 30 min (gratuit) →</a>
+        <a class="btn btn--secondary btn--lg" href="#etudes" style="color:#fff;border-color:#fff;">Voir des exemples concrets ↓</a>
       </div>
-      <div class="signature">Recommandé par <b>Xylofutur</b> · Tarifs préférentiels adhérents</div>
+      <div class="signature">Recommandé par <b>Xylofutur</b> · Présenté à l'AG du 16 avril 2026 · Tarifs préférentiels adhérents</div>
     </div>
 
     <div class="tree" aria-hidden="true">
@@ -342,8 +436,8 @@
 <!-- ============ MARQUEE ============ -->
 <div class="marquee" aria-hidden="true">
   <div class="marquee__track">
-    <span>Devis : 45 min → 4 min</span><span>Appels d'offres : 5 jours → 1 jour</span><span>Synthèse prod auto le lundi 8h</span><span>Traçabilité RE2020 automatisée</span><span>Reporting adhérents en 1 clic</span><span>Veille marché bois quotidienne</span><span>Procédures qualité rédigées seules</span>
-    <span>Devis : 45 min → 4 min</span><span>Appels d'offres : 5 jours → 1 jour</span><span>Synthèse prod auto le lundi 8h</span><span>Traçabilité RE2020 automatisée</span><span>Reporting adhérents en 1 clic</span><span>Veille marché bois quotidienne</span><span>Procédures qualité rédigées seules</span>
+    <span>Devis simplifiés</span><span>Appels d'offres accélérés</span><span>CCTP analysés en 30 min</span><span>Traçabilité facilitée</span><span>Reporting sans ressaisie</span><span>Fiches produit générées</span><span>Documentation qualité automatisée</span>
+    <span>Devis simplifiés</span><span>Appels d'offres accélérés</span><span>CCTP analysés en 30 min</span><span>Traçabilité facilitée</span><span>Reporting sans ressaisie</span><span>Fiches produit générées</span><span>Documentation qualité automatisée</span>
   </div>
 </div>
 
@@ -351,80 +445,25 @@
 <section class="why" id="contexte">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Pourquoi maintenant</span>
-      <h2>Réglez les problèmes. <em style="color:var(--xf-green-600);">Accélérez vos équipes.</em></h2>
-      <p class="t-lead">Production, devis, appels d'offres, traçabilité, reporting, gouvernance : on analyse vos points de friction, on automatise les tâches à faible valeur ajoutée et on vous livre un système qui tourne, adopté par vos équipes, pas rangé dans un tiroir.</p>
+      <span class="eyebrow">Le constat</span>
+      <h2>Vous le sentez : il y a des choses <em>qui pourraient être plus simples.</em></h2>
+      <p class="t-lead">Le devis qui prend une heure, l'appel d'offres qui mobilise toute l'équipe pendant une semaine, le reporting qu'on repousse toujours... On connaît ces sujets. On les travaille avec des entreprises comme la vôtre, et les résultats sont concrets.</p>
     </div>
     <div class="stats">
-      <div class="stat reveal"><div class="num">−41 min</div><p>Un devis rédigé en <b>4 min au lieu de 45</b>. Gain mesuré sur un négoce bois de 22 salariés, 6 semaines après le sprint.</p></div>
-      <div class="stat reveal"><div class="num">1 jour</div><p>Pour répondre à un appel d'offres public au lieu de 5. Relecture humaine gardée. La machine fait la structure, vous gardez la voix.</p></div>
-      <div class="stat reveal"><div class="num">=</div><p>On construit avec les outils IA que vous avez déjà, ou on les choisit selon votre politique interne.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ OFFRE EN 3 NIVEAUX ============ -->
-<section id="offre">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow">L'offre</span>
-      <h2>Trois façons d'entrer. <em style="color:var(--xf-green-600);">Un seul objectif : du ROI avant Noël.</em></h2>
-      <p class="t-lead">Vous choisissez votre porte d'entrée en fonction de votre contexte. On ne vous pousse jamais au niveau supérieur tant que celui d'avant n'a pas produit ses effets.</p>
-    </div>
-
-    <div class="levels-grid">
-      <article class="level-card reveal" data-level="1">
-        <span class="badge">01 · Découvrir</span>
-        <div class="level-card__numeral">01</div>
-        <h3>La journée qui démystifie</h3>
-        <p>Une journée de travail, pas de théorie. Vous repartez avec 5 cas d'usage chiffrés pour votre boîte et les 3 premiers à activer lundi.</p>
-        <ul>
-          <li>Repartez avec 5 cas d'usage chiffrés pour votre entreprise</li>
-          <li>Des exemples pris dans la filière : scierie, négoce, coopérative, transformation</li>
-          <li>Votre équipe sait quoi faire lundi matin</li>
-        </ul>
-        <div class="price">890 € HT <small>par participant</small></div>
-        <a class="cta" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">Réserver une session →</a>
-      </article>
-
-      <article class="level-card reveal" data-level="2">
-        <span class="badge">02 · Diagnostiquer</span>
-        <div class="level-card__numeral">02</div>
-        <h3>Le plan sur 12 mois</h3>
-        <p>Une journée chez vous, trois semaines de travail, un plan chiffré. Vous savez exactement par quoi commencer et combien vous allez économiser.</p>
-        <ul>
-          <li>Le montant précis que vous allez économiser en 12 mois</li>
-          <li>Les 3 cas d'usage prioritaires pour VOTRE boîte</li>
-          <li>Un plan d'action mois par mois, sans jargon</li>
-        </ul>
-        <div class="price">3 500 € HT <small>forfait · 2 975 € HT adhérents Xylofutur</small></div>
-        <a class="cta" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">Demander un diagnostic →</a>
-      </article>
-
-      <article class="level-card reveal" data-level="3">
-        <span class="badge">03 · Déployer</span>
-        <div class="level-card__numeral">03</div>
-        <h3>Votre premier cas en production</h3>
-        <p>On prend un cas d'usage prioritaire et on le met en production en 6 semaines. Votre équipe apprend en faisant. On part quand vous êtes autonome.</p>
-        <ul>
-          <li>Un cas d'usage en production en 6 semaines chrono</li>
-          <li>Votre équipe formée en faisant, pas en écoutant</li>
-          <li>On part quand vous savez faire sans nous</li>
-        </ul>
-        <div class="price">dès 950 €/mois <small>6 mois minimum · on arrête quand vous voulez</small></div>
-        <a class="cta" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">Parler de mon projet →</a>
-      </article>
+      <div class="stat reveal"><div class="num">−41 min</div><p>Un devis rédigé en <b>4 min au lieu de 45</b>. Mesuré chez un négoce bois de 22 salariés, quelques semaines après la mise en place.</p></div>
+      <div class="stat reveal"><div class="num">1 jour</div><p>Pour répondre à un appel d'offres au lieu de 5. L'outil prépare la structure, votre équipe garde la main sur le fond.</p></div>
+      <div class="stat reveal"><div class="num">=</div><p>On part de vos outils existants. Pas de grand remplacement, pas de nouvelle usine à gaz.</p></div>
     </div>
   </div>
 </section>
 
 <!-- ============ POUR QUI ============ -->
-<section class="for-who">
+<section class="for-who" id="pour-qui">
   <div class="wrap grid">
     <div class="reveal">
       <span class="eyebrow">Pour qui ?</span>
-      <h2 style="margin-top:var(--space-4);">Si vous n'avez pas de DSI, <em style="color:var(--xf-green-600);">c'est exactement pour vous.</em></h2>
-      <p class="t-lead">On ne travaille qu'avec la filière bois. Scieries, coopératives, négoces, 2<sup>e</sup>&nbsp;transformation, bureaux d'études, fédérations : on connaît vos ERP, vos marges, vos contraintes de main d'œuvre, vos jeux d'acteurs. Et on sait faire la différence entre un chêne et un douglas. Ça compte plus qu'on ne le pense.</p>
+      <h2 style="margin-top:var(--space-4);">Conçu pour des entreprises <em>comme la vôtre.</em></h2>
+      <p class="t-lead">On ne travaille qu'avec la filière bois. Scieries, coopératives, négoces, 2<sup>e</sup>&nbsp;transformation, bureaux d'études, fédérations : on connaît vos métiers, vos contraintes terrain, vos ERP et vos jeux d'acteurs. Pas besoin d'avoir un service informatique pour démarrer.</p>
       <ul>
         <li>Scieries et 1<sup>re</sup>&nbsp;transformation</li>
         <li>Négoces et distribution bois &amp; matériaux</li>
@@ -443,98 +482,264 @@
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">Notre méthode</span>
-      <h2>4 temps pour ne casser ni votre quotidien, <em style="color:var(--xf-green-600);">ni votre budget.</em></h2>
+      <h2>On avance pas à pas, <em>à votre rythme.</em></h2>
     </div>
     <div class="steps">
-      <div class="step reveal"><span class="ico">🌱</span><div class="num">01 · Comprendre</div><h4>Autodiagnostic</h4><p>20 questions pour situer votre maturité IA et cadrer les attentes de la direction.</p></div>
-      <div class="step reveal"><span class="ico">🧭</span><div class="num">02 · Cibler</div><h4>Séance sur site</h4><p>Une journée chez vous pour cartographier les cas d'usage et prioriser ceux qui rapportent vite.</p></div>
-      <div class="step reveal"><span class="ico">⚙️</span><div class="num">03 · Tester</div><h4>Premier cas en production</h4><p>3 à 6 semaines pour faire tourner un premier cas d'usage en conditions réelles.</p></div>
-      <div class="step reveal"><span class="ico">🌳</span><div class="num">04 · Déployer</div><h4>Équipe pilote</h4><p>On forme votre équipe, on mesure l'impact, on capitalise sur le suivant.</p></div>
+      <div class="step reveal"><span class="ico">🌱</span><div class="num">01 · Comprendre</div><h4>Autodiagnostic</h4><p>20 questions simples pour faire le point sur vos pratiques et identifier les sujets prioritaires.</p></div>
+      <div class="step reveal"><span class="ico">🧭</span><div class="num">02 · Cibler</div><h4>Séance sur site</h4><p>Une journée chez vous pour comprendre votre quotidien et repérer ensemble ce qui peut être simplifié.</p></div>
+      <div class="step reveal"><span class="ico">⚙️</span><div class="num">03 · Tester</div><h4>Un premier sujet concret</h4><p>On met en place une première amélioration en conditions réelles. Vous voyez le résultat avant d'aller plus loin.</p></div>
+      <div class="step reveal"><span class="ico">🌳</span><div class="num">04 · Déployer</div><h4>Votre équipe prend la main</h4><p>On forme vos collaborateurs, on mesure ensemble ce que ça change, et on passe au sujet suivant.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ============ CAS D'USAGE (snapshot) ============ -->
-<section id="cas" class="why">
+<!-- ============ ÉTUDES, CAS D'USAGES & TÉMOIGNAGES ============ -->
+<section id="etudes" class="why">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Cas d'usage filière bois</span>
-      <h2>Du devis client à la veille marché, <em style="color:var(--xf-green-600);">l'IA travaille déjà pour vos pairs.</em></h2>
+      <span class="eyebrow">Exemples concrets</span>
+      <h2>Ce qu'on a mis en place <em>chez des entreprises comme la vôtre.</em></h2>
+      <p class="t-lead">Pas de théorie : voici des situations réelles, dans des entreprises de la filière bois, avec les résultats observés après quelques semaines.</p>
     </div>
-    <div class="stats">
-      <div class="stat reveal"><div class="num" style="font-size:2rem;">📨 → 📄</div><p><b>Devis générés en 4 minutes</b> à partir d'une demande client par email, contre 45 min en moyenne aujourd'hui.</p></div>
-      <div class="stat reveal"><div class="num" style="font-size:2rem;">📊</div><p><b>Synthèse hebdo automatique</b> de vos indicateurs production, prête le lundi 8h dans la boîte mail du dirigeant.</p></div>
-      <div class="stat reveal"><div class="num" style="font-size:2rem;">🏛️</div><p><b>Réponses aux appels d'offres publics</b> structurées en 1 jour au lieu de 5, avec relecture humaine.</p></div>
+
+    <div class="levels-grid" style="grid-template-columns: 1fr; max-width: 900px; margin: 0 auto;">
+
+      <!-- Étude #01 — carte compacte -->
+      <article class="level-card reveal" style="display:grid; grid-template-columns:1fr auto; gap:var(--space-5); align-items:center;">
+        <div>
+          <span class="badge">Avril 2026 · Étude #01</span>
+          <h3 style="margin-top:var(--space-3);">IA et filière bois : ce que les données disent vraiment</h3>
+          <p style="margin-bottom:var(--space-3);">3,5x d'écart entre potentiel et adoption, 6 cas d'usage documentés, signal recrutement −14 % sur les postes exposés.</p>
+          <a class="cta" href="Articles/article_ia_filiere_bois_v3.html">Lire l'étude complète →</a>
+        </div>
+      </article>
     </div>
+
+    <!-- Grille cas d'usages -->
+    <div class="uc-grid reveal" style="margin-top:var(--space-6);">
+
+      <div class="uc-card">
+        <span class="uc-card__label" style="color:var(--xf-gold-600);">Négoce · 22 salariés</span>
+        <h4 class="uc-card__title">Devis simplifié</h4>
+        <p class="uc-card__desc">Le commercial décrit le besoin client, l'outil prépare le devis à partir du catalogue. Il ne reste qu'à relire et ajuster.</p>
+        <div><span class="uc-card__metric" style="color:var(--xf-gold-600);">4 min</span><span class="uc-card__unit"> au lieu de 45</span></div>
+      </div>
+
+      <div class="uc-card">
+        <span class="uc-card__label" style="color:var(--xf-green-600);">BE bois · 8 salariés</span>
+        <h4 class="uc-card__title">Réponse aux appels d'offres</h4>
+        <p class="uc-card__desc">L'outil structure le mémoire technique et le chiffrage à partir du DCE. L'ingénieur garde la main sur le contenu.</p>
+        <div><span class="uc-card__metric" style="color:var(--xf-green-600);">1 jour</span><span class="uc-card__unit"> au lieu de 5</span></div>
+      </div>
+
+      <div class="uc-card">
+        <span class="uc-card__label" style="color:var(--xf-gold-600);">Constructeur bois · 15 salariés</span>
+        <h4 class="uc-card__title">Analyse des CCTP</h4>
+        <p class="uc-card__desc">L'outil lit le CCTP, extrait les exigences techniques (essences, classes, traitements, normes) et prépare une grille de lecture synthétique. Plus besoin de surligner 40 pages à la main.</p>
+        <div><span class="uc-card__metric" style="color:var(--xf-gold-600);">30 min</span><span class="uc-card__unit"> au lieu d'une demi-journée</span></div>
+      </div>
+
+      <div class="uc-card">
+        <span class="uc-card__label" style="color:var(--km-sage-600);">Menuiserie industrielle · 35 salariés</span>
+        <h4 class="uc-card__title">Fiches produit pour les architectes</h4>
+        <p class="uc-card__desc">Les fiches techniques sont générées depuis les données de production. Les architectes clients peuvent les intégrer directement dans leurs projets BIM.</p>
+        <div><span class="uc-card__metric" style="color:var(--km-sage-600);">100 %</span><span class="uc-card__unit"> automatisé</span></div>
+      </div>
+
+      <div class="uc-card">
+        <span class="uc-card__label" style="color:var(--xf-green-600);">Coopérative forestière · 120 adhérents</span>
+        <h4 class="uc-card__title">Reporting adhérents</h4>
+        <p class="uc-card__desc">La synthèse trimestrielle par adhérent (volumes, prix, certifications) est générée depuis l'ERP. Fini les tableaux Excel manuels.</p>
+        <div><span class="uc-card__metric" style="color:var(--xf-green-600);">1 clic</span><span class="uc-card__unit"> par rapport</span></div>
+      </div>
+
+      <div class="uc-card">
+        <span class="uc-card__label" style="color:var(--km-sage-600);">Charpentier industriel · 60 salariés</span>
+        <h4 class="uc-card__title">Traçabilité PEFC/FSC</h4>
+        <p class="uc-card__desc">Fiches de traçabilité et rapports de non-conformité générés depuis les données de production. Indispensable pour les marchés publics.</p>
+        <div><span class="uc-card__metric" style="color:var(--km-sage-600);">×3</span><span class="uc-card__unit"> plus rapide</span></div>
+      </div>
+
+    </div>
+
+    <!-- Témoignages -->
+    <div style="margin-top:var(--space-8);">
+      <span class="eyebrow">Ils en parlent</span>
+      <div class="testimonial-grid" style="display:grid; gap:var(--space-6); grid-template-columns:1fr; margin-top:var(--space-6);">
+        <div class="card reveal" style="background:#fff; border:1px solid var(--grey-300); border-radius:var(--radius-lg); padding:var(--space-7);">
+          <p class="quote" style="font-family:var(--font-display); font-weight:700; font-size:clamp(1.15rem,1.6vw,1.4rem); line-height:1.35; letter-spacing:var(--tracking-tight); margin:0 0 var(--space-6);">« On a choisi de concevoir cette offre IA pour répondre précisément aux besoins des acteurs de la filière, à tous les niveaux de la chaîne de valeur. C'est du concret, pas du discours. »</p>
+          <div class="who" style="display:flex; align-items:center; gap:var(--space-4);">
+            <div class="avatar" style="width:56px;height:56px;border-radius:50%;background:var(--xf-green-50);color:var(--xf-green-600);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:1rem;flex:none;">CP</div>
+            <div><b>Charlotte Perrier</b><span style="color:var(--grey-600);font-size:.9rem;display:block;">Directrice · Xylofutur</span></div>
+          </div>
+        </div>
+        <div class="card reveal" style="background:#fff; border:1px solid var(--grey-300); border-radius:var(--radius-lg); padding:var(--space-7);">
+          <p class="quote" style="font-family:var(--font-display); font-weight:700; font-size:clamp(1.15rem,1.6vw,1.4rem); line-height:1.35; letter-spacing:var(--tracking-tight); margin:0 0 var(--space-6);">« On a simplifié la production des devis et la lecture des CCTP. Nos équipes y ont pris goût : c'est elles qui demandent à aller plus loin maintenant. »</p>
+          <div class="who" style="display:flex; align-items:center; gap:var(--space-4);">
+            <div class="avatar" style="width:56px;height:56px;border-radius:50%;background:var(--km-sage-50);color:var(--km-sage-600);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:1rem;flex:none;">TP</div>
+            <div><b>Thomas P.</b><span style="color:var(--grey-600);font-size:.9rem;display:block;">Dirigeant · Agencements et escaliers bois</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<!-- ============ TÉMOIGNAGES ============ -->
-<section class="testimonial">
-  <div class="wrap">
-    <span class="eyebrow">Ils en parlent</span>
-    <div class="grid">
-      <div class="card reveal">
-        <p class="quote">Les offres de formation se développent de toutes parts alors que la digitalisation reste un enjeu stratégique de taille pour la filière. On a choisi de concevoir cette offre IA pour répondre précisément aux besoins des acteurs, à tous les niveaux de la chaîne de valeur.</p>
-        <div class="who">
-          <div class="avatar" aria-hidden="true"></div>
-          <div><b>Charlotte Perrier</b><span>Directrice · Xylofutur</span></div>
-        </div>
-      </div>
-      <div class="card reveal">
-        <p class="quote">Les possibilités de l'IA sont énormes. On a mis en place un plan très concret pour accélérer la prise de mesure, faciliter le travail de notre BE et accélérer la production des devis. Cerise sur le gâteau : nos partenaires et clients ont maintenant accès aux passeports produits de nos agencements, intégrables dans leur BIM.</p>
-        <div class="who">
-          <div class="avatar" aria-hidden="true" style="background:linear-gradient(135deg,var(--km-sage-500),var(--xf-green-500));"></div>
-          <div><b>Thomas P.</b><span>Agencements et escaliers bois</span></div>
-        </div>
-      </div>
-    </div>
+<!-- ============ LEAD MAGNET ============ -->
+<section class="lead-magnet" id="etude-pdf" style="background:var(--km-sage-50); padding-block:clamp(3rem,6vw,5rem);">
+  <div class="wrap" style="max-width:700px; text-align:center;">
+    <span class="eyebrow" style="justify-content:center;">Ressource gratuite</span>
+    <h2 style="margin-top:var(--space-4); font-size:var(--text-h2);">L'étude complète en PDF, gratuite</h2>
+    <p class="t-lead" style="margin-bottom:var(--space-6);">6 cas d'usage détaillés + une grille d'auto-évaluation pour situer votre entreprise. On vous l'envoie par email.</p>
+    <form id="etude-form" novalidate style="display:flex; flex-wrap:wrap; gap:var(--space-3); justify-content:center; align-items:flex-end;">
+      <label style="flex:1; min-width:140px; max-width:200px; display:flex; flex-direction:column; gap:4px; font-size:.85rem; text-align:left;">
+        <span>Prénom *</span>
+        <input name="firstname" type="text" required autocomplete="given-name" style="padding:.6rem .75rem; border:1px solid rgba(0,0,0,.15); border-radius:8px; font:inherit;">
+      </label>
+      <label style="flex:1.5; min-width:200px; max-width:300px; display:flex; flex-direction:column; gap:4px; font-size:.85rem; text-align:left;">
+        <span>Email professionnel *</span>
+        <input name="email" type="email" required autocomplete="email" style="padding:.6rem .75rem; border:1px solid rgba(0,0,0,.15); border-radius:8px; font:inherit;">
+      </label>
+      <input type="hidden" name="newsletter" value="yes">
+      <button type="submit" class="btn btn--primary btn--sm" style="white-space:nowrap;">Recevoir le PDF →</button>
+    </form>
+    <p id="etude-form-status" role="status" aria-live="polite" style="text-align:center; margin-top:var(--space-3); font-size:.85rem; min-height:1.2rem;"></p>
+    <p style="font-size:.7rem; opacity:.55; margin-top:var(--space-2);">Données traitées par Kosmio (envoi étude + newsletter trimestrielle). <a href="mailto:mathieu@kosm.io" style="color:inherit;">Droits RGPD</a>. Désabonnement en 1 clic.</p>
   </div>
 </section>
 
-<!-- ============ TARIFS RÉSUMÉ ============ -->
-<section id="tarifs">
+<script>
+(function(){
+  const form = document.getElementById('etude-form');
+  if(!form) return;
+  const statusEl = document.getElementById('etude-form-status');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    statusEl.textContent = 'Envoi en cours…';
+    statusEl.style.color = '';
+    const data = Object.fromEntries(new FormData(form).entries());
+    data.source = 'site-public · section-lead-magnet · etude-01';
+    data.utm = new URLSearchParams(location.search).toString() || null;
+    try {
+      const r = await fetch('/api/subscribe-etude', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+      });
+      if (!r.ok) throw new Error(await r.text());
+      statusEl.textContent = '✅ Merci ! L\u0027étude et les bonus arrivent dans votre boîte mail.';
+      statusEl.style.color = 'var(--xf-green-600)';
+      form.reset();
+    } catch(err){
+      statusEl.textContent = '⚠️ Erreur — écrivez à mathieu@kosm.io, on vous envoie l\u0027étude.';
+      statusEl.style.color = '#B85C38';
+    } finally {
+      btn.disabled = false;
+    }
+  });
+})();
+</script>
+
+<!-- ============ OFFRE & TARIFS ============ -->
+<section id="offre">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Tarifs</span>
-      <h2>Trois engagements. <em style="color:var(--xf-green-600);">Trois budgets.</em></h2>
-      <p class="t-lead">Tarifs préférentiels pour les adhérents Xylofutur (-15% sur le diagnostic).</p>
+      <span class="eyebrow">Offre &amp; tarifs</span>
+      <h2>Comment ça se passe, <em>concrètement ?</em></h2>
+      <p class="t-lead">On commence toujours petit. Chaque étape est indépendante : vous décidez de la suite quand vous avez vu les résultats de l'étape précédente. Tarifs préférentiels pour les adhérents Xylofutur.</p>
     </div>
+
     <div class="levels-grid">
-      <div class="level-card reveal" data-level="1"><div class="level-card__numeral">01</div><h3>Découvrir</h3><div class="price">890 € HT</div><p style="margin-top:var(--space-4);">Par participant · Sessions inter ou intra entreprise</p></div>
-      <div class="level-card reveal" data-level="2"><div class="level-card__numeral">02</div><h3>Diagnostiquer</h3><div class="price">3 500 € HT</div><p style="margin-top:var(--space-4);">Forfait · 1 séance site + livrables · -15% adhérents Xylofutur</p></div>
-      <div class="level-card reveal" data-level="3"><div class="level-card__numeral">03</div><h3>Déployer</h3><div class="price">dès 950 €/mois</div><p style="margin-top:var(--space-4);">Engagement 6 mois min. · Devis personnalisé selon le périmètre</p></div>
+      <article class="level-card reveal" data-level="1">
+        <span class="badge">01 · Découvrir</span>
+        <div class="level-card__numeral">01</div>
+        <h3>Webinaire &amp; Atelier</h3>
+        <p>1h45 pour comprendre ce que l'IA peut apporter concrètement dans la filière bois, puis un atelier pour repérer ensemble vos sujets prioritaires. Sans jargon technique.</p>
+        <ul>
+          <li>Présentation adaptée à la filière bois</li>
+          <li>On part de vos problèmes du quotidien</li>
+          <li>Vous repartez avec des pistes concrètes</li>
+        </ul>
+        <div class="price">Gratuit <small>webinaire + atelier · Prochaine session : [DATE]</small></div>
+        <a class="cta" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">M'inscrire →</a>
+      </article>
+
+      <article class="level-card reveal" data-level="2">
+        <span class="badge">02 · Se former</span>
+        <div class="level-card__numeral">02</div>
+        <h3>Formation d'une journée</h3>
+        <p>7 heures pour que vos collaborateurs prennent en main les outils, sur vos propres fichiers et cas concrets. Ils repartent autonomes.</p>
+        <ul>
+          <li>Journée complète, adaptée à votre métier</li>
+          <li>Exercices sur vos vrais documents</li>
+          <li>Kit de bonnes pratiques à réutiliser</li>
+        </ul>
+        <div class="price">950 € HT <small>+ 100 € / participant · tarif préférentiel adhérents Xylofutur</small></div>
+        <a class="cta" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">Réserver une session →</a>
+      </article>
+
+      <article class="level-card reveal" data-level="3">
+        <span class="badge">03 · Tester pour de vrai</span>
+        <div class="level-card__numeral">03</div>
+        <h3>Diagnostic + premier cas concret</h3>
+        <p>On vient une journée chez vous pour comprendre vos process. On met en place un premier cas d'usage réel. Vous voyez ce que ça donne avant de décider de la suite.</p>
+        <ul>
+          <li>Questionnaire préparatoire simple</li>
+          <li>Journée sur site pour cibler le bon sujet</li>
+          <li>Un premier résultat visible en quelques semaines</li>
+        </ul>
+        <div class="price">3 000 € HT <small>forfait · -15 % adhérents Xylofutur</small></div>
+        <a class="cta" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">En savoir plus →</a>
+      </article>
+
+      <article class="level-card level-card--featured reveal" data-level="4">
+        <span class="badge">04 · Aller plus loin</span>
+        <div class="level-card__numeral">04</div>
+        <h3>Un accompagnement dans la durée</h3>
+        <p>On vous accompagne au fil des mois : nouveaux sujets, formation de vos équipes, suivi des résultats. Comme un collègue spécialisé qui vient régulièrement.</p>
+        <ul>
+          <li>On identifie les prochains sujets ensemble</li>
+          <li>Vos collaborateurs montent en compétence</li>
+          <li>Suivi des gains concrets, mois après mois</li>
+          <li>Engagement initial de 3 mois, renouvelable</li>
+        </ul>
+        <div class="price">1 800 € / mois <small>HT · sans surprise</small></div>
+        <a class="cta" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">En discuter →</a>
+      </article>
     </div>
   </div>
 </section>
 
 <!-- ============ FAQ ============ -->
-<section class="faq">
+<section class="faq" id="faq">
   <div class="wrap" style="max-width: 56rem;">
     <div class="section-head reveal">
       <span class="eyebrow">Questions fréquentes</span>
       <h2>Vous vous demandez sûrement…</h2>
     </div>
-    <details class="reveal"><summary>Combien ça va me coûter vraiment, tout compris, si je vais jusqu'au bout ?</summary><p>Le parcours complet (formation + diagnostic + 6 mois de déploiement) tourne entre 12 et 18 k€ HT selon le périmètre. On chiffre précisément avant de signer, pas après.</p></details>
-    <details class="reveal"><summary>Et si ça rate, qu'est-ce qu'il me reste ?</summary><p>Sur le diagnostic : la cartographie et la roadmap sont à vous, utilisables avec n'importe quel prestataire. Sur le déploiement : chaque sprint de 6 semaines est un livrable indépendant, vous pouvez arrêter à chaque fin de sprint sans rien devoir.</p></details>
-    <details class="reveal"><summary>Vous faites ça depuis combien de temps dans le bois ?</summary><p>Kosmio oeuvre dans la filière bois depuis 2024, en partenariat avec Xylofutur depuis 2025. Avant, 10 ans d'intégration de systèmes dans des projets environnementaux (dont l'industrie, la logistique et les crédits carbones), on connaît les contraintes d'atelier, pas juste celles des bureaux.</p></details>
-    <details class="reveal"><summary>Mes salariés vont prendre peur, comment on gère ?</summary><p>On ne fait jamais d'IA sur le dos des équipes. Notre méthode part toujours des irritants qu'ils vivent (devis, reporting, paperasse) pour leur rendre du temps. Dans 100 % des déploiements à date, l'équipe pilote a demandé à étendre l'outil.</p></details>
-    <details class="reveal"><summary>Mon entreprise est petite (moins de 10 salariés), est-ce pour moi ?</summary><p>Oui, peut-être encore plus. Une TPE qui récupère 5 h par semaine sur ses devis change son quotidien. On a un format allégé pour les &lt; 10 salariés, demandez-le.</p></details>
-    <details class="reveal"><summary>Faut-il déjà utiliser ChatGPT pour démarrer ?</summary><p>Non. Le niveau 01 est fait pour ceux qui n'ont jamais touché un outil d'IA. On part de zéro, sans culpabiliser personne.</p></details>
+    <details class="reveal"><summary>Combien ça coûte si on fait tout le parcours ?</summary><p>Le parcours complet (formation + diagnostic + accompagnement sur 6 mois) représente environ 14 000 € HT sur l'année. Mais rien n'oblige à tout faire : chaque étape est indépendante, et on en discute ensemble avant de s'engager.</p></details>
+    <details class="reveal"><summary>Et si ça ne marche pas, qu'est-ce qu'il me reste ?</summary><p>Tout ce qu'on produit vous appartient : cartographie, roadmap, outils mis en place. Si vous décidez d'arrêter, vous repartez avec. Et à chaque étape, c'est vous qui choisissez si on continue ou pas.</p></details>
+    <details class="reveal"><summary>Vous connaissez vraiment la filière bois ?</summary><p>Kosmio travaille avec la filière bois depuis 2024, en partenariat avec Xylofutur depuis 2025. Avant ça, 10 ans d'expérience dans l'industrie et les projets environnementaux. On connaît les contraintes d'atelier, pas juste celles des bureaux.</p></details>
+    <details class="reveal"><summary>Mes salariés vont avoir peur, comment on gère ça ?</summary><p>On ne fait rien dans le dos des équipes. Au contraire, on part de ce qui les embête au quotidien — les devis, le reporting, la paperasse — pour leur rendre du temps. Jusqu'ici, c'est toujours l'équipe pilote qui a demandé à aller plus loin.</p></details>
+    <details class="reveal"><summary>Mon entreprise est petite (moins de 10 salariés), c'est quand même pour moi ?</summary><p>Oui, peut-être même surtout. Quand une TPE gagne 5 heures par semaine sur ses devis, ça change le quotidien. On a un format adapté aux petites structures, n'hésitez pas à nous en parler.</p></details>
+    <details class="reveal"><summary>Je n'ai jamais utilisé ChatGPT, c'est un problème ?</summary><p>Pas du tout. Le webinaire est pensé pour ceux qui démarrent de zéro. On prend le temps d'expliquer, sans jugement et sans jargon.</p></details>
   </div>
 </section>
 
 <!-- ============ CTA FINAL ============ -->
 <section class="final" id="contact">
   <div class="wrap">
-    <span class="eyebrow" style="color:var(--xf-green-500);">Et après ?</span>
-    <h2 style="margin-top:var(--space-5);">30 minutes. Votre contexte. <em style="background:linear-gradient(120deg,var(--xf-green-500),var(--xf-gold-500));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-style:italic;">Zéro slide.</em></h2>
-    <p class="t-lead" style="color:rgba(255,255,255,0.7); max-width:50ch;">On écoute votre situation, on vous dit honnêtement si on peut aider. Si non, on vous oriente vers quelqu'un d'autre. Pas de pitch, pas de relance commerciale agressive, promis.</p>
+    <span class="eyebrow" style="color:var(--xf-green-500);">Envie d'en savoir plus ?</span>
+    <h2 style="margin-top:var(--space-5);">On en discute, <em style="background:linear-gradient(120deg,var(--xf-green-500),var(--xf-gold-500));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-style:italic;">tout simplement.</em></h2>
+    <p class="t-lead" style="color:rgba(255,255,255,0.7); max-width:50ch;">30 minutes pour comprendre votre situation et voir si on peut vous aider. Si ce n'est pas le bon moment ou le bon sujet, on vous le dira. Pas de pitch, pas de relance.</p>
 
     <div class="grid">
       <div class="contact-card">
         <h3>Kosmio</h3>
-        <p>Mathieu Pesin · Stratège IA & automatisation</p>
+        <p>Mathieu Pesin · Accompagnement IA filière bois</p>
         <p><a href="mailto:mathieu@kosm.io">mathieu@kosm.io</a></p>
         <p><a href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">Réserver 30 minutes →</a></p>
       </div>
@@ -552,10 +757,15 @@
   </div>
 </section>
 
+<!-- Sticky CTA mobile -->
+<div class="sticky-cta" id="sticky-cta">
+  <a class="btn btn--primary btn--sm" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">Réserver un échange gratuit →</a>
+</div>
+
 <footer class="site">
   <div class="wrap">
     <div>© 2026 Kosmio × Xylofutur · Parcours IA Filière Bois</div>
-    <div><a href="#">Mentions légales</a> · <a href="#">Confidentialité</a> · <a href="#">CGV</a></div>
+    <div><a href="mailto:mathieu@kosm.io?subject=Mentions%20légales">Mentions légales</a> · <a href="mailto:mathieu@kosm.io?subject=Confidentialité">Confidentialité</a> · <a href="mailto:mathieu@kosm.io?subject=CGV">CGV</a></div>
   </div>
 </footer>
 
@@ -565,6 +775,31 @@
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
   },{threshold:0.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // Hamburger mobile
+  (function(){
+    const btn = document.querySelector('.nav-toggle');
+    const nav = document.getElementById('nav-primary');
+    if(!btn || !nav) return;
+    btn.addEventListener('click', function(){
+      const open = nav.classList.toggle('primary--open');
+      btn.setAttribute('aria-expanded', open);
+    });
+    nav.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ nav.classList.remove('primary--open'); btn.setAttribute('aria-expanded','false'); });
+    });
+  })();
+
+  // Sticky CTA mobile — appears after hero leaves viewport
+  (function(){
+    var hero = document.querySelector('.hero');
+    var sticky = document.getElementById('sticky-cta');
+    if(!hero || !sticky) return;
+    var sio = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ sticky.classList.toggle('visible', !e.isIntersecting); });
+    }, {threshold:0});
+    sio.observe(hero);
+  })();
 </script>
 </body>
 </html>

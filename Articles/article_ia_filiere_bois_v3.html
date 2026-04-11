@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IA et filiere bois : ce que les donnees disent vraiment — Kosmio x Xylofutur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── DESIGN TOKENS Kosmio x Xylofutur ── */
+:root{
+  --xf-green-500:#00B194;--xf-green-600:#009982;--xf-green-50:#E6F7F4;
+  --xf-gold-500:#BA8748;--xf-gold-600:#9F7338;--xf-gold-50:#F8EFE2;
+  --xf-beige-300:#F3E3CF;--xf-sand-100:#FBF6EE;
+  --km-sage-500:#7C9E98;--km-sage-600:#65857F;--km-sage-50:#EEF3F2;
+  --ink-900:#1F2D3D;--ink-700:#3B4B5E;
+  --grey-600:#5D6C73;--grey-300:#C9BFB1;--white:#FFFFFF;
+  --color-bg:var(--white);--color-bg-alt:var(--xf-sand-100);
+  --color-bg-inverse:var(--ink-900);
+  --color-text:var(--ink-900);--color-text-muted:var(--grey-600);
+  --color-accent:var(--xf-green-500);--color-border:var(--grey-300);
+  --color-level-1:var(--km-sage-500);--color-level-2:var(--xf-green-500);--color-level-3:var(--xf-gold-500);
+  --font-display:"Helvetica Neue","Helvetica","Arial",sans-serif;
+  --font-body:"Inter","Myriad Pro","Calibri",system-ui,sans-serif;
+  --font-mono:"JetBrains Mono","Consolas",monospace;
+  --radius-sm:4px;--radius-md:8px;--radius-lg:12px;
+  --shadow-md:0 4px 16px rgba(31,45,61,0.08);--shadow-lg:0 12px 40px rgba(31,45,61,0.12);
+  --shadow-focus:0 0 0 3px rgba(0,177,148,0.35);
+  --ease-out:cubic-bezier(0.16,1,0.3,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;-webkit-font-smoothing:antialiased}
+body{font-family:var(--font-body);font-size:1.0625rem;line-height:1.65;color:var(--ink-900);background:var(--white)}
+
+/* ── SITE HEADER (shared with main site) ── */
+.site-header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,255,255,0.96);backdrop-filter:saturate(180%) blur(12px);
+  border-bottom:1px solid rgba(201,191,177,0.4);
+  height:72px;display:flex;align-items:center;
+  padding:0 clamp(1rem,3vw,2rem);
+}
+.site-header .wrap{
+  display:flex;align-items:center;justify-content:space-between;
+  width:100%;max-width:80rem;margin:0 auto;gap:1rem;
+}
+.brand{display:flex;align-items:center;gap:.75rem;
+  font-family:var(--font-display);font-weight:700;letter-spacing:-.02em;
+  color:var(--ink-900);text-decoration:none}
+.brand .dot{width:14px;height:14px;border-radius:50%;
+  background:var(--xf-green-500);box-shadow:0 0 0 4px var(--xf-green-50)}
+.site-nav{display:none;gap:1.5rem}
+.site-nav a{color:var(--ink-700);text-decoration:none;font-weight:500;font-size:.95rem}
+.site-nav a:hover{color:var(--xf-green-600)}
+@media(min-width:1024px){.site-nav{display:flex}}
+.btn{display:inline-flex;align-items:center;gap:.75rem;
+  padding:0 1.5rem;height:40px;font-family:var(--font-body);font-size:.875rem;
+  font-weight:600;letter-spacing:.02em;border-radius:var(--radius-sm);
+  border:none;cursor:pointer;text-decoration:none;
+  transition:background .25s var(--ease-out),transform .25s var(--ease-out)}
+.btn--primary{background:var(--xf-green-500);color:var(--white)}
+.btn--primary:hover{background:var(--xf-green-600);transform:translateY(-2px)}
+.nav-toggle{display:flex;align-items:center;justify-content:center;
+  width:40px;height:40px;border:none;background:none;cursor:pointer;color:var(--ink-900)}
+@media(min-width:1024px){.nav-toggle{display:none}}
+.site-nav.open{
+  display:flex;flex-direction:column;gap:0;
+  position:absolute;top:72px;left:0;right:0;
+  background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(201,191,177,0.4);
+  padding:1rem 1.5rem;z-index:99;
+}
+.site-nav.open a{padding:.75rem 0;border-bottom:1px solid var(--grey-300);font-size:1.05rem}
+.site-nav.open a:last-child{border-bottom:none}
+
+/* ── SITE FOOTER (shared with main site) ── */
+.site-footer{
+  background:#0f1820;color:rgba(255,255,255,0.6);
+  padding:2rem 0 1.5rem;font-size:.85rem;
+}
+.site-footer .wrap{
+  max-width:80rem;margin:0 auto;padding:0 clamp(1rem,3vw,2rem);
+  display:flex;flex-wrap:wrap;gap:1.25rem;justify-content:space-between;align-items:center;
+}
+.site-footer a{color:rgba(255,255,255,0.8);text-decoration:none}
+
+/* ── HERO ── */
+.hero{background:var(--ink-900);padding:clamp(4rem,10vw,10rem) clamp(1.5rem,5vw,5rem) clamp(3rem,7vw,7rem);
+  position:relative;overflow:hidden}
+.hero-inner{max-width:56rem}
+.eyebrow{display:inline-flex;align-items:center;gap:.75rem;margin-bottom:1.75rem;
+  font-family:var(--font-mono);font-size:.72rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.12em;color:var(--xf-gold-500)}
+.eyebrow::before{content:"";width:24px;height:4px;background:var(--xf-gold-500);flex-shrink:0}
+.hero h1{font-family:var(--font-display);font-size:clamp(2.4rem,5.5vw,4rem);font-weight:700;
+  line-height:1.05;letter-spacing:-.02em;color:var(--white);margin-bottom:1.5rem}
+.hero h1 em{font-style:italic;color:var(--xf-green-500)}
+.hero-lead{font-size:clamp(1rem,2vw,1.25rem);line-height:1.6;color:rgba(255,255,255,0.75);
+  max-width:48rem;margin-bottom:2.5rem}
+.hero-meta{display:flex;flex-wrap:wrap;gap:1.5rem;
+  padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.12);
+  font-family:var(--font-mono);font-size:.7rem;color:rgba(255,255,255,0.45);
+  text-transform:uppercase;letter-spacing:.08em}
+
+/* ── SECTIONS ── */
+.section{padding:clamp(3rem,8vw,7rem) clamp(1.5rem,5vw,5rem)}
+.section--alt{background:var(--xf-sand-100)}
+.section--sage{background:var(--km-sage-50)}
+.section--dark{background:var(--ink-900);color:var(--white)}
+.prose{max-width:52rem;margin:0 auto}
+
+/* ── SECTION HEADER ── */
+.section-head{margin-bottom:2.5rem}
+.section-num{font-family:var(--font-mono);font-size:.7rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.12em;color:var(--xf-green-600);
+  margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem}
+.section-num::before{content:"";width:20px;height:3px;background:var(--xf-green-500)}
+.section-head h2{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.25rem);
+  font-weight:700;line-height:1.15;letter-spacing:-.01em;color:var(--ink-900)}
+.section--dark .section-head h2,.section--dark h2{color:var(--white)}
+.section--dark .section-num{color:rgba(0,177,148,0.8)}
+
+/* ── BODY TEXT ── */
+.body-text p{margin-bottom:1.35rem;max-width:52rem}
+.body-text p:first-of-type::first-letter{font-family:var(--font-display);
+  font-size:3.8rem;font-weight:700;float:left;line-height:.88;
+  margin:.06em .1em 0 0;color:var(--xf-green-500)}
+.body-text a{color:var(--xf-green-600);text-decoration:underline;text-underline-offset:.2em}
+.body-text sup a{font-size:.7rem;color:var(--xf-gold-500);text-decoration:none;
+  font-family:var(--font-mono);font-weight:700}
+.body-text strong{font-weight:600;color:var(--ink-900)}
+.body-text--dark p{max-width:52rem;color:rgba(255,255,255,.8)}
+.body-text--dark strong{color:var(--white)}
+
+/* ── PULL QUOTE ── */
+.pull-quote{margin:2.5rem 0;padding:1.75rem 2rem;
+  border-left:4px solid var(--xf-green-500);background:var(--xf-green-50);
+  border-radius:0 var(--radius-md) var(--radius-md) 0}
+.pull-quote p{font-family:var(--font-display);font-size:1.15rem;font-style:italic;
+  line-height:1.5;color:var(--ink-900);margin:0 0 .5rem}
+.pull-quote cite{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.06em;
+  color:var(--grey-600);font-style:normal;text-transform:uppercase}
+
+/* ── STAT ROW ── */
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1.5rem;margin:2.5rem 0}
+.stat-card{background:var(--ink-900);border-radius:var(--radius-lg);padding:1.5rem 1.75rem;
+  position:relative;overflow:hidden}
+.stat-card.gold{background:var(--xf-gold-500)}
+.stat-card.sage{background:var(--km-sage-500)}
+.stat-num{font-family:var(--font-display);font-size:2.5rem;font-weight:700;
+  color:var(--white);line-height:1;margin-bottom:.5rem}
+.stat-num span{font-size:1.2rem;opacity:.7}
+.stat-bar{width:36px;height:4px;background:rgba(255,255,255,0.35);
+  border-radius:2px;margin-bottom:.75rem}
+.stat-label{font-family:var(--font-mono);font-size:.68rem;text-transform:uppercase;
+  letter-spacing:.08em;color:rgba(255,255,255,.65);line-height:1.4}
+
+/* ── INSIGHT BOX ── */
+.insight-box{margin:2rem 0;background:var(--xf-gold-50);border:1px solid var(--xf-beige-300);
+  border-left:4px solid var(--xf-gold-500);border-radius:0 var(--radius-md) var(--radius-md) 0;
+  padding:1.25rem 1.5rem}
+.insight-label{font-family:var(--font-mono);font-size:.68rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.1em;color:var(--xf-gold-600);margin-bottom:.5rem}
+.insight-box p{font-size:.9rem;color:var(--ink-700);line-height:1.6;margin:0;max-width:none}
+
+/* ── CHART BLOCK ── */
+.chart-block{background:var(--white);border:1px solid var(--grey-300);
+  border-radius:var(--radius-lg);overflow:hidden;
+  box-shadow:var(--shadow-md);margin:2rem 0}
+.chart-hd{padding:1.5rem 1.75rem 1rem;border-bottom:1px solid var(--grey-300)}
+.chart-eyebrow{font-family:var(--font-mono);font-size:.67rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.12em;color:var(--xf-gold-500);margin-bottom:.3rem}
+.chart-hd h3{font-family:var(--font-display);font-size:1rem;font-weight:700;
+  color:var(--ink-900);line-height:1.3;margin:0 0 .25rem}
+.chart-hd p{font-size:.82rem;color:var(--grey-600);margin:0;line-height:1.4}
+.chart-legend{display:flex;gap:1.5rem;flex-wrap:wrap;padding:.8rem 1.75rem;
+  background:var(--xf-sand-100);border-bottom:1px solid var(--grey-300)}
+.chart-legend-item{display:flex;align-items:center;gap:.5rem;
+  font-size:.78rem;color:var(--grey-600);font-family:var(--font-body)}
+.swatch{width:28px;height:3px;border-radius:2px;display:inline-block;flex-shrink:0}
+.chart-wrap{padding:1.25rem 1.25rem 1.75rem;position:relative;height:500px}
+.chart-wrap canvas{display:block}
+.chart-ft{padding:.85rem 1.75rem;background:var(--xf-sand-100);
+  border-top:1px solid var(--grey-300);font-size:.74rem;color:var(--grey-600);line-height:1.5}
+.chart-ft strong{color:var(--ink-700)}
+
+/* ── USE CASES ── */
+.uc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));
+  gap:1px;background:var(--grey-300);border:1px solid var(--grey-300);
+  border-radius:var(--radius-lg);overflow:hidden;margin:2rem 0}
+.uc-card{background:var(--white);padding:1.25rem 1.5rem}
+.uc-tag{font-family:var(--font-mono);font-size:.62rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.1em;padding:.2rem .55rem;
+  border-radius:var(--radius-sm);display:inline-block;margin-bottom:.65rem}
+.uc-tag.green{background:var(--xf-green-50);color:var(--xf-green-600)}
+.uc-tag.gold{background:var(--xf-gold-50);color:var(--xf-gold-600)}
+.uc-tag.sage{background:var(--km-sage-50);color:var(--km-sage-600)}
+.uc-card h4{font-family:var(--font-display);font-size:.92rem;font-weight:700;
+  margin-bottom:.3rem;color:var(--ink-900)}
+.uc-card p{font-size:.82rem;color:var(--grey-600);line-height:1.55;margin:0}
+
+/* ── ACTION LIST ── */
+.action-list{list-style:none;display:flex;flex-direction:column;gap:1px;
+  border:1px solid var(--grey-300);border-radius:var(--radius-lg);overflow:hidden;margin:2rem 0;
+  counter-reset:action}
+.action-list li{background:var(--white);padding:1.1rem 1.5rem 1.1rem 4.5rem;
+  position:relative;font-size:.9rem;color:var(--grey-600);line-height:1.55;
+  counter-increment:action}
+.action-list li::before{content:counter(action);position:absolute;left:1.5rem;top:1.1rem;
+  width:28px;height:28px;background:var(--xf-green-500);color:var(--white);
+  border-radius:50%;font-size:.72rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-mono)}
+.action-list li strong{display:block;color:var(--ink-900);font-weight:600;margin-bottom:.2rem;
+  font-family:var(--font-display);font-size:.95rem}
+
+/* ── CONCLUSION ── */
+.conclusion{padding:clamp(3rem,8vw,6rem) clamp(1.5rem,5vw,5rem);background:var(--ink-900)}
+.conclusion-inner{max-width:52rem}
+.conclusion h2{font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.25rem);
+  font-weight:700;color:var(--white);line-height:1.2;margin-bottom:1.25rem;letter-spacing:-.01em}
+.conclusion p{font-size:1rem;line-height:1.7;color:rgba(255,255,255,.75);
+  margin-bottom:.9rem;max-width:52rem}
+
+/* ── REFERENCES ── */
+.references{padding:2.5rem clamp(1.5rem,5vw,5rem);background:var(--xf-sand-100)}
+.references-inner{max-width:52rem;margin:0 auto}
+.references h3{font-family:var(--font-mono);font-size:.72rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.12em;color:var(--grey-600);margin-bottom:1.25rem}
+.references ol{padding-left:1.5rem}
+.references li{font-size:.8rem;color:var(--grey-600);line-height:1.7;margin-bottom:.6rem}
+.references li a{color:var(--xf-green-600)}
+
+/* ── (old footer styles removed — using .site-footer now) ── */
+
+/* ── RESPONSIVE ── */
+@media(max-width:640px){
+  .hero h1{font-size:2rem}
+  .stat-row{grid-template-columns:1fr}
+  .chart-wrap{height:420px}
+  .uc-grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+
+<!-- HEADER (same as main site) -->
+<header class="site-header">
+  <div class="wrap">
+    <a href="../index.html" class="brand">
+      <span class="dot"></span>
+      IA &amp; Automatisation
+    </a>
+    <nav class="site-nav" id="nav-primary">
+      <a href="../index.html#methode">Méthode</a>
+      <a href="../index.html#etudes">Résultats terrain</a>
+      <a href="../index.html#offre">Offre &amp; tarifs</a>
+      <a href="../index.html#faq">FAQ</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-primary" aria-label="Menu" onclick="var n=document.getElementById('nav-primary');n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <a class="btn btn--primary" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">Réserver un échange →</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Transition num&eacute;rique</div>
+    <h1>IA et fili&egrave;re bois&nbsp;:<br><em>ce que les donn&eacute;es<br>disent vraiment</em></h1>
+    <p class="hero-lead">De la sylviculture aux bureaux d&rsquo;&eacute;tudes, la fili&egrave;re bois fran&ccedil;aise n&rsquo;est pas un bloc homog&egrave;ne face &agrave; l&rsquo;IA. Une grille d&rsquo;analyse rigoureuse &mdash; croisant recherche acad&eacute;mique et donn&eacute;es de terrain &mdash; permet enfin de distinguer ce qui est vraiment transform&eacute; de ce qui reste prot&eacute;g&eacute;.</p>
+    <div class="hero-meta">
+      <span>Kosmio &times; Xylofutur</span>
+      <span>Avril 2026</span>
+      <span>15 min de lecture</span>
+      <span>17 sources cit&eacute;es</span>
+    </div>
+  </div>
+</header>
+
+<!-- SECTION 1 — CADRE -->
+<section class="section">
+  <div class="prose">
+    <div class="section-head">
+      <div class="section-num">01</div>
+      <h2>Capacit&eacute; th&eacute;orique vs exposition observ&eacute;e&nbsp;: une distinction d&eacute;cisive</h2>
+    </div>
+    <div class="body-text">
+      <p>La fili&egrave;re bois fran&ccedil;aise emploie pr&egrave;s de 500&nbsp;000 personnes. Depuis deux ans, le mot &laquo;&nbsp;intelligence artificielle&nbsp;&raquo; la traverse avec les m&ecirc;mes effets que partout ailleurs&nbsp;: fascination m&ecirc;l&eacute;e d&rsquo;inqui&eacute;tude, usages pionniers dans quelques entreprises, et majorit&eacute; des acteurs dans l&rsquo;expectative. Le rapport s&eacute;natorial &laquo;&nbsp;Une fili&egrave;re qui sort du bois&nbsp;&raquo; (juillet 2025) &eacute;value &agrave; 8,5&nbsp;milliards d&rsquo;euros le d&eacute;ficit commercial fran&ccedil;ais sur les produits bois &mdash; un dixi&egrave;me du d&eacute;ficit total &mdash; alors que la for&ecirc;t couvre un tiers du territoire<sup><a href="#ref1">[1]</a></sup>. La modernisation n&rsquo;est pas une option&nbsp;: c&rsquo;est une n&eacute;cessit&eacute; comp&eacute;titive.</p>
+      <p>Depuis le travail fondateur d&rsquo;Eloundou et al. (2023)<sup><a href="#ref2">[2]</a></sup>, nous disposons d&rsquo;un score &beta; mesurant la probabilit&eacute; qu&rsquo;un LLM puisse r&eacute;aliser une t&acirc;che professionnelle deux fois plus vite. Selon ce crit&egrave;re, <strong>environ 80&nbsp;% des travailleurs verraient au moins 10&nbsp;% de leurs t&acirc;ches affect&eacute;es</strong>. Chiffre souvent cit&eacute; hors contexte &mdash; car il ne mesure que ce que l&rsquo;IA <em>pourrait</em> faire, pas ce qu&rsquo;elle fait.</p>
+      <p>L&rsquo;&eacute;tude &eacute;conomique d&rsquo;Anthropic (mars 2026)<sup><a href="#ref3">[3]</a></sup> franchit un pas d&eacute;cisif en croisant donn&eacute;es d&rsquo;utilisation r&eacute;elle de Claude avec la base O*NET. R&eacute;sultat&nbsp;: l&rsquo;adoption observ&eacute;e est <strong>en moyenne 3,5 fois inf&eacute;rieure</strong> &agrave; la capacit&eacute; th&eacute;orique. Barri&egrave;res l&eacute;gales, r&eacute;sistances organisationnelles, manque de formation, sp&eacute;cificit&eacute;s m&eacute;tier&nbsp;: la technologie est pr&ecirc;te, les organisations ne le sont pas encore. Ce constat est particuli&egrave;rement aigu dans une fili&egrave;re constitu&eacute;e &agrave; 95&nbsp;% de TPE-PME.</p>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-num">3,5<span>&times;</span></div>
+        <div class="stat-bar"></div>
+        <div class="stat-label">Ecart moyen<br>th&eacute;orie / usage r&eacute;el<br>Anthropic 2026</div>
+      </div>
+      <div class="stat-card gold">
+        <div class="stat-num">10<span>%</span></div>
+        <div class="stat-bar" style="background:rgba(255,255,255,0.4)"></div>
+        <div class="stat-label">Entreprises fran&ccedil;aises<br>utilisant l&rsquo;IA en 2024<br>vs 13% UE (INSEE)</div>
+      </div>
+      <div class="stat-card sage">
+        <div class="stat-num">8,5<span>Md</span></div>
+        <div class="stat-bar" style="background:rgba(255,255,255,0.4)"></div>
+        <div class="stat-label">D&eacute;ficit commercial<br>bois France (EUR)<br>S&eacute;nat 2025</div>
+      </div>
+    </div>
+
+    <div class="pull-quote">
+      <p>&laquo;&nbsp;Seulement 9&nbsp;% des entreprises fran&ccedil;aises de moins de 50&nbsp;salari&eacute;s utilisent l&rsquo;IA en 2024 &mdash; tr&egrave;s en dessous du Danemark (28&nbsp;%) ou de la Belgique (25&nbsp;%).&nbsp;&raquo;</p>
+      <cite>INSEE, Enqu&ecirc;te TIC Entreprises 2024</cite>
+    </div>
+
+    <div class="body-text" style="margin-top:-.5rem">
+      <p>Ghobakhloo et al. (2021)<sup><a href="#ref4">[4]</a></sup>, dans leur analyse de 219&nbsp;citations sur la transformation Industrie&nbsp;4.0 des PME manufacturières, montrent que <strong>onze facteurs conditionnent le succ&egrave;s</strong> de la transition &mdash; dont la maturit&eacute; technologique, le management du changement et le soutien externe. Ce dernier facteur est le premier &agrave; mettre en place, avant m&ecirc;me la technologie elle-m&ecirc;me.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2 — DEUX NIVEAUX + CHARTS -->
+<section class="section section--alt">
+  <div class="prose">
+    <div class="section-head">
+      <div class="section-num">02</div>
+      <h2>Deux niveaux d&rsquo;analyse&nbsp;: fonctions transversales et segments d&rsquo;activit&eacute;</h2>
+    </div>
+    <div class="body-text">
+      <p>L&rsquo;erreur la plus fr&eacute;quente dans les analyses sectorielles consiste &agrave; m&eacute;langer deux logiques d&rsquo;exposition fondamentalement distinctes. Un <strong>segment d&rsquo;activit&eacute;</strong> &mdash; scierie, charpente, n&eacute;goce &mdash; d&eacute;signe ce que fait l&rsquo;entreprise sur la cha&icirc;ne de valeur. Une <strong>fonction transversale</strong> &mdash; comptabilit&eacute;, commercial, bureau d&rsquo;&eacute;tudes &mdash; d&eacute;signe les m&eacute;tiers pr&eacute;sents dans <em>toutes</em> les entreprises de la fili&egrave;re, quel que soit leur segment.</p>
+      <p>Une scierie de 40&nbsp;personnes a peut-&ecirc;tre 2 ou 3 gestionnaires tr&egrave;s expos&eacute;s, et 37&nbsp;op&eacute;rateurs quasiment hors de port&eacute;e des LLM. Son <em>score segment</em> sera faible &mdash; mais ses fonctions support sont aussi vuln&eacute;rables qu&rsquo;un cabinet comptable. Deux graphes s&eacute;par&eacute;s permettent de lire les deux dynamiques sans les contaminer.</p>
+    </div>
+  </div>
+
+  <!-- CHART 1 -->
+  <div style="max-width:64rem;margin:0 auto">
+    <div class="chart-block">
+      <div class="chart-hd">
+        <div class="chart-eyebrow">Figure 1 &mdash; Fonctions transversales</div>
+        <h3>Capacit&eacute; th&eacute;orique et exposition observ&eacute;e pour les m&eacute;tiers-support</h3>
+        <p>M&eacute;tiers pr&eacute;sents dans toutes les entreprises de la fili&egrave;re &bull; Adapt&eacute; de Massenkoff &amp; McCrory (2026) et Eloundou et al. (2023)</p>
+      </div>
+      <div class="chart-legend">
+        <div class="chart-legend-item"><span class="swatch" style="background:#00B194"></span>Capacit&eacute; th&eacute;orique &beta; &mdash; tâches faisables par LLM</div>
+        <div class="chart-legend-item"><span class="swatch" style="background:#BA8748"></span>Exposition observ&eacute;e &mdash; usage IA r&eacute;el estim&eacute;</div>
+      </div>
+      <div class="chart-wrap">
+        <canvas id="chartFonctions" role="img" aria-label="Radar fonctions transversales filiere bois : Gestion 90% vs 36%, Bureau etudes 76% vs 40%, Marketing 80% vs 42%, Commercial 70% vs 28%, Logistique 56% vs 16%, Qualite 62% vs 20%, RH 68% vs 22%, Direction 70% vs 28%"></canvas>
+      </div>
+      <div class="chart-ft"><strong>Lecture&nbsp;:</strong> Zone verte = capacit&eacute; th&eacute;orique &beta; (Eloundou et al. 2023). Zone or = exposition observ&eacute;e estim&eacute;e, pond&eacute;r&eacute;e usage automatis&eacute; vs augmentatif (Anthropic Economic Index). L&rsquo;&eacute;cart entre les deux zones est le gisement de transformation non activ&eacute;.</div>
+    </div>
+
+    <!-- CHART 2 -->
+    <div class="chart-block" style="margin-top:2rem">
+      <div class="chart-hd">
+        <div class="chart-eyebrow">Figure 2 &mdash; Segments d&rsquo;activit&eacute;</div>
+        <h3>Score IA pond&eacute;r&eacute; par le mix de postes dans chaque segment de la fili&egrave;re</h3>
+        <p>Score naturellement bas l&agrave; o&ugrave; le travail physique domine &bull; Asymm&eacute;trie = signature de la fili&egrave;re bois</p>
+      </div>
+      <div class="chart-legend">
+        <div class="chart-legend-item"><span class="swatch" style="background:#00B194"></span>Capacit&eacute; th&eacute;orique &beta; (segment complet)</div>
+        <div class="chart-legend-item"><span class="swatch" style="background:#BA8748"></span>Exposition observ&eacute;e (segment complet)</div>
+      </div>
+      <div class="chart-wrap">
+        <canvas id="chartSegments" role="img" aria-label="Radar segments filiere bois : Ingenierie 76% vs 38%, Negoce 60% vs 22%, Menuiserie 32% vs 7%, Charpente 38% vs 9%, 2e transfo 30% vs 7%, Scierie 22% vs 5%, Exploitation 12% vs 2%, Sylviculture 14% vs 3%"></canvas>
+      </div>
+      <div class="chart-ft"><strong>Note&nbsp;:</strong> Le score d&rsquo;un segment est la moyenne pond&eacute;r&eacute;e de l&rsquo;exposition de tous ses postes (op&eacute;rationnels + fonctions support), proportionnellement au temps de travail. Un segment &agrave; 90&nbsp;% de postes physiques aura n&eacute;cessairement un score global faible m&ecirc;me si ses gestionnaires sont tr&egrave;s expos&eacute;s.</div>
+    </div>
+  </div>
+
+  <div class="prose" style="margin-top:2rem">
+    <div class="body-text">
+      <p>La comparaison est &eacute;clairante. La Figure&nbsp;1 pr&eacute;sente une forme <strong>relativement &eacute;quilibr&eacute;e</strong> &mdash; toutes les fonctions ont un score th&eacute;orique &eacute;lev&eacute; (70-90&nbsp;%) parce qu&rsquo;elles sont par d&eacute;finition cognitives. La Figure&nbsp;2 est radicalement diff&eacute;rente&nbsp;: deux sommets (Ing&eacute;nierie/MOE et N&eacute;goce), un large creux pour tous les segments en amont. Cette <strong>asymm&eacute;trie est la vraie signature de la fili&egrave;re bois</strong>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3 — AUTOMATISATION -->
+<section class="section">
+  <div class="prose">
+    <div class="section-head">
+      <div class="section-num">03</div>
+      <h2>Scieries et transformation&nbsp;: l&rsquo;Industrie&nbsp;4.0 avant les LLM</h2>
+    </div>
+    <div class="body-text">
+      <p>Avant de parler de LLM, il faut rappeler que l&rsquo;automatisation industrielle est d&eacute;j&agrave; tr&egrave;s avanc&eacute;e dans les scieries les plus comp&eacute;titives. Holzinger et al. (2022)<sup><a href="#ref5">[5]</a></sup> qualifient cette vague de &laquo;&nbsp;transformation digitale des op&eacute;rations foresti&egrave;res&nbsp;&raquo; appel&eacute;e &agrave; devenir &laquo;&nbsp;irremplacable pour s&eacute;curiser notre plan&egrave;te&nbsp;&raquo; (109&nbsp;citations, <em>Sensors</em>).</p>
+      <p>L&rsquo;exemple le plus abouti en France est la plateforme <strong>Osia de Finega</strong>, deploy&eacute;e dans la scierie Aprobois &agrave; Carhaix (Bretagne)<sup><a href="#ref6">[6]</a></sup>. La plateforme enregistre 5&nbsp;000&nbsp;donn&eacute;es par minute, synchronise une cam&eacute;ra d&rsquo;analyse a&nbsp;<em>posteriori</em> des pertes de productivit&eacute;, et mod&eacute;lise les populations de grumes pour simuler les d&eacute;cisions de d&eacute;bit. Investissement&nbsp;: 3 &agrave; 4&nbsp;M&euro; par site.</p>
+      <p>Sur le plan acad&eacute;mique, Morin et al. (2020)<sup><a href="#ref7">[7]</a></sup> ont d&eacute;montr&eacute; dans le <em>Journal of Production Economics</em> (30&nbsp;citations) comment le ML g&eacute;n&egrave;re des mod&egrave;les de scierie capables de recommander l&rsquo;allocation optimale des grumes &mdash; &laquo;&nbsp;envoyer le bon bois au bon moulin&nbsp;&raquo;. Munis et al. (2022)<sup><a href="#ref8">[8]</a></sup> ont mesur&eacute; sur 144&nbsp;973 enregistrements bras&iacute;liens que des algorithmes ensemblistes pr&eacute;disent la productivit&eacute; des t&ecirc;tes d&rsquo;abattage avec un R&sup2; = 0,98.</p>
+    </div>
+    <div class="insight-box">
+      <div class="insight-label">Signal terrain &mdash; LIGNA 2025 · Hanovre</div>
+      <p>&laquo;&nbsp;L&rsquo;IA dans le travail du bois n&rsquo;est plus un concept futuriste, mais une r&eacute;alit&eacute;. Les entreprises l&rsquo;int&egrave;grent &agrave; diff&eacute;rentes &eacute;tapes de la production. L&rsquo;IA ne remplace pas les travailleurs humains, mais renforce leurs capacit&eacute;s &mdash; la synergie entre cr&eacute;ativit&eacute; humaine et pr&eacute;cision de l&rsquo;IA stimule l&rsquo;innovation.&nbsp;&raquo;<sup><a href="#ref9">[9]</a></sup></p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4 — USAGES CONCRETS -->
+<section class="section section--alt">
+  <div style="max-width:80rem;margin:0 auto">
+    <div class="section-head" style="max-width:52rem">
+      <div class="section-num">04</div>
+      <h2>BIM, IA et ing&eacute;nierie bois&nbsp;: les cas d&rsquo;usage concrets</h2>
+    </div>
+    <div class="body-text" style="margin-bottom:1.5rem">
+      <p>Une revue syst&eacute;matique publi&eacute;e dans <em>Archives of Computational Methods in Engineering</em> (246&nbsp;citations)<sup><a href="#ref10">[10]</a></sup> identifie six domaines de transformation BIM+IA dans la cha&icirc;ne AEC. Lobos Calqu&iacute;n et al. (2024)<sup><a href="#ref11">[11]</a></sup> &eacute;tablissent sp&eacute;cifiquement pour le bois que ces outils ont &eacute;t&eacute; principalement utilis&eacute;s en acad&eacute;mie &mdash; laissant aux entreprises ambitieuses une fen&ecirc;tre d&rsquo;avance. Girmay (2025)<sup><a href="#ref12">[12]</a></sup> montre que XGBoost pr&eacute;dit la densit&eacute; du bois avec R&sup2;&nbsp;= 89&nbsp;% contre 33&nbsp;% pour les m&eacute;thodes conventionnelles.</p>
+    </div>
+    <div class="uc-grid">
+      <div class="uc-card">
+        <div class="uc-tag green">Ingenierie & MOE bois</div>
+        <h4>Calcul structure assist&eacute; par LLM</h4>
+        <p>G&eacute;n&eacute;ration de notes de calcul, v&eacute;rification Eurocodes, optimisation de sections &mdash; gain 30-50&nbsp;% sur certaines phases.</p>
+      </div>
+      <div class="uc-card">
+        <div class="uc-tag green">Ingenierie & MOE bois</div>
+        <h4>G&eacute;n&eacute;ration CCTP &amp; sp&eacute;cifications</h4>
+        <p>Transformation d&rsquo;un mod&egrave;le BIM en document de march&eacute; structur&eacute;&nbsp;: descriptifs lots bois, fiches techniques, exigences RE2020.</p>
+      </div>
+      <div class="uc-card">
+        <div class="uc-tag sage">Scierie & 1re transfo</div>
+        <h4>Tri automatique et d&eacute;tection d&eacute;fauts</h4>
+        <p>IA de vision pour d&eacute;tection de n&oelig;uds, fentes et poches de r&eacute;sine. R&eacute;duction des chutes de 8 &agrave; 15&nbsp;%.</p>
+      </div>
+      <div class="uc-card">
+        <div class="uc-tag sage">2e transformation</div>
+        <h4>Planification de production</h4>
+        <p>Mod&egrave;les ML int&eacute;grant volume de grumes, essence, m&eacute;t&eacute;o et exp&eacute;rience op&eacute;rateur (R&sup2;&nbsp;= 0,98, Munis et al. 2022).</p>
+      </div>
+      <div class="uc-card">
+        <div class="uc-tag gold">Negoce & distribution</div>
+        <h4>G&eacute;n&eacute;ration de devis automatis&eacute;e</h4>
+        <p>LLM connect&eacute; au catalogue produit&nbsp;: devis en langage naturel, r&eacute;ponse technique, suivi commandes. Gain&nbsp;: 2-4h/sem par commercial.</p>
+      </div>
+      <div class="uc-card">
+        <div class="uc-tag gold">Negoce & distribution</div>
+        <h4>Pr&eacute;diction ruptures de stock</h4>
+        <p>Analyse tendances de commande, d&eacute;lais fournisseurs et m&eacute;t&eacute;o pour anticiper les ruptures de bois d&rsquo;&oelig;uvre.</p>
+      </div>
+      <div class="uc-card">
+        <div class="uc-tag green">Toutes entreprises</div>
+        <h4>Documentation qualit&eacute; &amp; tra&ccedil;abilit&eacute;</h4>
+        <p>G&eacute;n&eacute;ration auto de fiches PEFC/FSC, rapports de non-conformit&eacute; depuis les donn&eacute;es de production. Critique pour march&eacute;s publics bois.</p>
+      </div>
+      <div class="uc-card">
+        <div class="uc-tag gold">Toutes entreprises</div>
+        <h4>Veille r&eacute;glementaire automatis&eacute;e</h4>
+        <p>Synth&egrave;se &eacute;volutions RE2020, R&egrave;glement anti-d&eacute;forestation EUDR, taxonomie verte &mdash; alertes sur impacts pour offres en cours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5 — RH -->
+<section class="section">
+  <div class="prose">
+    <div class="section-head">
+      <div class="section-num">05</div>
+      <h2>Le signal discret sur les jeunes entrants</h2>
+    </div>
+    <div class="body-text">
+      <p>L&rsquo;&eacute;tude Anthropic (2026) pointe un signal pr&eacute;occupant&nbsp;: le taux de recrutement des 22-25&nbsp;ans dans les m&eacute;tiers les plus expos&eacute;s &agrave; l&rsquo;IA a diminu&eacute; d&rsquo;environ <strong>14&nbsp;%</strong> depuis le lancement de ChatGPT fin 2022. L&rsquo;effet ne se traduit pas encore par une hausse du ch&ocirc;mage &mdash; mais par un ralentissement de l&rsquo;embauche de d&eacute;butants dans les fonctions cognitives.</p>
+      <p>La recherche acad&eacute;mique nuance ce tableau. Chen et al. (2025)<sup><a href="#ref16">[16]</a></sup> trouvent, dans une analyse Diff-in-Diff, que les travailleurs dans les professions les plus expos&eacute;es ont vu leurs <strong>salaires augmenter</strong> post-ChatGPT, sans effet d&eacute;tectable sur le ch&ocirc;mage. Sharfaei et al. (2026)<sup><a href="#ref17">[17]</a></sup> concluent que &laquo;&nbsp;les inqui&eacute;tudes sur les destructions massives d&rsquo;emplois li&eacute;es &agrave; l&rsquo;IA ne sont pas soutenues par les preuves empiriques&nbsp;&raquo;.</p>
+      <p>Pour la fili&egrave;re bois, les postes concern&eacute;s sont&nbsp;: <strong>assistant(e) commercial(e), gestionnaire de commandes, charg&eacute;(e) de formation, assistant(e) qualit&eacute;</strong> &mdash; les emplois d&rsquo;entr&eacute;e par lesquels les nouvelles g&eacute;n&eacute;rations acc&egrave;dent traditionnellement &agrave; ces m&eacute;tiers.</p>
+    </div>
+
+    <div class="pull-quote">
+      <p>&laquo;&nbsp;Le risque n&rsquo;est pas que les seniors soient licenci&eacute;s. C&rsquo;est que les juniors ne soient plus recrut&eacute;s pour apprendre ce que les seniors ne feront plus faire. Une d&eacute;sint&eacute;rm&eacute;diation silencieuse de l&rsquo;apprentissage.&nbsp;&raquo;</p>
+      <cite>Analyse Kosmio, d&rsquo;apr&egrave;s Brynjolfsson et al. (2025) &amp; Anthropic Economic Index</cite>
+    </div>
+
+    <div class="body-text">
+      <p>L&rsquo;&eacute;tude du secteur bois slov&egrave;ne (Kropi&scaron;ek et al., 2020)<sup><a href="#ref15">[15]</a></sup>, comparable &agrave; la France par sa structure PME, est &eacute;clairante&nbsp;: parmi les obstacles &agrave; l&rsquo;Industrie&nbsp;4.0, le <strong>manque de comp&eacute;tences num&eacute;riques, particuli&egrave;rement chez les travailleurs plus &acirc;g&eacute;s</strong>, arrive en deuxi&egrave;me position apr&egrave;s les contraintes d&rsquo;investissement. Or si les postes juniors &mdash; qui transmettent naturellement la culture num&eacute;rique &mdash; ralentissent, ce frein structurel risque de s&rsquo;aggraver.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6 — PLAN D'ACTION -->
+<section class="section section--sage">
+  <div class="prose">
+    <div class="section-head">
+      <div class="section-num">06</div>
+      <h2>Ce que les acteurs de la fili&egrave;re doivent faire maintenant</h2>
+    </div>
+    <div class="body-text" style="margin-bottom:1.5rem">
+      <p>Hansen et al. (2024)<sup><a href="#ref14">[14]</a></sup> proposent une approche en &laquo;&nbsp;<em>scaffolding</em>&nbsp;&raquo;&nbsp;: accompagner d&rsquo;abord la compr&eacute;hension des concepts avant de vouloir d&eacute;ployer les outils. C&rsquo;est pr&eacute;cis&eacute;ment le r&ocirc;le que les organisations professionnelles de la fili&egrave;re bois &mdash; France Bois R&eacute;gions, FCBA, interprofessions &mdash; doivent jouer en priorit&eacute;.</p>
+    </div>
+    <ol class="action-list">
+      <li>
+        <strong>Cartographier vos m&eacute;tiers sur les deux niveaux</strong>
+        Avant tout investissement, identifier o&ugrave; se situent vos postes &mdash; fonctions support et segment d&rsquo;activit&eacute;. Un autodiagnostic de 2h avec les responsables de p&ocirc;le suffit pour prioriser. C&rsquo;est le socle de tout plan IA cr&eacute;dible.
+      </li>
+      <li>
+        <strong>Attaquer en premier les fonctions transversales</strong>
+        Commerce, qualit&eacute;, administration&nbsp;: pr&eacute;sentes dans toutes vos entreprises, &eacute;cart th&eacute;orie/pratique maximal. Un pilote de 6&nbsp;semaines sur la g&eacute;n&eacute;ration de devis ou la documentation qualit&eacute; g&eacute;n&egrave;re un ROI mesurable et cr&eacute;e la culture interne.
+      </li>
+      <li>
+        <strong>Structurer les donn&eacute;es avant les outils</strong>
+        L&rsquo;IA est aussi performante que les donn&eacute;es qu&rsquo;on lui fournit. Structurer catalogue produits, donn&eacute;es clients et process en amont &mdash; c&rsquo;est un investissement infrastructure qui conditionne le ROI de tout ce qui suit.
+      </li>
+      <li>
+        <strong>Enrichir les parcours juniors en cons&eacute;quence</strong>
+        Si les t&acirc;ches d&rsquo;apprentissage &eacute;l&eacute;mentaires sont absorb&eacute;es par l&rsquo;IA, reconstruire les postes juniors avec des missions plus complexes d&egrave;s l&rsquo;entr&eacute;e&nbsp;: analyse, conception, relation client. Ne pas r&eacute;duire les effectifs, mais &eacute;lever le niveau.
+      </li>
+      <li>
+        <strong>Mutualiser via les communs sectoriels</strong>
+        Les PME bois ne peuvent pas d&eacute;velopper seules des outils IA sectoriels pertinents. Bases de donn&eacute;es produits communes, r&eacute;f&eacute;rentiels tra&ccedil;abilit&eacute; PEFC/FSC partag&eacute;s, modules de formation IA pour la fili&egrave;re &mdash; la mutualisation est le levier des TPE-PME.
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- CONCLUSION -->
+<div class="conclusion">
+  <div class="conclusion-inner">
+    <div class="eyebrow" style="color:rgba(0,177,148,0.8)">Conclusion</div>
+    <h2>La for&ecirc;t n&rsquo;a pas peur de l&rsquo;IA.<br>Mais elle doit la comprendre.</h2>
+    <p>La fili&egrave;re bois n&rsquo;est pas un secteur &agrave; risque &eacute;lev&eacute; de disruption globale par les LLM. La dominante physique de la majorit&eacute; de ses m&eacute;tiers &mdash; de la for&ecirc;t &agrave; la charpente &mdash; constitue une protection naturelle que peu d&rsquo;industries peuvent revendiquer.</p>
+    <p>Mais la fili&egrave;re abrite aussi des fonctions cognitives &mdash; bureau d&rsquo;&eacute;tudes, gestion, commerce, qualit&eacute; &mdash; qui sont, elles, pleinement dans la trajectoire de transformation. Ces fonctions portent la coordination, la valeur ajout&eacute;e immat&eacute;rielle, la comp&eacute;titivit&eacute;.</p>
+    <p>L&rsquo;&eacute;cart entre capacit&eacute; th&eacute;orique et exposition observ&eacute;e &mdash; le 3,5&times; que l&rsquo;&eacute;tude Anthropic met en &eacute;vidence &mdash; n&rsquo;est pas une mauvaise nouvelle. C&rsquo;est une carte. Et une carte, &ccedil;a sert &agrave; choisir son chemin avant que les autres l&rsquo;aient d&eacute;j&agrave; pris.</p>
+  </div>
+</div>
+
+<!-- REFERENCES -->
+<div class="references">
+  <div class="references-inner">
+    <h3>R&eacute;f&eacute;rences</h3>
+    <ol>
+      <li id="ref1">Loisier, A.-C., M&eacute;rillou, S. (2025). <em>Une fili&egrave;re qui sort du bois</em>. Rapport S&eacute;nat n&deg;&nbsp;847. <a href="https://www.senat.fr/notice-rapport/2024/r24-847-notice.html" target="_blank">senat.fr</a></li>
+      <li id="ref2">Eloundou, T. et al. (2023). <em>GPTs are GPTs: An Early Look at the Labor Market Impact Potential of Large Language Models</em>. <a href="https://consensus.app/papers/details/36a60044641a583380a17ba909aa5ba8/" target="_blank">arXiv:2303.10130</a> &mdash; 481&nbsp;citations.</li>
+      <li id="ref3">Massenkoff, M., McCrory, P. (2026). <em>Labor market impacts of AI: A new measure and early evidence</em>. <a href="https://www.anthropic.com/research/labor-market-impacts" target="_blank">Anthropic Economic Research</a></li>
+      <li id="ref4">Ghobakhloo, M., Iranmanesh, M. (2021). <em>Digital transformation success under Industry 4.0: a strategic guideline for manufacturing SMEs</em>. <a href="https://consensus.app/papers/details/88002a28d10756c18dbf164c6cff83af/" target="_blank">Journal of Manufacturing Technology Management</a> &mdash; 219&nbsp;citations.</li>
+      <li id="ref5">Holzinger, A. et al. (2022). <em>Digital Transformation in Smart Farm and Forest Operations Needs Human-Centered AI</em>. <a href="https://consensus.app/papers/details/bf6b6fcfa79a5fafa1ca19dae313a687/" target="_blank">Sensors, 22(8)</a> &mdash; 109&nbsp;citations.</li>
+      <li id="ref6">FNB / Forestopic (2023). <em>La fili&egrave;re bois a rendez-vous avec l&rsquo;industrie 4.0</em>. <a href="https://www.forestopic.com/fr/yes-i-wood/filiere-bois/734-filiere-bois-industrie-4-0" target="_blank">forestopic.com</a></li>
+      <li id="ref7">Morin, M. et al. (2020). <em>Machine learning-based models of sawmills for better wood allocation planning</em>. <a href="https://consensus.app/papers/details/4aa1f0b525f45dc48beb7b55b4ca755b/" target="_blank">International Journal of Production Economics</a> &mdash; 30&nbsp;citations.</li>
+      <li id="ref8">Munis, R.A. et al. (2022). <em>Machine Learning Methods to Estimate Productivity of Harvesters</em>. <a href="https://consensus.app/papers/details/0b90f7110f7b539a9fe98b6c51718903/" target="_blank">Forests, 13(7)</a> &mdash; 17&nbsp;citations.</li>
+      <li id="ref9">Architecture Bois &amp; Wood&amp;Panel Europe (2025). <em>IA, automatisation et robotique&nbsp;: la construction bois augment&eacute;e</em>. <a href="https://www.architecturebois.fr/intelligence-artificielle-automatisation-et-robotique-vers-la-construction-bois-augmentee/" target="_blank">architecturebois.fr</a></li>
+      <li id="ref10">Pan, Y., Zhang, L. (2022). <em>Integrating BIM and AI for Smart Construction Management</em>. <a href="https://consensus.app/papers/details/e797b38ae21d56c2b6d4310569d3b9fb/" target="_blank">Archives of Computational Methods in Engineering</a> &mdash; 246&nbsp;citations.</li>
+      <li id="ref11">Lobos Calqu&iacute;n, D. et al. (2024). <em>Implementation of BIM Technologies in Wood Construction</em>. <a href="https://consensus.app/papers/details/7894ceb44d9452249a37b5bf36cb9bd1/" target="_blank">Buildings, 14</a></li>
+      <li id="ref12">Girmay, M.A. (2025). <em>Revolutionizing timber structures: AI-driven structural design</em>. <a href="https://consensus.app/papers/details/e508e753a58153838218e08d0ab7beb0/" target="_blank">i-manager's Journal on Structural Engineering</a></li>
+      <li id="ref13">INSEE (2025). <em>Les TIC dans les entreprises en 2024</em>. <a href="https://www.insee.fr/fr/statistiques/8604126" target="_blank">INSEE Premi&egrave;re n&deg;&nbsp;2061</a></li>
+      <li id="ref14">Hansen, A.K. et al. (2024). <em>Technology isn&rsquo;t enough for Industry 4.0: on SMEs and hindrances to digital transformation</em>. <a href="https://consensus.app/papers/details/8f2bd6cb04f952a48525f0a63b70943a/" target="_blank">International Journal of Production Research</a> &mdash; 33&nbsp;citations.</li>
+      <li id="ref15">Kropi&scaron;ek, J. et al. (2020). <em>Digital Development of Slovenian Wood Industry</em>. <a href="https://consensus.app/papers/details/1c5fe8afad5a5d23bf2760c424a8a5e1/" target="_blank">Drvna industrija, 71(4)</a></li>
+      <li id="ref16">Chen, D. et al. (2025). <em>The (Short-Term) Effects of Large Language Models on Unemployment and Earnings</em>. <a href="https://consensus.app/papers/details/4f380b0d36315c9284257ade5afd315b/" target="_blank">arXiv</a></li>
+      <li id="ref17">Sharfaei, S. et al. (2026). <em>Automation as an Equalizer: How Easy-to-Use Technologies Narrow Skill Gaps</em>. <a href="https://consensus.app/papers/details/81069c1e4cae584a9ea374a4a1ae1676/" target="_blank">Journal of Economic Surveys</a></li>
+    </ol>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div>&copy; 2026 Kosmio &times; Xylofutur &middot; Parcours IA Fili&egrave;re Bois</div>
+    <div>
+      <a href="../index.html">Retour au site</a> &middot;
+      <a href="mailto:mathieu@kosm.io?subject=Mentions%20l%C3%A9gales">Mentions légales</a> &middot;
+      <a href="mailto:mathieu@kosm.io?subject=Confidentialit%C3%A9">Confidentialité</a>
+    </div>
+  </div>
+</footer>
+
+<!-- CHART.JS — chargement synchrone obligatoire avant initCharts() -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+function initCharts() {
+  var green = '#00B194', gold = '#BA8748';
+  var gridC = 'rgba(31,45,61,0.07)', tickC = 'rgba(31,45,61,0.4)', lblC = '#1F2D3D';
+
+  function dsGreen(data) {
+    return {
+      label: 'Capacite theorique (beta)',
+      data: data,
+      backgroundColor: 'rgba(0,177,148,0.12)',
+      borderColor: green,
+      borderWidth: 2.5,
+      pointBackgroundColor: green,
+      pointBorderColor: green,
+      pointRadius: 5,
+      pointHoverRadius: 7
+    };
+  }
+  function dsGold(data) {
+    return {
+      label: 'Exposition observee',
+      data: data,
+      backgroundColor: 'rgba(186,135,72,0.2)',
+      borderColor: gold,
+      borderWidth: 2.5,
+      pointBackgroundColor: gold,
+      pointBorderColor: gold,
+      pointRadius: 5,
+      pointHoverRadius: 7
+    };
+  }
+  function radarOpts(max) {
+    return {
+      responsive: true,
+      maintainAspectRatio: false,
+      layout: { padding: 16 },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function(c) { return '  ' + c.dataset.label + ' : ' + c.parsed.r + '%'; }
+          },
+          backgroundColor: '#FFFFFF',
+          borderColor: 'rgba(31,45,61,0.15)',
+          borderWidth: 1,
+          titleColor: '#1F2D3D',
+          bodyColor: '#5D6C73',
+          padding: 12,
+          titleFont: { family: 'Helvetica Neue, Helvetica, Arial, sans-serif', weight: '700', size: 13 },
+          bodyFont: { family: 'Inter, system-ui, sans-serif', size: 12 }
+        }
+      },
+      scales: {
+        r: {
+          min: 0, max: max,
+          ticks: {
+            stepSize: max <= 80 ? 10 : 20,
+            callback: function(v) { return v + '%'; },
+            color: tickC,
+            font: { size: 10, family: 'Inter, system-ui, sans-serif' },
+            backdropColor: 'transparent'
+          },
+          grid: { color: gridC, lineWidth: 1 },
+          angleLines: { color: gridC, lineWidth: 1 },
+          pointLabels: {
+            color: lblC,
+            font: { size: 11, weight: '600', family: 'Helvetica Neue, Helvetica, Arial, sans-serif' },
+            padding: 8
+          }
+        }
+      }
+    };
+  }
+
+  var c1 = document.getElementById('chartFonctions');
+  if (c1) {
+    new Chart(c1, {
+      type: 'radar',
+      data: {
+        labels: [
+          ['Gestion &', 'Comptabilite'],
+          ["Bureau d'etudes", '& CAO'],
+          ['Marketing &', 'Communication'],
+          ['Commercial', '& Vente'],
+          ['Logistique', '& Achats'],
+          ['Qualite &', 'Tracabilite'],
+          ['RH &', 'Formation'],
+          ['Direction', '& Strategie']
+        ],
+        datasets: [
+          dsGreen([90, 76, 80, 70, 56, 62, 68, 70]),
+          dsGold([36, 40, 42, 28, 16, 20, 22, 28])
+        ]
+      },
+      options: radarOpts(100)
+    });
+  }
+
+  var c2 = document.getElementById('chartSegments');
+  if (c2) {
+    new Chart(c2, {
+      type: 'radar',
+      data: {
+        labels: [
+          ['Ingenierie &', 'MOE bois'],
+          ['Negoce &', 'Distribution'],
+          ['Menuiserie &', 'Agencement'],
+          ['Charpente &', 'Construction'],
+          ['2e transformation', 'industrielle'],
+          ['Scierie &', '1re transformation'],
+          ['Exploitation &', 'Bois ronds'],
+          ['Sylviculture', '& Foret']
+        ],
+        datasets: [
+          dsGreen([76, 60, 32, 38, 30, 22, 12, 14]),
+          dsGold([38, 22, 7, 9, 7, 5, 2, 3])
+        ]
+      },
+      options: radarOpts(80)
+    });
+  }
+}
+
+// Attendre que le DOM soit complet ET que Chart.js soit parse
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initCharts);
+} else {
+  initCharts();
+}
+</script>
+</body>
+</html>
