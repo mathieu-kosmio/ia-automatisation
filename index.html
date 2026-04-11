@@ -609,35 +609,88 @@
   </div>
 </section>
 
+<script src="config.js"></script>
 <script>
 (function(){
-  const form = document.getElementById('etude-form');
+  var cfg = window.__SITE_CONFIG || {};
+  var BREVO_KEY = cfg.BREVO_KEY;
+  var BREVO_LIST = cfg.BREVO_LIST || 17;
+
+  if (!BREVO_KEY) { console.warn('config.js manquant — formulaire désactivé'); return; }
+
+  var form = document.getElementById('etude-form');
   if(!form) return;
-  const statusEl = document.getElementById('etude-form-status');
-  form.addEventListener('submit', async (e) => {
+  var statusEl = document.getElementById('etude-form-status');
+
+  form.addEventListener('submit', async function(e) {
     e.preventDefault();
-    const btn = form.querySelector('button[type="submit"]');
+    var btn = form.querySelector('button[type="submit"]');
     btn.disabled = true;
-    statusEl.textContent = 'Envoi en cours…';
-    statusEl.style.color = '';
-    const data = Object.fromEntries(new FormData(form).entries());
-    data.source = 'site-public · section-lead-magnet · etude-01';
-    data.utm = new URLSearchParams(location.search).toString() || null;
+    btn.textContent = 'Envoi…';
+    statusEl.textContent = '';
+
+    var fd = new FormData(form);
+    var email = (fd.get('email') || '').trim();
+    var firstname = (fd.get('firstname') || '').trim();
+
+    if (!email || !firstname) {
+      statusEl.textContent = 'Merci de remplir les deux champs.';
+      statusEl.style.color = '#B85C38';
+      btn.disabled = false;
+      btn.textContent = 'Recevoir le PDF →';
+      return;
+    }
+
     try {
-      const r = await fetch('/api/subscribe-etude', {
+      // 1. Créer ou mettre à jour le contact dans Brevo
+      var r = await fetch('https://api.brevo.com/v3/contacts', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(data)
+        headers: {
+          'api-key': BREVO_KEY,
+          'Content-Type': 'application/json',
+          'accept': 'application/json'
+        },
+        body: JSON.stringify({
+          email: email,
+          attributes: { FIRSTNAME: firstname, SOURCE: 'site-public-lead-magnet' },
+          listIds: [BREVO_LIST],
+          updateEnabled: true
+        })
       });
-      if (!r.ok) throw new Error(await r.text());
-      statusEl.textContent = '✅ Merci ! L\u0027étude et les bonus arrivent dans votre boîte mail.';
+
+      // Brevo retourne 201 (créé) ou 204 (mis à jour) en succès
+      // Si 400 "Contact already exist", on fait un PUT pour l'ajouter à la liste
+      if (!r.ok) {
+        var errBody = await r.text();
+        if (r.status === 400 && errBody.indexOf('already exist') !== -1) {
+          var r2 = await fetch('https://api.brevo.com/v3/contacts/' + encodeURIComponent(email), {
+            method: 'PUT',
+            headers: {
+              'api-key': BREVO_KEY,
+              'Content-Type': 'application/json',
+              'accept': 'application/json'
+            },
+            body: JSON.stringify({
+              attributes: { FIRSTNAME: firstname },
+              listIds: [BREVO_LIST]
+            })
+          });
+          if (!r2.ok && r2.status !== 204) throw new Error('update failed');
+        } else {
+          throw new Error(errBody);
+        }
+      }
+
+      statusEl.textContent = '✅ Merci ' + firstname + ' ! L\u0027étude arrive dans votre boîte mail.';
       statusEl.style.color = 'var(--xf-green-600)';
       form.reset();
-    } catch(err){
+    } catch(err) {
+      console.error('Brevo error:', err);
       statusEl.textContent = '⚠️ Erreur — écrivez à mathieu@kosm.io, on vous envoie l\u0027étude.';
       statusEl.style.color = '#B85C38';
     } finally {
       btn.disabled = false;
+      btn.textContent = 'Recevoir le PDF →';
     }
   });
 })();
