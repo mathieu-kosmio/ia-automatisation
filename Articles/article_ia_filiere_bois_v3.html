@@ -45,11 +45,8 @@ body{font-family:var(--font-body);font-size:1.0625rem;line-height:1.65;color:var
   display:flex;align-items:center;justify-content:space-between;
   width:100%;max-width:80rem;margin:0 auto;gap:1rem;
 }
-.brand{display:flex;align-items:center;gap:.75rem;
-  font-family:var(--font-display);font-weight:700;letter-spacing:-.02em;
-  color:var(--ink-900);text-decoration:none}
-.brand .dot{width:14px;height:14px;border-radius:50%;
-  background:var(--xf-green-500);box-shadow:0 0 0 4px var(--xf-green-50)}
+.brand{display:flex;align-items:center;text-decoration:none}
+.brand-logo{height:36px;width:auto;display:block}
 .site-nav{display:none;gap:1.5rem}
 .site-nav a{color:var(--ink-700);text-decoration:none;font-weight:500;font-size:.95rem}
 .site-nav a:hover{color:var(--xf-green-600)}
@@ -250,8 +247,7 @@ body{font-family:var(--font-body);font-size:1.0625rem;line-height:1.65;color:var
 <header class="site-header">
   <div class="wrap">
     <a href="../index.html" class="brand">
-      <span class="dot"></span>
-      IA &amp; Automatisation
+      <img src="../assets/logo-dark.svg" alt="IA & Automatisation" class="brand-logo">
     </a>
     <nav class="site-nav" id="nav-primary">
       <a href="../index.html#methode">Méthode</a>

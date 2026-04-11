@@ -39,9 +39,8 @@
     border-bottom: 1px solid rgba(201,191,177,0.4);
   }
   header.site .wrap { display:flex; align-items:center; justify-content:space-between; height:72px; }
-  .brand { display:flex; align-items:center; gap:var(--space-3); font-family:var(--font-display); font-weight:700; letter-spacing:var(--tracking-tight); color:var(--ink-900); text-decoration:none;}
-  .brand .dot { width:14px;height:14px;border-radius:50%; background:var(--xf-green-500); box-shadow: 0 0 0 4px var(--xf-green-50);}
-  .brand small { font-family:var(--font-mono); font-size:.7rem; font-weight:600; color:var(--grey-600); letter-spacing:var(--tracking-mono); text-transform:uppercase;}
+  .brand { display:flex; align-items:center; text-decoration:none;}
+  .brand-logo { height:36px; width:auto; display:block; }
   nav.primary { display:none; gap: var(--space-6);}
   nav.primary a { color: var(--ink-700); text-decoration:none; font-weight:500; font-size:.95rem;}
   nav.primary a:hover { color: var(--xf-green-600); }
@@ -368,8 +367,7 @@
 <header class="site">
   <div class="wrap">
     <a href="#" class="brand">
-      <span class="dot"></span>
-      IA &amp; Automatisation
+      <img src="assets/logo-dark.svg" alt="IA & Automatisation" class="brand-logo">
     </a>
     <nav class="primary" id="nav-primary" aria-label="Principal">
       <a href="#methode">Méthode</a>
