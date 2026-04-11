@@ -391,65 +391,97 @@
     </div>
 
     <div class="tree" aria-hidden="true">
-      <svg viewBox="0 0 480 520" fill="none">
+      <svg viewBox="0 0 480 500" fill="none">
         <!-- Ombre au sol -->
-        <ellipse cx="220" cy="505" rx="130" ry="12" fill="rgba(0,177,148,0.08)"/>
+        <ellipse cx="230" cy="488" rx="140" ry="10" fill="rgba(0,177,148,0.07)"/>
 
-        <!-- Tronc principal — courbe organique -->
-        <path d="M215 500 C212 420, 208 350, 218 280 C225 230, 215 180, 220 120" stroke="#BA8748" stroke-width="16" stroke-linecap="round"/>
-        <!-- Texture tronc -->
-        <path d="M215 500 C212 420, 208 350, 218 280 C225 230, 215 180, 220 120" stroke="#9F7338" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 18" opacity="0.4"/>
+        <!-- Tronc — courbe organique épaisse -->
+        <path d="M225 485 C222 420, 216 360, 224 300 C230 255, 222 210, 228 160" stroke="#BA8748" stroke-width="18" stroke-linecap="round"/>
+        <path d="M225 485 C222 420, 216 360, 224 300 C230 255, 222 210, 228 160" stroke="#9F7338" stroke-width="3" stroke-linecap="round" stroke-dasharray="3 20" opacity="0.35"/>
 
-        <!-- Branches — naturelles, asymétriques -->
-        <path d="M218 320 C195 305, 160 298, 120 300" stroke="#BA8748" stroke-width="7" stroke-linecap="round"/>
-        <path d="M220 260 C250 245, 290 240, 330 248" stroke="#BA8748" stroke-width="6" stroke-linecap="round"/>
-        <path d="M219 200 C195 185, 165 178, 135 182" stroke="#BA8748" stroke-width="5" stroke-linecap="round"/>
-        <path d="M220 160 C240 148, 268 142, 295 148" stroke="#BA8748" stroke-width="4.5" stroke-linecap="round"/>
-        <path d="M220 130 C205 115, 185 108, 170 112" stroke="#BA8748" stroke-width="3.5" stroke-linecap="round"/>
+        <!-- Branches principales -->
+        <path d="M224 330 C200 318, 170 310, 130 315" stroke="#BA8748" stroke-width="8" stroke-linecap="round"/>
+        <path d="M226 280 C255 265, 295 258, 340 265" stroke="#BA8748" stroke-width="7" stroke-linecap="round"/>
+        <path d="M225 230 C198 215, 160 208, 125 215" stroke="#BA8748" stroke-width="6" stroke-linecap="round"/>
+        <path d="M227 195 C252 182, 285 178, 315 185" stroke="#BA8748" stroke-width="5" stroke-linecap="round"/>
+        <path d="M228 165 C210 148, 185 140, 160 148" stroke="#BA8748" stroke-width="4" stroke-linecap="round"/>
+        <path d="M228 165 C245 150, 265 145, 280 152" stroke="#BA8748" stroke-width="3.5" stroke-linecap="round"/>
 
-        <!-- Canopée — formes organiques superposées -->
-        <!-- Couche arrière (plus sombre) -->
-        <path class="leaf" d="M90 310 C60 260, 80 200, 130 180 C160 168, 190 175, 200 200 C185 240, 120 290, 90 310Z" fill="#65857F" opacity="0.7"/>
-        <path class="leaf" d="M300 260 C340 220, 370 180, 350 140 C338 115, 310 110, 290 125 C270 145, 275 220, 300 260Z" fill="#65857F" opacity="0.6"/>
+        <!-- ===== CANOPÉE DENSE ===== -->
+        <!-- Couche 1 — fond, vert foncé, masses larges -->
+        <ellipse class="leaf" cx="130" cy="290" rx="65" ry="55" fill="#4A7A72" opacity="0.5"/>
+        <ellipse class="leaf" cx="330" cy="240" rx="70" ry="50" fill="#4A7A72" opacity="0.45"/>
+        <ellipse class="leaf" cx="225" cy="130" rx="80" ry="55" fill="#4A7A72" opacity="0.4"/>
+        <ellipse class="leaf" cx="160" cy="195" rx="55" ry="45" fill="#4A7A72" opacity="0.4"/>
+        <ellipse class="leaf" cx="300" cy="170" rx="50" ry="42" fill="#4A7A72" opacity="0.4"/>
 
-        <!-- Couche milieu -->
-        <path class="leaf" d="M100 300 C70 250, 75 190, 120 165 C155 148, 185 160, 195 185 C200 210, 150 270, 100 300Z" fill="#009982"/>
-        <path class="leaf" d="M280 250 C320 210, 355 170, 340 130 C328 100, 300 95, 275 112 C250 135, 255 210, 280 250Z" fill="#009982"/>
-        <path class="leaf" d="M160 170 C140 120, 160 70, 210 50 C245 38, 270 55, 270 85 C270 120, 210 155, 160 170Z" fill="#009982" opacity="0.9"/>
+        <!-- Couche 2 — vert sage, volume intermédiaire -->
+        <ellipse class="leaf" cx="120" cy="300" rx="55" ry="48" fill="#65857F" opacity="0.7"/>
+        <ellipse class="leaf" cx="180" cy="250" rx="50" ry="42" fill="#65857F" opacity="0.65"/>
+        <ellipse class="leaf" cx="340" cy="248" rx="55" ry="42" fill="#65857F" opacity="0.6"/>
+        <ellipse class="leaf" cx="275" cy="190" rx="48" ry="40" fill="#65857F" opacity="0.65"/>
+        <ellipse class="leaf" cx="170" cy="175" rx="45" ry="38" fill="#65857F" opacity="0.6"/>
+        <ellipse class="leaf" cx="250" cy="120" rx="52" ry="40" fill="#65857F" opacity="0.55"/>
 
-        <!-- Couche avant (plus clair, vert vif) -->
-        <path class="leaf" d="M115 280 C90 240, 100 195, 135 175 C158 162, 178 170, 185 190 C192 215, 155 258, 115 280Z" fill="#00B194"/>
-        <path class="leaf" d="M290 230 C315 195, 340 165, 325 135 C315 112, 295 108, 278 120 C260 138, 265 200, 290 230Z" fill="#00B194"/>
-        <path class="leaf" d="M175 145 C160 105, 175 65, 215 50 C240 42, 258 52, 260 75 C262 100, 220 132, 175 145Z" fill="#00B194"/>
-        <path class="leaf" d="M210 95 C200 60, 215 30, 245 25 C262 22, 272 35, 268 55 C264 75, 235 88, 210 95Z" fill="#00B194" opacity="0.8"/>
+        <!-- Couche 3 — vert moyen -->
+        <ellipse class="leaf" cx="135" cy="285" rx="50" ry="40" fill="#009982"/>
+        <ellipse class="leaf" cx="195" cy="235" rx="45" ry="38" fill="#009982" opacity="0.9"/>
+        <ellipse class="leaf" cx="260" cy="260" rx="42" ry="35" fill="#009982" opacity="0.85"/>
+        <ellipse class="leaf" cx="325" cy="235" rx="48" ry="38" fill="#009982" opacity="0.9"/>
+        <ellipse class="leaf" cx="150" cy="200" rx="42" ry="35" fill="#009982" opacity="0.85"/>
+        <ellipse class="leaf" cx="290" cy="180" rx="45" ry="36" fill="#009982"/>
+        <ellipse class="leaf" cx="220" cy="145" rx="50" ry="38" fill="#009982" opacity="0.9"/>
+        <ellipse class="leaf" cx="170" cy="150" rx="38" ry="32" fill="#009982" opacity="0.8"/>
+        <ellipse class="leaf" cx="275" cy="135" rx="40" ry="32" fill="#009982" opacity="0.8"/>
 
-        <!-- Points lumineux dans le feuillage — données/IA -->
-        <g opacity="0.9">
-          <circle class="leaf" cx="145" cy="195" r="3" fill="#F8EFE2"/>
-          <circle class="leaf" cx="170" cy="120" r="2.5" fill="#F8EFE2"/>
-          <circle class="leaf" cx="230" cy="65" r="2" fill="#F8EFE2"/>
-          <circle class="leaf" cx="300" cy="140" r="2.5" fill="#F8EFE2"/>
-          <circle class="leaf" cx="255" cy="100" r="3.5" fill="#F8EFE2"/>
-          <circle class="leaf" cx="120" cy="250" r="2" fill="#F8EFE2"/>
+        <!-- Couche 4 — vert vif, premier plan -->
+        <ellipse class="leaf" cx="155" cy="270" rx="40" ry="32" fill="#00B194"/>
+        <ellipse class="leaf" cx="210" cy="245" rx="38" ry="30" fill="#00B194" opacity="0.9"/>
+        <ellipse class="leaf" cx="300" cy="240" rx="35" ry="28" fill="#00B194" opacity="0.85"/>
+        <ellipse class="leaf" cx="120" cy="250" rx="32" ry="28" fill="#00B194" opacity="0.8"/>
+        <ellipse class="leaf" cx="345" cy="225" rx="32" ry="26" fill="#00B194" opacity="0.8"/>
+        <ellipse class="leaf" cx="175" cy="210" rx="35" ry="28" fill="#00B194"/>
+        <ellipse class="leaf" cx="265" cy="200" rx="32" ry="26" fill="#00B194" opacity="0.9"/>
+        <ellipse class="leaf" cx="310" cy="175" rx="30" ry="25" fill="#00B194" opacity="0.85"/>
+        <ellipse class="leaf" cx="145" cy="180" rx="30" ry="25" fill="#00B194" opacity="0.85"/>
+        <ellipse class="leaf" cx="228" cy="125" rx="42" ry="30" fill="#00B194"/>
+        <ellipse class="leaf" cx="190" cy="138" rx="30" ry="24" fill="#00B194" opacity="0.8"/>
+        <ellipse class="leaf" cx="268" cy="128" rx="28" ry="22" fill="#00B194" opacity="0.8"/>
+        <!-- Sommet -->
+        <ellipse class="leaf" cx="228" cy="95" rx="35" ry="28" fill="#00B194"/>
+        <ellipse class="leaf" cx="210" cy="108" rx="25" ry="20" fill="#00B194" opacity="0.7"/>
+        <ellipse class="leaf" cx="250" cy="105" rx="22" ry="18" fill="#00B194" opacity="0.7"/>
+
+        <!-- Couche 5 — touches de lumière -->
+        <ellipse class="leaf" cx="200" cy="230" rx="22" ry="18" fill="#2ECAAB" opacity="0.35"/>
+        <ellipse class="leaf" cx="280" cy="210" rx="18" ry="15" fill="#2ECAAB" opacity="0.3"/>
+        <ellipse class="leaf" cx="228" cy="110" rx="20" ry="16" fill="#2ECAAB" opacity="0.3"/>
+        <ellipse class="leaf" cx="155" cy="245" rx="16" ry="14" fill="#2ECAAB" opacity="0.25"/>
+
+        <!-- Points lumineux — réseau IA -->
+        <g opacity="0.85">
+          <circle class="leaf" cx="140" cy="270" r="3" fill="#F8EFE2"/>
+          <circle class="leaf" cx="200" cy="230" r="2.5" fill="#F8EFE2"/>
+          <circle class="leaf" cx="300" cy="225" r="2.5" fill="#F8EFE2"/>
+          <circle class="leaf" cx="170" cy="195" r="3" fill="#F8EFE2"/>
+          <circle class="leaf" cx="280" cy="175" r="2.5" fill="#F8EFE2"/>
+          <circle class="leaf" cx="228" cy="125" r="3.5" fill="#F8EFE2"/>
+          <circle class="leaf" cx="155" cy="155" r="2" fill="#F8EFE2"/>
           <circle class="leaf" cx="310" cy="195" r="2" fill="#F8EFE2"/>
+          <circle class="leaf" cx="228" cy="90" r="2" fill="#F8EFE2"/>
         </g>
 
-        <!-- Lignes de connexion subtiles entre les points (réseau/IA) -->
-        <g stroke="#F8EFE2" stroke-width="0.5" opacity="0.25">
-          <line x1="145" y1="195" x2="170" y2="120"/>
-          <line x1="170" y1="120" x2="230" y2="65"/>
-          <line x1="230" y1="65" x2="255" y2="100"/>
-          <line x1="255" y1="100" x2="300" y2="140"/>
-          <line x1="170" y1="120" x2="255" y2="100"/>
-          <line x1="145" y1="195" x2="120" y2="250"/>
-          <line x1="300" y1="140" x2="310" y2="195"/>
-        </g>
-
-        <!-- Cernes de bois à la base (coupe) -->
-        <g opacity="0.15">
-          <ellipse cx="220" cy="498" rx="22" ry="6" stroke="#BA8748" stroke-width="1" fill="none"/>
-          <ellipse cx="220" cy="498" rx="14" ry="4" stroke="#BA8748" stroke-width="0.8" fill="none"/>
-          <ellipse cx="220" cy="498" rx="7" ry="2" stroke="#BA8748" stroke-width="0.6" fill="none"/>
+        <!-- Lignes de connexion subtiles -->
+        <g stroke="#F8EFE2" stroke-width="0.6" opacity="0.2">
+          <line x1="140" y1="270" x2="200" y2="230"/>
+          <line x1="200" y1="230" x2="300" y2="225"/>
+          <line x1="200" y1="230" x2="170" y2="195"/>
+          <line x1="170" y1="195" x2="280" y2="175"/>
+          <line x1="280" y1="175" x2="228" y2="125"/>
+          <line x1="170" y1="195" x2="155" y2="155"/>
+          <line x1="228" y1="125" x2="228" y2="90"/>
+          <line x1="300" y1="225" x2="310" y2="195"/>
+          <line x1="155" y1="155" x2="228" y2="125"/>
         </g>
       </svg>
     </div>
