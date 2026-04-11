@@ -45,8 +45,9 @@ body{font-family:var(--font-body);font-size:1.0625rem;line-height:1.65;color:var
   display:flex;align-items:center;justify-content:space-between;
   width:100%;max-width:80rem;margin:0 auto;gap:1rem;
 }
-.brand{display:flex;align-items:center;text-decoration:none}
-.brand-logo{height:36px;width:auto;display:block}
+.brand{display:flex;align-items:center;gap:.75rem;text-decoration:none}
+.brand-logo{height:32px;width:auto;display:block}
+.brand-name{font-family:var(--font-display);font-weight:700;font-size:.95rem;color:var(--ink-900);letter-spacing:-.02em}
 .site-nav{display:none;gap:1.5rem}
 .site-nav a{color:var(--ink-700);text-decoration:none;font-weight:500;font-size:.95rem}
 .site-nav a:hover{color:var(--xf-green-600)}
@@ -247,7 +248,8 @@ body{font-family:var(--font-body);font-size:1.0625rem;line-height:1.65;color:var
 <header class="site-header">
   <div class="wrap">
     <a href="../index.html" class="brand">
-      <img src="../assets/logo-dark.svg" alt="IA & Automatisation" class="brand-logo">
+      <img src="../assets/logo-white.svg" alt="IA & Automatisation" class="brand-logo">
+      <span class="brand-name">IA &amp; Automatisation</span>
     </a>
     <nav class="site-nav" id="nav-primary">
       <a href="../index.html#methode">Méthode</a>
