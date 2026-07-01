@@ -130,6 +130,9 @@
   @media (min-width:1024px){ .hero .wrap { grid-template-columns: 1.4fr .9fr; align-items:center;} }
   .hero .eyebrow { color: var(--xf-green-500); }
   .hero .eyebrow::before { background: var(--xf-green-500); }
+  .hero-logos { display:flex; align-items:center; gap:var(--space-3); margin-bottom:var(--space-5); }
+  .hero-logos img { height:26px; width:auto; display:block; opacity:.9; }
+  .hero-logos .x { color: rgba(255,255,255,0.35); font-size:.85rem; }
   .hero h1 {
     color: var(--white);
     font-size: var(--text-display-1);
@@ -339,6 +342,7 @@
   .contact-card h3 { color:#fff; font-size: 1.4rem; margin-bottom: var(--space-3);}
   .contact-card p { color: rgba(255,255,255,0.7); margin: var(--space-2) 0;}
   .contact-card a { color: var(--xf-green-500);}
+  .contact-logo { height: 34px; width:auto; display:block; margin-bottom: var(--space-4); }
 
   /* ============ Footer ============ */
   footer.site {
@@ -348,6 +352,9 @@
   }
   footer.site .wrap { display:flex; flex-wrap:wrap; gap: var(--space-5); justify-content:space-between; align-items:center;}
   footer.site a { color: rgba(255,255,255,0.8);}
+  .footer-brands { display:flex; align-items:center; gap: var(--space-4); width:100%; padding-bottom: var(--space-6); margin-bottom: var(--space-5); border-bottom: 1px solid rgba(255,255,255,0.1);}
+  .footer-brands img { height: 26px; width:auto; display:block; opacity:.85; }
+  .footer-brands .x { color: rgba(255,255,255,0.35); font-size: 1.1rem; }
 
   /* ============ Reveal on scroll ============ */
   .reveal { opacity:0; transform: translateY(20px); transition: opacity .8s var(--ease-out), transform .8s var(--ease-out);}
@@ -380,14 +387,18 @@
 <section class="hero">
   <div class="wrap">
     <div>
-      <span class="eyebrow">Kosmio ✕ Xylofutur · Au service de la filière bois</span>
+      <div class="hero-logos" aria-hidden="true">
+        <img src="assets/Logos-Kosmio-Xylofutur/logo-kosmio-blanc.svg" alt="">
+        <span class="x">✕</span>
+        <img src="assets/Logos-Kosmio-Xylofutur/logo-xylofutur-blanc-web.png" alt="">
+      </div>
+      <span class="eyebrow">L'IA au service de la filière bois</span>
       <h1>Moins de paperasse, plus de temps <em>pour votre vrai métier.</em></h1>
       <p class="lead">Devis, appels d'offres, CCTP, traçabilité, reporting : on vous aide à simplifier ce qui vous ralentit au quotidien, avec des outils adaptés à votre façon de travailler. Pas besoin de tout changer.</p>
       <div class="ctas">
         <a class="btn btn--primary btn--lg" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">En discuter 30 min (gratuit) →</a>
         <a class="btn btn--secondary btn--lg" href="#etudes" style="color:#fff;border-color:#fff;">Voir des exemples concrets ↓</a>
       </div>
-      <div class="signature">Recommandé par <b>Xylofutur</b> · Présenté à l'AG du 16 avril 2026 · Tarifs préférentiels adhérents</div>
     </div>
 
     <div class="tree" aria-hidden="true">
@@ -888,13 +899,13 @@
 
     <div class="grid">
       <div class="contact-card">
-        <h3>Kosmio</h3>
+        <img src="assets/Logos-Kosmio-Xylofutur/logo-kosmio-blanc.svg" alt="Kosmio" class="contact-logo">
         <p>Mathieu Pesin · Accompagnement IA filière bois</p>
         <p><a href="mailto:mathieu@kosm.io">mathieu@kosm.io</a></p>
         <p><a href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">Réserver 30 minutes →</a></p>
       </div>
       <div class="contact-card">
-        <h3>Xylofutur</h3>
+        <img src="assets/Logos-Kosmio-Xylofutur/logo-xylofutur-blanc-web.png" alt="Xylofutur" class="contact-logo">
         <p>Pôle de compétitivité Forêt-Bois-Papier</p>
         <p>Charlotte Perrier · Directrice</p>
         <p><a href="https://xylofutur.fr">xylofutur.fr →</a></p>
@@ -914,6 +925,11 @@
 
 <footer class="site">
   <div class="wrap">
+    <div class="footer-brands">
+      <img src="assets/Logos-Kosmio-Xylofutur/logo-kosmio-blanc.svg" alt="Kosmio">
+      <span class="x">✕</span>
+      <img src="assets/Logos-Kosmio-Xylofutur/logo-xylofutur-blanc-web.png" alt="Xylofutur">
+    </div>
     <div>© 2026 Kosmio × Xylofutur · Parcours IA Filière Bois</div>
     <div><a href="mailto:mathieu@kosm.io?subject=Mentions%20légales">Mentions légales</a> · <a href="mailto:mathieu@kosm.io?subject=Confidentialité">Confidentialité</a> · <a href="mailto:mathieu@kosm.io?subject=CGV">CGV</a></div>
   </div>
