@@ -9,11 +9,11 @@
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Quel outil IA pour votre entreprise ?" />
 <meta property="og:description" content="9 questions, 3 minutes, une recommandation argumentée. Sans jargon, pour les entreprises de la filière bois." />
-<meta property="og:url" content="https://ia-automatisation.kosm.io/choix-ia.html" />
-<meta property="og:image" content="https://ia-automatisation.kosm.io/assets/og-cover.png" />
+<meta property="og:url" content="https://ia-bois.kosm.io/choix-ia.html" />
+<meta property="og:image" content="https://ia-bois.kosm.io/assets/og-cover.png" />
 <meta property="og:locale" content="fr_FR" />
 <meta name="twitter:card" content="summary_large_image" />
-<link rel="canonical" href="https://ia-automatisation.kosm.io/choix-ia.html" />
+<link rel="canonical" href="https://ia-bois.kosm.io/choix-ia.html" />
 
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
 
@@ -399,7 +399,6 @@
   </div>
 </footer>
 
-<script src="config.js"></script>
 <script>
 (function(){
   'use strict';
@@ -958,7 +957,7 @@
     var alt = r.ranked[1];
     var reasons = buildReasons(top, answers);
     var gains = computeGains(answers);
-    lastResult = { top: top, alt: alt, reasons: reasons, gains: gains };
+    lastResult = { top: top, alt: alt, third: r.ranked[2], reasons: reasons, gains: gains };
 
     /* --- Les trois colonnes de comparaison --- */
     var podium = [r.ranked[0], r.ranked[1], r.ranked[2]];
@@ -1052,11 +1051,6 @@
   /* =====================================================================
      5. Capture de contact (Brevo)
      ===================================================================== */
-  var cfg = window.__SITE_CONFIG || {};
-  var BREVO_KEY = cfg.BREVO_KEY;
-  var BREVO_LIST = cfg.BREVO_LIST_QUIZ || cfg.BREVO_LIST || 17;
-  var NOTIFY_TO = 'mathieu@kosm.io';
-
   var form = document.getElementById('quiz-form');
   var statusEl = document.getElementById('quiz-form-status');
 
@@ -1065,45 +1059,6 @@
     if (!q) return v;
     var o = q.options.filter(function(x){ return x.v === v; })[0];
     return o ? o.label : v;
-  }
-
-  function answersHtml() {
-    var rows = QUESTIONS.map(function(q){
-      var v = answers[q.id];
-      var txt = Array.isArray(v) ? v.map(function(x){ return labelOf(q.id, x); }).join(', ') : labelOf(q.id, v);
-      return '<tr><td style="padding:6px 10px;border-bottom:1px solid #eee;color:#5D6C73;">' + q.title +
-             '</td><td style="padding:6px 10px;border-bottom:1px solid #eee;"><strong>' + (txt || 'non renseigné') + '</strong></td></tr>';
-    }).join('');
-    return '<table style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:13px;width:100%;">' + rows + '</table>';
-  }
-
-  function summaryHtml(firstname) {
-    var top = SOLUTIONS[lastResult.top];
-    var alt = SOLUTIONS[lastResult.alt];
-    var why = lastResult.reasons.map(function(t){ return '<li style="margin-bottom:8px;">' + t + '</li>'; }).join('');
-    return '' +
-      '<div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.6;color:#1F2D3D;max-width:640px;">' +
-      '<p>Bonjour ' + firstname + ',</p>' +
-      '<p>Voici la synthèse de votre diagnostic, tel que vous venez de le remplir sur le site.</p>' +
-      '<h2 style="font-size:18px;margin:24px 0 8px;">Notre recommandation : ' + top.name + '</h2>' +
-      '<p style="color:#5D6C73;margin:0 0 12px;">' + top.tag + '</p>' +
-      '<ul style="padding-left:18px;margin:0 0 16px;">' + why + '</ul>' +
-      '<p><strong>Budget indicatif :</strong> ' + top.budget + '</p>' +
-      '<p><strong>L\'alternative à garder en tête :</strong> ' + alt.name + '.</p>' +
-      '<h2 style="font-size:18px;margin:28px 0 8px;">Le temps en jeu</h2>' +
-      '<p>Avec un simple abonnement bien utilisé, de l\'ordre de <strong>' + lastResult.gains.abo + ' heures par mois</strong> pour votre entreprise. ' +
-      'En automatisant réellement les processus concernés, de l\'ordre de <strong>' + lastResult.gains.auto + ' heures par mois</strong>. ' +
-      'Ce sont des ordres de grandeur issus de nos interventions dans la filière, à confirmer en regardant vos processus réels.</p>' +
-      '<h2 style="font-size:18px;margin:28px 0 8px;">Les trois conditions à réunir</h2>' +
-      '<ol style="padding-left:18px;">' +
-      '<li style="margin-bottom:8px;">Vérifier ce que vous payez déjà. Une partie des fonctions est peut-être incluse dans votre abonnement bureautique actuel.</li>' +
-      '<li style="margin-bottom:8px;">Commencer petit et en mensuel résiliable, avec deux ou trois personnes volontaires, avant tout engagement annuel.</li>' +
-      '<li style="margin-bottom:8px;">Poser une règle écrite d\'une page : ce qu\'on confie à l\'outil, ce qu\'on ne lui confie jamais, qui relit avant envoi.</li>' +
-      '</ol>' +
-      '<p style="margin-top:28px;">Le choix de l\'outil compte moins que ce que vous allez en faire. Si vous voulez qu\'on regarde ensemble lesquels de vos processus méritent d\'être automatisés, mon agenda est ouvert : ' +
-      '<a href="https://cal.com/kosmio/ia-automatisation">cal.com/kosmio/ia-automatisation</a></p>' +
-      '<p>Mathieu Pesin<br>Kosmio · Parcours IA Filière Bois<br><a href="mailto:mathieu@kosm.io">mathieu@kosm.io</a></p>' +
-      '</div>';
   }
 
   if (form) {
@@ -1119,78 +1074,38 @@
 
       if (!firstname || !email) { statusEl.textContent = 'Merci d\'indiquer votre prénom et votre email.'; return; }
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { statusEl.textContent = 'Cette adresse email ne semble pas valide.'; return; }
-      if (!BREVO_KEY) { statusEl.textContent = 'Le formulaire est momentanément indisponible. Écrivez-nous à mathieu@kosm.io, on vous envoie la synthèse à la main.'; return; }
 
       btn.disabled = true; btn.textContent = 'Envoi…'; statusEl.textContent = '';
 
-      var reco = SOLUTIONS[lastResult.top].name;
-      var usagesTxt = (answers.usages || []).map(function(v){ return labelOf('usages', v); }).join(' | ');
-      var headers = { 'api-key': BREVO_KEY, 'Content-Type': 'application/json', 'accept': 'application/json' };
+      var top = SOLUTIONS[lastResult.top];
+      var payload = {
+        kind: 'choix-ia',
+        firstname: firstname,
+        email: email,
+        company: company,
+        result: {
+          topName: top.name,
+          topTag: top.tag,
+          topBudget: top.budget,
+          altNames: SOLUTIONS[lastResult.alt].name + ' et ' + SOLUTIONS[lastResult.third].name,
+          gainAbo: lastResult.gains.abo,
+          gainAuto: lastResult.gains.auto,
+          reasons: lastResult.reasons,
+          answers: QUESTIONS.map(function(q){
+            var v = answers[q.id];
+            var txt = Array.isArray(v) ? v.map(function(x){ return labelOf(q.id, x); }).join(', ') : labelOf(q.id, v);
+            return { q: q.title, a: txt };
+          })
+        }
+      };
 
       try {
-        var richAttrs = {
-          FIRSTNAME: firstname,
-          SOURCE: 'outil-choix-ia',
-          UTM: 'reco=' + reco + '; effectif=' + (answers.effectif||'') + '; usages=' + usagesTxt,
-          COMPANY: company,
-          RECO: reco,
-          USAGES: usagesTxt
-        };
-        var minAttrs = { FIRSTNAME: firstname, SOURCE: 'outil-choix-ia', UTM: 'reco=' + reco };
-
-        async function upsert(attrs) {
-          var r = await fetch('https://api.brevo.com/v3/contacts', {
-            method: 'POST', headers: headers,
-            body: JSON.stringify({ email: email, attributes: attrs, listIds: [BREVO_LIST], updateEnabled: true })
-          });
-          return r;
-        }
-
-        var r = await upsert(richAttrs);
-        if (!r.ok && r.status !== 204) {
-          // Attributs personnalisés non déclarés dans Brevo : on retente avec le strict nécessaire
-          r = await upsert(minAttrs);
-          if (!r.ok && r.status !== 204) {
-            var t = await r.text();
-            if (r.status === 400 && t.indexOf('already exist') !== -1) {
-              await fetch('https://api.brevo.com/v3/contacts/' + encodeURIComponent(email), {
-                method: 'PUT', headers: headers,
-                body: JSON.stringify({ attributes: minAttrs, listIds: [BREVO_LIST] })
-              });
-            } else { throw new Error('contact ' + r.status); }
-          }
-        }
-
-        // Synthèse au prospect
-        await fetch('https://api.brevo.com/v3/smtp/email', {
-          method: 'POST', headers: headers,
-          body: JSON.stringify({
-            to: [{ email: email, name: firstname }],
-            sender: { email: 'mathieu@kosm.io', name: 'Mathieu Pesin — Kosmio' },
-            replyTo: { email: 'mathieu@kosm.io', name: 'Mathieu Pesin' },
-            subject: 'Votre recommandation : ' + reco,
-            htmlContent: summaryHtml(firstname),
-            tags: ['outil-choix-ia', 'lead-magnet']
-          })
+        var r = await fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
         });
-
-        // Notification interne avec le détail des réponses
-        await fetch('https://api.brevo.com/v3/smtp/email', {
-          method: 'POST', headers: headers,
-          body: JSON.stringify({
-            to: [{ email: NOTIFY_TO, name: 'Mathieu Pesin' }],
-            sender: { email: 'mathieu@kosm.io', name: 'Outil choix IA' },
-            replyTo: { email: email, name: firstname },
-            subject: 'Nouveau diagnostic IA · ' + (company || firstname) + ' · reco ' + reco,
-            htmlContent: '<div style="font-family:Arial,sans-serif;font-size:14px;color:#1F2D3D;">' +
-              '<p><strong>' + firstname + '</strong> (' + email + ')' + (company ? ' · ' + company : '') + '</p>' +
-              '<p>Recommandation calculée : <strong>' + reco + '</strong> · alternative : ' + SOLUTIONS[lastResult.alt].name + '</p>' +
-              '<p>Gain estimé : ' + lastResult.gains.abo + ' h/mois avec abonnement, ' + lastResult.gains.auto + ' h/mois automatisé.</p>' +
-              '<h3 style="font-size:15px;">Réponses</h3>' + answersHtml() + '</div>',
-            tags: ['outil-choix-ia', 'notification']
-          })
-        });
-
+        if (!r.ok) throw new Error('HTTP ' + r.status);
         form.reset();
         form.hidden = true;
         statusEl.innerHTML = '<strong>C\'est envoyé.</strong> Votre synthèse arrive dans votre boîte mail, vérifiez les indésirables si elle se fait attendre.';

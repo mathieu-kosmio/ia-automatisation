@@ -688,15 +688,8 @@
   </div>
 </section>
 
-<script src="config.js"></script>
 <script>
 (function(){
-  var cfg = window.__SITE_CONFIG || {};
-  var BREVO_KEY = cfg.BREVO_KEY;
-  var BREVO_LIST = cfg.BREVO_LIST || 17;
-
-  if (!BREVO_KEY) { console.warn('config.js manquant — formulaire désactivé'); return; }
-
   var form = document.getElementById('etude-form');
   if(!form) return;
   var statusEl = document.getElementById('etude-form-status');
@@ -704,10 +697,6 @@
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
     var btn = form.querySelector('button[type="submit"]');
-    btn.disabled = true;
-    btn.textContent = 'Envoi…';
-    statusEl.textContent = '';
-
     var fd = new FormData(form);
     var email = (fd.get('email') || '').trim();
     var firstname = (fd.get('firstname') || '').trim();
@@ -715,109 +704,36 @@
     if (!email || !firstname) {
       statusEl.textContent = 'Merci de remplir les deux champs.';
       statusEl.style.color = '#B85C38';
-      btn.disabled = false;
-      btn.textContent = 'Recevoir le PDF →';
       return;
     }
 
+    btn.disabled = true;
+    btn.textContent = 'Envoi\u2026';
+    statusEl.textContent = '';
+
     try {
-      // 1. Créer ou mettre à jour le contact dans Brevo
-      var r = await fetch('https://api.brevo.com/v3/contacts', {
+      var r = await fetch('/api/lead', {
         method: 'POST',
-        headers: {
-          'api-key': BREVO_KEY,
-          'Content-Type': 'application/json',
-          'accept': 'application/json'
-        },
-        body: JSON.stringify({
-          email: email,
-          attributes: { FIRSTNAME: firstname, SOURCE: 'site-public-lead-magnet' },
-          listIds: [BREVO_LIST],
-          updateEnabled: true
-        })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ kind: 'etude', firstname: firstname, email: email })
       });
-
-      // Brevo retourne 201 (créé) ou 204 (mis à jour) en succès
-      // Si 400 "Contact already exist", on fait un PUT pour l'ajouter à la liste
-      if (!r.ok) {
-        var errBody = await r.text();
-        if (r.status === 400 && errBody.indexOf('already exist') !== -1) {
-          var r2 = await fetch('https://api.brevo.com/v3/contacts/' + encodeURIComponent(email), {
-            method: 'PUT',
-            headers: {
-              'api-key': BREVO_KEY,
-              'Content-Type': 'application/json',
-              'accept': 'application/json'
-            },
-            body: JSON.stringify({
-              attributes: { FIRSTNAME: firstname },
-              listIds: [BREVO_LIST]
-            })
-          });
-          if (!r2.ok && r2.status !== 204) throw new Error('update failed');
-        } else {
-          throw new Error(errBody);
-        }
-      }
-
-      // 2. Envoyer l'email transactionnel avec le PDF
-      var siteUrl = window.location.origin;
-      var pdfUrl = siteUrl + '/Articles/bonus-dirigeant-etude-01.pdf';
-      var articleUrl = siteUrl + '/Articles/article_ia_filiere_bois_v3.html';
-
-      await fetch('https://api.brevo.com/v3/smtp/email', {
-        method: 'POST',
-        headers: {
-          'api-key': BREVO_KEY,
-          'Content-Type': 'application/json',
-          'accept': 'application/json'
-        },
-        body: JSON.stringify({
-          sender: { name: 'Mathieu Pesin — Kosmio', email: 'mathieu@kosm.io' },
-          to: [{ email: email, name: firstname }],
-          subject: firstname + ', votre étude IA & filière bois est prête',
-          htmlContent: [
-            '<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#1F2D3D;">',
-            '<div style="background:#00B194;padding:24px 32px;border-radius:8px 8px 0 0;">',
-            '<h1 style="color:#fff;font-size:22px;margin:0;">Votre étude est prête !</h1>',
-            '</div>',
-            '<div style="padding:32px;background:#FBF6EE;border:1px solid #C9BFB1;border-top:none;border-radius:0 0 8px 8px;">',
-            '<p style="font-size:16px;line-height:1.6;">Bonjour ' + firstname + ',</p>',
-            '<p style="font-size:16px;line-height:1.6;">Merci pour votre intérêt. Voici les ressources promises :</p>',
-            '<div style="margin:24px 0;">',
-            '<a href="' + pdfUrl + '" style="display:inline-block;background:#00B194;color:#fff;padding:14px 28px;border-radius:4px;text-decoration:none;font-weight:600;font-size:16px;">Télécharger le PDF + bonus dirigeant →</a>',
-            '</div>',
-            '<p style="font-size:15px;line-height:1.6;">Vous pouvez aussi <a href="' + articleUrl + '" style="color:#009982;">lire l\'étude en ligne</a>.</p>',
-            '<hr style="border:none;border-top:1px solid #C9BFB1;margin:28px 0;">',
-            '<p style="font-size:15px;line-height:1.6;">Si vous souhaitez en discuter, je vous propose un échange de 30 minutes, sans engagement :</p>',
-            '<p><a href="https://cal.com/kosmio/ia-automatisation" style="color:#009982;font-weight:600;">Réserver un créneau →</a></p>',
-            '<hr style="border:none;border-top:1px solid #C9BFB1;margin:28px 0;">',
-            '<p style="font-size:13px;color:#5D6C73;">Mathieu Pesin · <a href="https://kosm.io" style="color:#5D6C73;">Kosmio</a> × <a href="https://xylofutur.fr" style="color:#5D6C73;">Xylofutur</a><br>',
-            'Accompagnement IA filière bois</p>',
-            '<p style="font-size:11px;color:#999;margin-top:16px;">Vous recevez cet email car vous avez demandé l\'étude sur ia-automatisation.kosm.io. <a href="mailto:mathieu@kosm.io?subject=Désabonnement" style="color:#999;">Se désabonner</a>.</p>',
-            '</div>',
-            '</div>'
-          ].join(''),
-          tags: ['etude-01', 'lead-magnet']
-        })
-      }).catch(function(err) { console.warn('Email transac warning:', err); });
-
-      statusEl.textContent = '✅ Merci ' + firstname + ' ! L\u0027étude arrive dans votre boîte mail.';
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      statusEl.textContent = 'Merci ' + firstname + ', l\u0027\u00e9tude arrive dans votre bo\u00eete mail.';
       statusEl.style.color = 'var(--xf-green-600)';
       form.reset();
-    } catch(err) {
-      console.error('Brevo error:', err);
-      statusEl.textContent = '⚠️ Erreur — écrivez à mathieu@kosm.io, on vous envoie l\u0027étude.';
-      statusEl.style.color = '#B85C38';
-    } finally {
       btn.disabled = false;
-      btn.textContent = 'Recevoir le PDF →';
+      btn.textContent = 'Recevoir le PDF \u2192';
+    } catch(err) {
+      console.error(err);
+      statusEl.textContent = 'L\u0027envoi a \u00e9chou\u00e9. \u00c9crivez \u00e0 mathieu@kosm.io, on vous envoie l\u0027\u00e9tude.';
+      statusEl.style.color = '#B85C38';
+      btn.disabled = false;
+      btn.textContent = 'Recevoir le PDF \u2192';
     }
   });
 })();
 </script>
 
-<!-- ============ OFFRE & TARIFS ============ -->
 <section id="offre">
   <div class="wrap">
     <div class="section-head reveal">
