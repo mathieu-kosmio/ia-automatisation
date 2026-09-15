@@ -1,0 +1,1222 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Quel outil IA pour votre entreprise ? · Kosmio × Xylofutur</title>
+<meta name="description" content="9 questions, 3 minutes : découvrez quel abonnement IA correspond à votre façon de travailler, et surtout combien de temps vous pouvez réellement gagner. Outil gratuit pour les entreprises de la filière bois." />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Quel outil IA pour votre entreprise ?" />
+<meta property="og:description" content="9 questions, 3 minutes, une recommandation argumentée. Sans jargon, pour les entreprises de la filière bois." />
+<meta property="og:url" content="https://ia-bois.kosm.io/choix-ia.html" />
+<meta property="og:image" content="https://ia-bois.kosm.io/assets/og-cover.png" />
+<meta property="og:locale" content="fr_FR" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="canonical" href="https://ia-bois.kosm.io/choix-ia.html" />
+
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@600;700&display=swap">
+<link rel="stylesheet" href="design-system/tokens.css" />
+
+<style>
+  .wrap { max-width: var(--container-xl); margin-inline:auto; padding-inline: var(--gutter-mobile); }
+  @media (min-width:768px){ .wrap{ padding-inline: var(--gutter-tablet);} }
+  @media (min-width:1024px){ .wrap{ padding-inline: var(--gutter-desktop);} }
+
+  /* ===== Header (identique au site) ===== */
+  header.site {
+    position: sticky; top:0; z-index:50;
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid rgba(201,191,177,0.4);
+  }
+  header.site .wrap { display:flex; align-items:center; justify-content:space-between; height:72px; gap:var(--space-4); }
+  .brand { display:flex; align-items:center; gap:var(--space-3); text-decoration:none;}
+  .brand-logo { height:32px; width:auto; display:block; }
+  .brand-name { font-family:var(--font-display); font-weight:700; font-size:.95rem; color:var(--ink-900); letter-spacing:var(--tracking-tight); }
+  nav.primary { display:none; gap: var(--space-6);}
+  nav.primary a { color: var(--ink-700); text-decoration:none; font-weight:500; font-size:.95rem;}
+  nav.primary a:hover { color: var(--xf-green-600); }
+  nav.primary a.is-current { color: var(--xf-green-600); font-weight:600; }
+  @media (min-width:1024px){
+    nav.primary a.is-current { position:relative; }
+    nav.primary a.is-current::after {
+      content:""; position:absolute; left:0; right:0; bottom:-6px;
+      height:2px; background: var(--xf-green-500); border-radius:2px;
+    }
+  }
+  @media (min-width:1024px){ nav.primary{ display:flex; } }
+  .nav-toggle { display:flex; align-items:center; justify-content:center; width:40px; height:40px; border:none; background:none; cursor:pointer; color: var(--ink-900); }
+  @media (min-width:1024px){ .nav-toggle { display:none; } }
+  nav.primary.primary--open {
+    display:flex; flex-direction:column; gap:0;
+    position:absolute; top:72px; left:0; right:0;
+    background:rgba(255,255,255,0.97); backdrop-filter:blur(12px);
+    padding:var(--space-4) var(--gutter-mobile); border-bottom:1px solid rgba(201,191,177,.5);
+  }
+  nav.primary.primary--open a { padding:var(--space-3) 0; }
+  .header-cta { display:none; }
+  @media (min-width:640px){ .header-cta { display:inline-flex; } }
+
+  /* ===== Intro ===== */
+  .intro { background: linear-gradient(160deg, var(--ink-900) 0%, #16303a 55%, var(--xf-green-600) 160%); color:#fff; padding-block: clamp(2.5rem,6vw,4.5rem); }
+  .intro h1 { color:#fff; font-size: var(--text-h1); margin-bottom: var(--space-4); max-width: 22ch; }
+  .intro h1 em { font-style:italic; color: var(--xf-green-500); }
+  .intro p { color: rgba(255,255,255,.78); font-size: var(--text-lead); line-height: var(--lh-base); max-width: 58ch; margin:0 0 var(--space-5); }
+  .intro-meta { display:flex; flex-wrap:wrap; gap: var(--space-5); margin-top: var(--space-6); }
+  .intro-meta div { font-family: var(--font-mono); font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing: var(--tracking-mono); color: rgba(255,255,255,.6); }
+  .intro-meta strong { display:block; font-family: var(--font-display); font-size:1.5rem; color:#fff; letter-spacing: var(--tracking-tight); margin-bottom:2px; }
+
+  /* ===== App ===== */
+  .app { background: var(--xf-sand-100); padding-block: clamp(2rem,5vw,3.5rem); min-height: 60vh; }
+  .card {
+    background:#fff; border:1px solid rgba(201,191,177,.6); border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md); max-width: 760px; margin-inline:auto;
+    padding: clamp(1.25rem, 4vw, var(--space-7));
+  }
+
+  .progress { max-width:760px; margin: 0 auto var(--space-5); }
+  .progress-bar { height:6px; background: rgba(0,0,0,.08); border-radius: var(--radius-pill); overflow:hidden; }
+  .progress-bar span { display:block; height:100%; width:0%; background: var(--xf-green-500); border-radius: var(--radius-pill); transition: width .35s var(--ease-out); }
+  .progress-label { display:flex; justify-content:space-between; align-items:center; margin-top: var(--space-2); font-family: var(--font-mono); font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing: var(--tracking-mono); color: var(--grey-600); }
+
+  .q-num { font-family: var(--font-mono); font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing: var(--tracking-mono); color: var(--xf-green-600); }
+  .q-title { font-family: var(--font-display); font-weight:700; font-size: clamp(1.3rem, 3vw, 1.75rem); line-height: var(--lh-tight); letter-spacing: var(--tracking-tight); margin: var(--space-3) 0 var(--space-2); }
+  .q-help { color: var(--grey-600); font-size:.92rem; line-height: var(--lh-base); margin:0 0 var(--space-5); }
+
+  .opts { display:grid; gap: var(--space-3); }
+  @media (min-width:640px){ .opts.opts--2 { grid-template-columns: 1fr 1fr; } }
+  .opt {
+    display:flex; align-items:flex-start; gap: var(--space-3); text-align:left;
+    width:100%; padding: var(--space-4); font:inherit; color:var(--ink-900);
+    background:#fff; border:1.5px solid rgba(201,191,177,.85); border-radius: var(--radius-md);
+    cursor:pointer; transition: border-color var(--duration-fast) var(--ease-out), background var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+  }
+  .opt:hover { border-color: var(--xf-green-500); background: var(--xf-green-50); transform: translateY(-1px); }
+  .opt:focus-visible { outline:none; box-shadow: var(--shadow-focus); }
+  .opt[aria-pressed="true"] { border-color: var(--xf-green-500); background: var(--xf-green-50); }
+  .opt .tick {
+    flex:0 0 auto; width:22px; height:22px; border-radius:50%; margin-top:1px;
+    border:1.5px solid var(--grey-300); display:flex; align-items:center; justify-content:center;
+    font-size:.7rem; color:#fff; background:#fff;
+  }
+  .opt[aria-pressed="true"] .tick { background: var(--xf-green-500); border-color: var(--xf-green-500); }
+  .opt .txt strong { display:block; font-weight:600; line-height:1.3; }
+  .opt .txt small { display:block; color: var(--grey-600); font-size:.82rem; line-height:1.4; margin-top:3px; }
+
+  .q-nav { display:flex; justify-content:space-between; align-items:center; gap:var(--space-3); margin-top: var(--space-6); flex-wrap:wrap; }
+  .link-btn { background:none; border:none; padding:0; font:inherit; color: var(--grey-600); cursor:pointer; text-decoration:underline; text-underline-offset:.2em; font-size:.9rem; }
+  .link-btn:hover { color: var(--ink-900); }
+
+  /* ===== Résultat ===== */
+  .reco { border:1px solid rgba(201,191,177,.6); border-radius: var(--radius-lg); overflow:hidden; background:#fff; }
+  .reco__head { background: var(--ink-900); color:#fff; padding: var(--space-5) var(--space-6); }
+  .reco__head .t-micro { color: var(--xf-green-500); }
+  .reco__head h3 { color:#fff; font-size: clamp(1.5rem,3.5vw,2rem); margin: var(--space-2) 0 0; }
+  .reco__head p { margin: var(--space-2) 0 0; color: rgba(255,255,255,.72); font-size:.95rem; }
+  .reco__body { padding: var(--space-6); }
+  .reco__why { list-style:none; margin:0 0 var(--space-5); padding:0; display:grid; gap: var(--space-3); }
+  .reco__why li { display:flex; gap: var(--space-3); align-items:flex-start; font-size:.95rem; line-height: var(--lh-base); }
+  .reco__why li::before { content:"✓"; flex:0 0 auto; color: var(--xf-green-600); font-weight:700; }
+  .reco__meta { display:grid; gap: var(--space-4); border-top:1px solid rgba(201,191,177,.5); padding-top: var(--space-5); }
+  @media (min-width:640px){ .reco__meta { grid-template-columns: 1fr 1fr; } }
+  .reco__meta h4 { font-family: var(--font-mono); font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing: var(--tracking-mono); color: var(--grey-600); margin:0 0 var(--space-2); }
+  .reco__meta p { margin:0; font-size:.92rem; line-height: var(--lh-base); }
+
+  /* ===== Tableau comparatif façon grille tarifaire ===== */
+  .plans { display:grid; gap: var(--space-6); align-items:start; margin-top: var(--space-5); scroll-margin-top: 96px; }
+  @media (min-width: 900px) { .plans { gap: var(--space-4); } }
+  @media (min-width: 900px) {
+    .plans { grid-template-columns: 1fr 1.1fr 1fr; gap: var(--space-5); align-items:stretch; }
+    .plan[data-rank="1"] { order:2; }
+    .plan[data-rank="2"] { order:1; }
+    .plan[data-rank="3"] { order:3; }
+  }
+  .plan {
+    position:relative; display:flex; flex-direction:column;
+    background:#fff; border:1px solid rgba(201,191,177,.8); border-radius: var(--radius-lg);
+    padding: var(--space-6) var(--space-5) var(--space-5);
+  }
+  .plan[data-rank="1"] {
+    border:2px solid var(--xf-green-500);
+    box-shadow: var(--shadow-lg);
+    padding-top: var(--space-7);
+  }
+  @media (min-width: 900px) { .plan[data-rank="1"] { transform: scale(1.03); z-index:2; } }
+  .plan[data-rank="2"], .plan[data-rank="3"] { background: #FDFCF9; }
+
+  .plan__badge {
+    position:absolute; top:0; left:50%; transform: translate(-50%,-50%);
+    background: var(--xf-green-500); color:#fff; white-space:nowrap;
+    font-family: var(--font-mono); font-size:.62rem; font-weight:700;
+    text-transform:uppercase; letter-spacing: var(--tracking-mono);
+    padding: 6px 14px; border-radius: var(--radius-pill);
+  }
+  .plan__rank {
+    font-family: var(--font-mono); font-size:.62rem; font-weight:700;
+    text-transform:uppercase; letter-spacing: var(--tracking-mono);
+    color: var(--grey-600); margin:0 0 var(--space-2);
+  }
+  .plan__name { font-family: var(--font-display); font-weight:700; font-size:1.2rem; line-height:1.2; letter-spacing: var(--tracking-tight); margin:0 0 4px; }
+  .plan[data-rank="1"] .plan__name { font-size:1.35rem; }
+  .plan__tag { color: var(--grey-600); font-size:.85rem; line-height:1.4; margin:0 0 var(--space-5); min-height:2.4em; }
+  .plan__price { margin:0 0 var(--space-5); padding-bottom: var(--space-5); border-bottom:1px solid rgba(201,191,177,.6); }
+  .plan__price b { display:block; font-family: var(--font-display); font-weight:700; font-size:1.9rem; letter-spacing: var(--tracking-tight); line-height:1; color: var(--ink-900); }
+  .plan[data-rank="1"] .plan__price b { color: var(--xf-green-600); }
+  .plan__price span { display:block; font-size:.78rem; color: var(--grey-600); line-height:1.4; margin-top:6px; }
+
+  .plan__crit { list-style:none; margin:0 0 var(--space-5); padding:0; display:grid; gap: var(--space-3); }
+  .plan__crit li { display:grid; grid-template-columns: 1fr auto; gap: var(--space-3); align-items:center; font-size:.82rem; }
+  .plan__crit .c { color: var(--ink-700); line-height:1.3; }
+  .plan__crit .n { grid-column:1/-1; font-size:.74rem; color: var(--grey-600); line-height:1.4; margin-top:-4px; }
+  .dots { display:inline-flex; gap:3px; }
+  .dots i { width:7px; height:7px; border-radius:50%; background: rgba(201,191,177,.85); display:block; }
+  .dots[data-l="1"] i:nth-child(-n+1),
+  .dots[data-l="2"] i:nth-child(-n+2),
+  .dots[data-l="3"] i:nth-child(-n+3) { background: var(--xf-green-500); }
+
+  .plan__why { list-style:none; margin:0 0 var(--space-5); padding:0; display:grid; gap: var(--space-2); }
+  .plan__why li { display:flex; gap:8px; align-items:flex-start; font-size:.85rem; line-height:1.45; }
+  .plan__why li::before { content:"✓"; color: var(--xf-green-600); font-weight:700; flex:0 0 auto; }
+
+  .plan__foot { margin-top:auto; padding-top: var(--space-4); border-top:1px solid rgba(201,191,177,.6); }
+  .plan__foot p { margin:0; font-size:.78rem; color: var(--grey-600); line-height:1.5; }
+  .plan__foot .btn { width:100%; justify-content:center; margin-bottom: var(--space-3); }
+
+  .alert { display:flex; gap: var(--space-3); align-items:flex-start; padding: var(--space-4); border-radius: var(--radius-md); background: var(--xf-gold-50); border:1px solid rgba(186,135,72,.3); margin-top: var(--space-4); font-size:.92rem; line-height: var(--lh-base); }
+  .alert .ico { flex:0 0 auto; font-size:1.1rem; line-height:1.3; }
+  .alert strong { display:block; margin-bottom:2px; }
+
+  /* ===== Pivot usage ===== */
+  .pivot { background: var(--ink-900); color:#fff; padding-block: clamp(2.5rem,6vw,4.5rem); }
+  .pivot h2 { color:#fff; font-size: var(--text-h2); max-width: 20ch; }
+  .pivot h2 em { font-style:italic; background:linear-gradient(120deg,var(--xf-green-500),var(--xf-gold-500)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+  .pivot p { color: rgba(255,255,255,.75); font-size: var(--text-lead); line-height: var(--lh-base); max-width: 62ch; }
+  .gain { display:grid; gap: var(--space-4); margin: var(--space-7) 0; }
+  @media (min-width:768px){ .gain { grid-template-columns: repeat(3, 1fr); } }
+  .gain div { background: rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); border-radius: var(--radius-lg); padding: var(--space-5); }
+  .gain .k { font-family: var(--font-mono); font-size:.66rem; font-weight:700; text-transform:uppercase; letter-spacing: var(--tracking-mono); color: rgba(255,255,255,.55); }
+  .gain .v { font-family: var(--font-display); font-weight:700; font-size: clamp(1.6rem,4vw,2.25rem); line-height:1.1; color:#fff; margin:var(--space-2) 0; letter-spacing: var(--tracking-tight); }
+  .gain .d { font-size:.85rem; color: rgba(255,255,255,.65); line-height: var(--lh-base); margin:0; }
+  .disclaimer { font-size:.78rem; color: rgba(255,255,255,.45); max-width:70ch; line-height:1.5; }
+
+  /* ===== Capture ===== */
+  .capture { background: var(--km-sage-50); padding-block: clamp(2.5rem,6vw,4rem); }
+  .capture .inner { max-width: 720px; margin-inline:auto; text-align:center; }
+  .cform { display:flex; flex-wrap:wrap; gap: var(--space-3); justify-content:center; align-items:flex-end; margin-top: var(--space-5); }
+  .cform label { flex:1; min-width:150px; max-width:230px; display:flex; flex-direction:column; gap:4px; font-size:.85rem; text-align:left; }
+  .cform input { padding:.65rem .8rem; border:1px solid rgba(0,0,0,.15); border-radius:8px; font:inherit; background:#fff; }
+  .cform input:focus-visible { outline:none; box-shadow: var(--shadow-focus); border-color: var(--xf-green-500); }
+
+  .final { background: linear-gradient(160deg, #16303a, var(--ink-900)); color:#fff; padding-block: clamp(2.5rem,6vw,4rem); text-align:center; }
+  .final h2 { color:#fff; }
+
+  footer.site { background: var(--ink-900); color: rgba(255,255,255,.65); padding-block: var(--space-7); font-size:.85rem; }
+  footer.site .wrap { display:flex; flex-direction:column; gap: var(--space-4); align-items:center; text-align:center; }
+  footer.site a { color: rgba(255,255,255,.8); }
+  .footer-brands { display:flex; align-items:center; gap: var(--space-4); }
+  .footer-brands img { height:26px; width:auto; }
+  .footer-brands .x { color: rgba(255,255,255,.35); }
+
+  [hidden] { display:none !important; }
+  .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <img src="assets/logo-white.svg" alt="IA &amp; Automatisation" class="brand-logo">
+      <span class="brand-name">IA &amp; Automatisation</span>
+    </a>
+    <nav class="primary" id="nav-primary" aria-label="Principal">
+      <a href="index.html#methode">Méthode</a>
+      <a href="index.html#etudes">Résultats terrain</a>
+      <a href="index.html#offre">Offre &amp; tarifs</a>
+      <a href="choix-ia.html" class="is-current" aria-current="page">Quel outil IA&nbsp;?</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-primary" aria-label="Menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <a class="btn btn--primary btn--sm header-cta" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">Réserver un échange →</a>
+  </div>
+</header>
+
+<!-- ============ INTRO ============ -->
+<section class="intro" id="intro">
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--xf-green-500);">Outil gratuit</span>
+    <h1 style="margin-top:var(--space-4);">Quel outil IA pour <em>votre entreprise</em> ?</h1>
+    <p>ChatGPT, Copilot, Claude, Gemini, Mistral : les modèles se valent désormais sur la plupart des usages d'une PME, et les tarifs ont convergé. Ce qui fait vraiment la différence, c'est votre façon de travailler aujourd'hui. Répondez à 9 questions simples, vous repartez avec une recommandation argumentée et une estimation du temps que vous pouvez gagner.</p>
+    <div class="intro-meta">
+      <div><strong>9</strong>questions</div>
+      <div><strong>3 min</strong>chrono</div>
+      <div><strong>0 €</strong>et sans jargon</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ APP ============ -->
+<section class="app" id="app">
+  <div class="wrap">
+
+    <div class="progress" id="progress">
+      <div class="progress-bar"><span id="progress-fill"></span></div>
+      <div class="progress-label">
+        <span id="progress-text">Question 1 sur 9</span>
+        <button class="link-btn" id="btn-restart" type="button" hidden>Recommencer</button>
+      </div>
+    </div>
+
+    <!-- Questionnaire -->
+    <div class="card" id="quiz">
+      <p class="q-num" id="q-num">Question 1 sur 9</p>
+      <h2 class="q-title" id="q-title">…</h2>
+      <p class="q-help" id="q-help"></p>
+      <div class="opts" id="q-opts" role="group" aria-labelledby="q-title"></div>
+      <div class="q-nav">
+        <button class="link-btn" id="btn-prev" type="button">← Question précédente</button>
+        <button class="btn btn--primary" id="btn-next" type="button" hidden>Continuer →</button>
+      </div>
+    </div>
+
+    <!-- Résultat -->
+    <div id="result" hidden>
+
+      <div style="text-align:center; max-width:640px; margin:0 auto var(--space-6);">
+        <span class="eyebrow" style="justify-content:center;">Votre résultat</span>
+        <h2 style="margin-top:var(--space-4); font-size:var(--text-h2);">Trois solutions tenables, <em id="res-head-em" style="font-style:italic; color:var(--xf-green-600);">une qui vous va mieux</em></h2>
+        <p class="t-lead" style="margin-bottom:0;">Comparées sur vos réponses, pas dans l'absolu. La colonne mise en avant est celle qui colle le mieux à votre façon de travailler aujourd'hui.</p>
+      </div>
+
+      <div class="plans" id="plans"></div>
+
+      <p style="text-align:center; margin:var(--space-5) 0 0; font-family:var(--font-mono); font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:var(--tracking-mono); color:var(--grey-600);">
+        <span class="dots" data-l="3" style="vertical-align:middle; margin-right:8px;"><i></i><i></i><i></i></span> adapté à votre situation
+        <span class="dots" data-l="1" style="vertical-align:middle; margin:0 8px 0 24px;"><i></i><i></i><i></i></span> peu déterminant pour vous
+      </p>
+
+      <div style="max-width:860px; margin:var(--space-6) auto 0;">
+        <div id="reco-alerts"></div>
+        <p style="font-size:.75rem; color:var(--grey-600); margin:var(--space-5) 0 0; line-height:1.5;">Comparaison établie à partir de vos réponses et d'un référentiel à sept critères : intégration à vos outils, adéquation à vos priorités, confidentialité et hébergement, facilité d'adoption, coût, réversibilité, cadre d'usage. Tarifs constatés en septembre 2026, à revérifier chez l'éditeur avant toute souscription. Les deux solutions non retenues ne sont pas de mauvais outils, elles répondent moins bien à votre situation précise.</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ PIVOT USAGE ============ -->
+<section class="pivot" id="pivot" hidden>
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--xf-green-500);">Et maintenant, l'essentiel</span>
+    <h2 style="margin-top:var(--space-4);">L'outil n'est pas le sujet. <em>L'usage, si.</em></h2>
+    <p>Vous avez votre réponse, et elle a peu d'importance. Une entreprise qui choisit l'abonnement idéal sans changer sa façon de travailler perd son argent, pendant qu'une autre obtient des résultats avec l'outil qu'elle avait déjà. La vraie question n'est pas quel modèle, c'est quel processus vous allez cesser de faire à la main.</p>
+
+    <div class="gain">
+      <div>
+        <p class="k">Vos priorités</p>
+        <p class="v" id="gain-usages">0</p>
+        <p class="d" id="gain-usages-d">tâches identifiées comme prioritaires par vos réponses.</p>
+      </div>
+      <div>
+        <p class="k">Avec un simple abonnement</p>
+        <p class="v" id="gain-abo">0 h</p>
+        <p class="d">par mois pour l'entreprise, en aidant chacun à rédiger, lire et synthétiser plus vite. Gain réel, mais qui dépend entièrement de la discipline de chacun.</p>
+      </div>
+      <div>
+        <p class="k">En automatisant le processus</p>
+        <p class="v" id="gain-auto">0 h</p>
+        <p class="d">par mois, quand la tâche se déclenche toute seule et que l'information circule entre vos outils sans ressaisie. C'est là que se situe l'écart.</p>
+      </div>
+    </div>
+
+    <p class="disclaimer">Estimation indicative, construite sur les ordres de grandeur observés lors de nos interventions dans la filière. Elle ne remplace pas l'observation de vos processus réels : c'est précisément ce qu'on fait ensemble lors d'un premier échange.</p>
+
+    <div style="margin-top:var(--space-7); display:flex; gap:var(--space-4); flex-wrap:wrap;">
+      <a class="btn btn--primary btn--lg" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">Parlons de vos processus (30 min, gratuit) →</a>
+      <a class="btn btn--secondary btn--lg" href="index.html#etudes" style="color:#fff;border-color:rgba(255,255,255,.5);">Voir des exemples concrets ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CAPTURE ============ -->
+<section class="capture" id="capture" hidden>
+  <div class="wrap">
+    <div class="inner">
+      <span class="eyebrow" style="justify-content:center;">Votre synthèse</span>
+      <h2 style="margin-top:var(--space-4); font-size:var(--text-h2);">Recevez votre recommandation par email</h2>
+      <p class="t-lead" style="margin-bottom:0;">Le détail de votre profil, la comparaison des cinq solutions sur vos critères, et les trois conditions à réunir avant de souscrire. Une page, rien à installer.</p>
+
+      <form class="cform" id="quiz-form" novalidate>
+        <label>
+          <span>Prénom *</span>
+          <input name="firstname" type="text" required autocomplete="given-name">
+        </label>
+        <label>
+          <span>Entreprise</span>
+          <input name="company" type="text" autocomplete="organization">
+        </label>
+        <label style="max-width:270px;">
+          <span>Email professionnel *</span>
+          <input name="email" type="email" required autocomplete="email">
+        </label>
+        <button type="submit" class="btn btn--primary btn--sm" style="white-space:nowrap;">Recevoir ma synthèse →</button>
+      </form>
+      <p id="quiz-form-status" role="status" aria-live="polite" style="margin-top:var(--space-3); font-size:.88rem; min-height:1.3rem;"></p>
+      <p style="font-size:.7rem; opacity:.6; margin-top:var(--space-2);">Données traitées par Kosmio pour vous envoyer cette synthèse et, si vous le souhaitez, une lettre trimestrielle sur l'IA dans la filière bois. <a href="mailto:mathieu@kosm.io" style="color:inherit;">Droits RGPD</a>. Désabonnement en un clic.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL ============ -->
+<section class="final" id="final" hidden>
+  <div class="wrap">
+    <h2>Un outil ne change rien tout seul.</h2>
+    <p class="t-lead" style="color:rgba(255,255,255,.75); max-width:56ch; margin-inline:auto;">On regarde ensemble comment vous travaillez aujourd'hui, on repère ce qui mérite d'être automatisé, et on le met en place. Si ce n'est pas le bon moment, on vous le dira.</p>
+    <div style="margin-top:var(--space-6);">
+      <a class="btn btn--primary btn--lg" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">📅 Réserver 30 minutes</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="footer-brands">
+      <img src="assets/Logos-Kosmio-Xylofutur/logo-kosmio-blanc.svg" alt="Kosmio">
+      <span class="x">✕</span>
+      <img src="assets/Logos-Kosmio-Xylofutur/logo-xylofutur-blanc-web.png" alt="Xylofutur">
+    </div>
+    <div>© 2026 Kosmio × Xylofutur · Parcours IA Filière Bois</div>
+    <div><a href="index.html">Retour au site</a> · <a href="mailto:mathieu@kosm.io?subject=Mentions%20légales">Mentions légales</a> · <a href="mailto:mathieu@kosm.io?subject=Confidentialité">Confidentialité</a></div>
+  </div>
+</footer>
+
+<script src="config.js"></script>
+<script>
+(function(){
+  'use strict';
+
+  /* =====================================================================
+     1. Référentiel : questions
+     ===================================================================== */
+  var QUESTIONS = [
+    {
+      id: 'suite',
+      title: 'Vos adresses mail professionnelles, elles sont chez qui ?',
+      help: "Si vous ne savez pas, regardez la fin de votre adresse ou demandez à la personne qui s'occupe de l'informatique. La réponse « je ne sais pas » est une réponse utile.",
+      cols: 2,
+      options: [
+        { v:'m365',    label:'Outlook / Microsoft 365', sub:'Vous ouvrez Outlook, ou vos mails finissent en @votreentreprise et passent par Microsoft' },
+        { v:'google',  label:'Gmail / Google Workspace', sub:'Vous ouvrez Gmail, même avec une adresse à votre nom de société' },
+        { v:'autre',   label:'Une autre messagerie', sub:'OVH, Mailo, Orange, celle de votre hébergeur de site' },
+        { v:'inconnu', label:'Je ne sais pas', sub:"C'est notre prestataire qui gère tout ça" }
+      ]
+    },
+    {
+      id: 'fichiers',
+      title: 'Vos documents de travail, ils sont rangés où ?',
+      help: 'Devis, plans, photos de chantier, dossiers clients. Choisissez ce qui représente la majorité de vos fichiers.',
+      cols: 2,
+      options: [
+        { v:'sharepoint', label:'SharePoint ou OneDrive', sub:"L'espace de partage Microsoft, accessible depuis n'importe quel poste" },
+        { v:'drive',      label:'Google Drive', sub:"L'espace de partage Google, accessible depuis n'importe quel poste" },
+        { v:'local',      label:'Un serveur ou un disque partagé dans les locaux', sub:'Le fameux lecteur réseau, ou un boîtier NAS dans le bureau' },
+        { v:'postes',     label:'Sur les ordinateurs de chacun', sub:"Chacun garde ses fichiers, on s'envoie les documents par mail" },
+        { v:'papier',     label:'Beaucoup de papier encore', sub:'Classeurs, pochettes de chantier, impressions' }
+      ]
+    },
+    {
+      id: 'usages',
+      title: 'Qu\'est-ce qui vous ferait gagner le plus de temps demain matin ?',
+      help: 'Choisissez jusqu\'à trois tâches. Ce sont elles qui déterminent la recommandation, bien plus que la marque de l\'outil.',
+      multi: true,
+      max: 3,
+      cols: 2,
+      options: [
+        { v:'ecrits',   label:'Mails, courriers et relances', sub:'Écrire vite et bien, sans y passer la soirée' },
+        { v:'ao',       label:"Appels d'offres, CCTP, marchés publics", sub:'Lire un gros dossier et en sortir ce qui vous engage' },
+        { v:'prod',     label:'Passer du devis à la fiche de production', sub:'Arrêter de ressaisir les mêmes lignes trois fois' },
+        { v:'cr',       label:'Comptes rendus de réunion ou de chantier', sub:'Ne plus rédiger le soir ce qui a été dit le matin' },
+        { v:'recherche',label:'Retrouver une information dans vos documents', sub:'Le devis de 2023, la fiche technique, la clause du marché' },
+        { v:'tableaux', label:'Analyser vos tableaux et vos chiffres', sub:'Marges, heures, consommations, rendement matière' },
+        { v:'commerce', label:'Documents commerciaux et visuels', sub:'Plaquettes, présentations, fiches produit' },
+        { v:'qualite',  label:'Procédures, qualité, sécurité', sub:'Rédiger et tenir à jour ce que personne n\'a le temps d\'écrire' }
+      ]
+    },
+    {
+      id: 'effectif',
+      title: 'Combien de personnes s\'en serviraient vraiment ?',
+      help: 'Dans les six prochains mois, pas dans un monde idéal. Mieux vaut deux personnes convaincues que dix comptes dormants.',
+      cols: 2,
+      options: [
+        { v:'1',    label:'Vous seul, pour commencer', sub:'Vous testez avant de déployer' },
+        { v:'2_5',  label:'2 à 5 personnes', sub:'Le bureau, quelques fonctions clés' },
+        { v:'6_15', label:'6 à 15 personnes', sub:'La majorité des postes administratifs et techniques' },
+        { v:'15p',  label:'Plus de 15 personnes', sub:'Un déploiement à organiser' }
+      ]
+    },
+    {
+      id: 'sensible',
+      title: 'Dans les documents que vous confieriez à une IA, il y a quoi ?',
+      help: 'Plusieurs réponses possibles. Cela ne bloque rien, cela oriente le choix et les règles à poser.',
+      multi: true,
+      cols: 2,
+      options: [
+        { v:'marges',   label:'Vos prix et vos marges', sub:'Devis, tarifs, conditions fournisseurs' },
+        { v:'technique',label:'Des plans, des méthodes, un savoir-faire', sub:"Ce qui fait la valeur de l'entreprise" },
+        { v:'clients',  label:'Des documents appartenant à vos clients', sub:'Vous en êtes responsable vis-à-vis d\'eux' },
+        { v:'rh',       label:'Des données concernant vos salariés', sub:'Contrats, plannings, évaluations' },
+        { v:'rien',     label:'Rien de vraiment sensible', sub:'Des documents que vous montreriez sans gêne' }
+      ]
+    },
+    {
+      id: 'souverainete',
+      title: 'Un client vous a-t-il déjà demandé où sont hébergées vos données ?',
+      help: 'La question revient de plus en plus vite dans les marchés publics et chez les grands donneurs d\'ordre.',
+      cols: 2,
+      options: [
+        { v:'contrat', label:"Oui, c'est écrit dans un contrat", sub:'Ou dans un cahier des charges, une charte fournisseur' },
+        { v:'evoque',  label:'Cela a été évoqué, sans être exigé', sub:'On sent que cela vient' },
+        { v:'jamais',  label:'Jamais', sub:"Personne ne m'a posé la question" },
+        { v:'perso',   label:"C'est important pour moi personnellement", sub:'Indépendamment de ce que demandent les clients' }
+      ]
+    },
+    {
+      id: 'it',
+      title: 'Qui s\'occupe de l\'informatique chez vous ?',
+      help: 'Cela détermine ce qu\'il est raisonnable de mettre en place, et ce qui restera un projet sur l\'étagère.',
+      cols: 2,
+      options: [
+        { v:'dedie',  label:"Un salarié dont c'est le métier", sub:'Vous avez quelqu\'un en interne' },
+        { v:'bricole',label:"Quelqu'un qui s'en occupe en plus de son travail", sub:'Le plus fréquent dans nos entreprises' },
+        { v:'presta', label:'Un prestataire extérieur', sub:'On l\'appelle quand ça ne marche plus' },
+        { v:'aucun',  label:'Personne, on se débrouille', sub:'Chacun règle ses problèmes comme il peut' }
+      ]
+    },
+    {
+      id: 'shadow',
+      title: 'Des collaborateurs utilisent-ils déjà une IA gratuite avec vos documents ?',
+      help: 'Question sans piège et sans jugement. Dans la plupart des entreprises, la réponse est oui, et le dirigeant ne le sait pas.',
+      cols: 2,
+      options: [
+        { v:'oui',     label:'Oui, je le sais', sub:'Cela se fait ouvertement' },
+        { v:'probable',label:"Probablement, mais je n'en suis pas sûr", sub:'Je ne serais pas surpris' },
+        { v:'non',     label:'Non', sub:'Personne à ma connaissance' },
+        { v:'inconnu', label:'Aucune idée', sub:'Je ne me suis jamais posé la question' }
+      ]
+    },
+    {
+      id: 'charte',
+      title: 'Existe-t-il une règle écrite sur ce qu\'on peut faire avec l\'IA ?',
+      help: "Depuis août 2026, le règlement européen sur l'IA demande aux entreprises utilisatrices un minimum de transparence et de traçabilité sur leurs usages.",
+      cols: 2,
+      options: [
+        { v:'oui',   label:'Oui, quelque chose est écrit', sub:'Une note, une charte, une mention au règlement intérieur' },
+        { v:'cours', label:'En cours de rédaction', sub:'Le sujet est ouvert' },
+        { v:'non',   label:'Non, rien du tout', sub:'Comme la grande majorité des entreprises' }
+      ]
+    }
+  ];
+
+  /* =====================================================================
+     2. Référentiel : solutions
+     ===================================================================== */
+  var SOLUTIONS = {
+    copilot: {
+      name: 'Microsoft 365 Copilot',
+      tag: "L'assistant intégré à Word, Excel, Outlook et Teams",
+      price: "18 à 20 €",
+      unit: "par personne et par mois, en supplément de votre abonnement Microsoft 365",
+      budget: "environ 18 à 20 € par personne et par mois, en supplément de votre abonnement Microsoft 365 existant.",
+      strengths: {
+        base: "Il travaille là où vous êtes déjà : il lit vos mails Outlook, vos fichiers SharePoint, résume vos réunions Teams et rédige directement dans Word et Excel.",
+        cr: "Il résume automatiquement vos réunions Teams, y compris celles auxquelles vous n'avez pas pu assister.",
+        recherche: "Il retrouve un document dans SharePoint à partir d'une question posée en français, sans que vous sachiez où il est rangé.",
+        tableaux: "Il travaille directement dans le classeur Excel ouvert, sans copier-coller.",
+        ecrits: "Il rédige et répond directement dans Outlook, en reprenant le fil de la conversation et les pièces jointes du dossier.",
+        ao: "Il ouvre le dossier de consultation dans Word et vous aide à en extraire les exigences sans quitter l'application.",
+        prod: "Il génère la fiche depuis le devis Excel ou Word, dans le format que vous utilisez déjà.",
+        commerce: "Il construit une présentation PowerPoint à partir d'un document existant, mise en page comprise.",
+        qualite: "Il rédige vos procédures dans Word en reprenant la trame de celles que vous avez déjà."
+      }
+    },
+    chatgpt: {
+      name: 'ChatGPT Business',
+      tag: 'Le plus polyvalent, et celui que vos équipes connaissent déjà',
+      price: "21 à 25 €",
+      unit: "par personne et par mois, à partir de 2 utilisateurs",
+      budget: "environ 21 à 25 € par personne et par mois, à partir de deux utilisateurs.",
+      strengths: {
+        base: "C'est le plus polyvalent et le plus connu : vos collaborateurs qui l'utilisent déjà à la maison n'auront rien à réapprendre, ce qui règle une bonne partie du problème d'adoption.",
+        commerce: "Il génère aussi des visuels et des illustrations, utile pour vos plaquettes et vos présentations.",
+        ecrits: "Il permet de créer des assistants sur mesure partagés dans l'entreprise, par exemple un assistant qui écrit toujours vos courriers dans votre ton.",
+        prod: "Il se connecte à vos espaces de fichiers et à de nombreux logiciels en ligne, ce qui ouvre la voie aux automatisations.",
+        ao: "Il lit un dossier de consultation et vous rend un tableau des exigences, des délais et des pièces à fournir.",
+        cr: "Il transforme un enregistrement ou des notes prises à la volée en compte rendu structuré, avec les décisions et les actions.",
+        recherche: "Vous pouvez lui déposer un ensemble de documents et l'interroger dessus, sans avoir à ranger quoi que ce soit au préalable.",
+        tableaux: "Il analyse un export Excel et vous explique ce qu'il contient, sans que vous ayez à écrire la moindre formule.",
+        qualite: "Il rédige procédures et modes opératoires à partir de ce que vous lui décrivez à l'oral."
+      }
+    },
+    claude: {
+      name: 'Claude (offre Team)',
+      tag: 'Le meilleur sur les gros dossiers et les documents exigeants',
+      price: "25 à 30 €",
+      unit: "par personne et par mois, à partir de 5 utilisateurs (20 € en solo)",
+      budget: "environ 25 à 30 € par personne et par mois, à partir de cinq utilisateurs. Une formule individuelle existe autour de 20 € pour commencer seul.",
+      strengths: {
+        base: "C'est le plus solide sur les documents longs et exigeants : il lit un dossier de plusieurs centaines de pages sans en perdre le fil et restitue fidèlement ce qui s'y trouve.",
+        ao: "Sur un CCTP ou un dossier de consultation, il sort les exigences, les délais et les pièces à fournir sans en oublier en route.",
+        qualite: "Il rédige des procédures et des documents qualité structurés, à partir de ce que vous lui décrivez oralement.",
+        recherche: "Il analyse de gros volumes de documents en une seule fois, ce qui évite de découper le travail.",
+        ecrits: "Il écrit dans un français sobre et professionnel, sans la grandiloquence qui trahit une machine.",
+        prod: "Il tient la cohérence entre le devis et la fiche produite, y compris sur des nomenclatures longues.",
+        cr: "Il restitue un compte rendu fidèle à partir de notes désordonnées, sans inventer ce qui n'a pas été dit.",
+        tableaux: "Il croise plusieurs tableaux et explique les écarts, en montrant son raisonnement.",
+        commerce: "Il structure vos argumentaires et vos fiches produit, le visuel restant à faire ailleurs."
+      }
+    },
+    gemini: {
+      name: 'Gemini, inclus dans Google Workspace',
+      tag: "Vous le payez peut-être déjà sans le savoir",
+      price: "Inclus",
+      unit: "dans les abonnements Google Workspace Business, à vérifier sur votre formule",
+      budget: "souvent déjà compris dans votre abonnement Google Workspace Business. Vérifiez votre formule avant d'acheter quoi que ce soit d'autre.",
+      strengths: {
+        base: "Il est désormais inclus dans les abonnements Google Workspace Business : dans beaucoup de cas, vous n'avez rien à acheter, juste à l'activer.",
+        recherche: "Il interroge vos documents Drive directement, et NotebookLM permet de créer un espace de questions-réponses sur un ensemble de dossiers.",
+        cr: "Il prend les notes de vos réunions Meet et en produit le compte rendu.",
+        ecrits: "Il rédige dans Gmail et dans Docs, là où vous travaillez déjà.",
+        ao: "Il traite un dossier de consultation déposé dans Drive, sans que vous ayez à le sortir de son dossier.",
+        prod: "Il génère la fiche dans Google Sheets à partir du devis, sans sortir de Drive.",
+        tableaux: "Il analyse vos feuilles de calcul directement dans Sheets, formules comprises.",
+        commerce: "Il construit vos présentations dans Slides à partir d'un document existant.",
+        qualite: "Il rédige vos procédures dans Docs, partageables immédiatement avec l'équipe."
+      }
+    },
+    mistral: {
+      name: 'Mistral Le Chat',
+      tag: 'Éditeur français, données traitées en Europe',
+      price: "15 à 25 €",
+      unit: "par personne et par mois selon la formule, Pro ou équipe",
+      budget: "environ 15 € par personne et par mois pour la formule Pro, environ 25 € pour la formule équipe.",
+      strengths: {
+        base: "Éditeur français, données traitées en Europe et hors juridiction américaine : c'est un argument vérifiable quand un client ou un donneur d'ordre pose la question.",
+        souverainete: "Vous pouvez répondre précisément à un client qui vous demande où partent ses documents, ce qui devient un critère dans les marchés publics.",
+        ao: "Sur un dossier de marché public, vous traitez le document sans avoir à expliquer à votre client où partent ses pièces.",
+        ecrits: "L'outil est sobre et va droit au but, ce qui limite la dispersion des usages.",
+        prod: "Il structure la fiche de production depuis le devis, et ses modèles ouverts permettent d'aller plus loin plus tard.",
+        cr: "Il produit un compte rendu propre à partir de vos notes, sans que le contenu quitte l'Europe.",
+        recherche: "Les formules hautes se connectent à SharePoint et à vos espaces de fichiers pour interroger vos documents.",
+        tableaux: "Il analyse vos exports chiffrés et en tire les écarts, dans un cadre de traitement européen.",
+        commerce: "Il rédige vos supports commerciaux, le travail graphique restant à faire ailleurs.",
+        qualite: "Il rédige procédures et documents qualité, ce qui va bien avec une exigence de traçabilité."
+      }
+    }
+  };
+
+  /* Gains horaires mensuels indicatifs, par usage : [abonnement, automatisation] */
+  var GAINS = {
+    ecrits:    [2, 5],
+    ao:        [4, 10],
+    prod:      [2, 12],
+    cr:        [2, 6],
+    recherche: [2, 5],
+    tableaux:  [2, 5],
+    commerce:  [2, 4],
+    qualite:   [2, 6]
+  };
+  var USER_FACTOR = { '1': 1, '2_5': 1.5, '6_15': 2.2, '15p': 3 };
+
+  /* =====================================================================
+     3. Moteur de scoring
+     ===================================================================== */
+  function score(a) {
+    var s = { copilot:0, chatgpt:0, claude:0, gemini:0, mistral:0 };
+    var reasons = { copilot:[], chatgpt:[], claude:[], gemini:[], mistral:[] };
+    var alerts = [];
+    var usages = a.usages || [];
+    var sensible = a.sensible || [];
+    var filesOk = (a.fichiers === 'sharepoint' || a.fichiers === 'drive');
+
+    /* --- K1 : intégration à l'environnement --- */
+    if (a.suite === 'm365') { s.copilot += 9; s.chatgpt += 3; s.claude += 3; s.mistral += 3; }
+    if (a.suite === 'google') { s.gemini += 9; s.chatgpt += 3; s.claude += 3; }
+    if (a.fichiers === 'sharepoint') { s.copilot += 9; s.chatgpt += 3; s.mistral += 3; }
+    if (a.fichiers === 'drive') { s.gemini += 9; s.chatgpt += 6; s.claude += 3; }
+
+    /* --- K2 : adéquation aux usages --- */
+    usages.forEach(function(u){
+      if (u === 'ao')        { s.claude += 9; s.chatgpt += 6; s.mistral += 3; }
+      if (u === 'qualite')   { s.claude += 6; s.chatgpt += 3; s.mistral += 3; }
+      if (u === 'ecrits')    { s.chatgpt += 4; s.gemini += 3; s.mistral += 3; s.copilot += 3; }
+      if (u === 'commerce')  { s.chatgpt += 6; s.gemini += 3; }
+      if (u === 'tableaux')  { s.copilot += 6; s.chatgpt += 4; s.claude += 4; }
+      if (u === 'prod')      { s.chatgpt += 5; s.claude += 4; s.copilot += 3; }
+      if (u === 'cr')        { if (a.suite === 'm365') s.copilot += 6; if (a.suite === 'google') s.gemini += 6; s.chatgpt += 2; }
+      if (u === 'recherche') {
+        if (a.fichiers === 'sharepoint') s.copilot += 9;
+        else if (a.fichiers === 'drive') s.gemini += 9;
+        else { s.claude += 3; s.chatgpt += 3; }
+      }
+    });
+
+    /* --- K3 : confidentialité et hébergement --- */
+    if (a.souverainete === 'contrat') s.mistral += 12;
+    if (a.souverainete === 'perso')   s.mistral += 9;
+    if (a.souverainete === 'evoque')  s.mistral += 5;
+    if (sensible.indexOf('clients') !== -1)   s.mistral += 3;
+    if (sensible.indexOf('technique') !== -1) s.mistral += 2;
+
+    /* --- K4 : facilité d'adoption --- */
+    if (a.it === 'aucun' || a.it === 'presta') {
+      if (a.suite === 'm365') s.copilot += 4;
+      if (a.suite === 'google') s.gemini += 4;
+      s.chatgpt += 3;
+    }
+    if (a.effectif === '1') { s.copilot -= 6; s.claude -= 2; }
+    if (a.effectif === '15p') { if (a.suite === 'm365') s.copilot += 3; if (a.suite === 'google') s.gemini += 3; }
+
+    /* --- K5 : coût --- */
+    if (a.suite === 'google') s.gemini += 5;
+    if (a.effectif === '1') { s.mistral += 3; s.chatgpt += 2; }
+
+    /* --- Règles dures --- */
+    var forced = null;
+    if (a.souverainete === 'contrat') forced = 'mistral';
+
+    /* La règle des 80 % pour Copilot : sans fichiers dans SharePoint, il perd sa raison d'être */
+    if (a.fichiers !== 'sharepoint') s.copilot -= 8;
+    if (a.suite !== 'm365') s.copilot -= 10;
+    if (a.suite !== 'google' || a.fichiers === 'local' || a.fichiers === 'postes' || a.fichiers === 'papier') {
+      if (a.suite !== 'google') s.gemini -= 10;
+    }
+
+    /* --- Alertes contextuelles --- */
+    if (!filesOk) {
+      alerts.push({
+        ico: '📁',
+        title: 'Vos fichiers ne sont pas encore partagés en ligne',
+        text: "Aucun assistant ne pourra lire vos documents tant qu'ils vivent sur un serveur local, sur les postes ou en classeur. Le vrai préalable n'est pas l'abonnement, c'est le rangement. Commencez par un abonnement individuel simple, et traitez le sujet des fichiers en parallèle : c'est lui qui débloquera tout le reste."
+      });
+    }
+    if (a.souverainete === 'contrat') {
+      alerts.push({
+        ico: '🇪🇺',
+        title: 'Un engagement contractuel ferme le débat',
+        text: "Puisqu'un contrat ou un cahier des charges vous impose une localisation des données, la question du meilleur modèle passe au second plan. Choisissez la solution qui vous permet de répondre sans ambiguïté à votre client, et gardez la preuve écrite de cet engagement."
+      });
+    }
+    if (sensible.indexOf('rh') !== -1) {
+      alerts.push({
+        ico: '⚖️',
+        title: 'Des données de salariés appellent une précaution',
+        text: "Faire traiter des données personnelles de vos salariés par un outil IA suppose une base légale, une information des personnes concernées et un contrat de sous-traitance avec l'éditeur. Ce n'est pas un obstacle, c'est une formalité à traiter avant de commencer, pas après."
+      });
+    }
+    if (a.shadow === 'oui' || a.shadow === 'probable' || a.shadow === 'inconnu') {
+      alerts.push({
+        ico: '👀',
+        title: 'Des usages existent probablement déjà chez vous',
+        text: "Quand des collaborateurs utilisent une IA gratuite avec des documents de l'entreprise, vos données partent sans cadre et sans traçabilité. Un abonnement professionnel n'est alors pas seulement un gain de confort, c'est le moyen de ramener ces usages dans un périmètre que vous maîtrisez."
+      });
+    }
+    if (a.charte === 'non') {
+      alerts.push({
+        ico: '📝',
+        title: 'Aucune règle écrite, à corriger avant de déployer',
+        text: "Depuis le 2 août 2026, une entreprise qui utilise l'IA doit informer les personnes concernées et garder une trace de ses usages. Pour une PME de la filière, l'essentiel tient en une page : ce qu'on peut confier à l'outil, ce qu'on ne lui confie jamais, et qui relit avant envoi."
+      });
+    }
+
+    /* --- Classement --- */
+    var ranked = Object.keys(s).sort(function(x,y){ return s[y] - s[x]; });
+    if (forced && ranked[0] !== forced) {
+      ranked = [forced].concat(ranked.filter(function(k){ return k !== forced; }));
+    }
+    return { ranked: ranked, scores: s, alerts: alerts };
+  }
+
+  function buildReasons(key, a) {
+    var sol = SOLUTIONS[key];
+    var out = [sol.strengths.base];
+    var usages = a.usages || [];
+    usages.forEach(function(u){
+      if (sol.strengths[u] && out.length < 3) out.push(sol.strengths[u]);
+    });
+    if (out.length < 3 && key === 'mistral' && sol.strengths.souverainete && a.souverainete !== 'jamais') {
+      out.push(sol.strengths.souverainete);
+    }
+    var fallbacks = [];
+    if (a.effectif === '1') fallbacks.push("Vous pouvez démarrer seul, en mensuel résiliable, et n'ouvrir des comptes pour l'équipe qu'une fois l'usage prouvé.");
+    else fallbacks.push("Commencez par deux ou trois utilisateurs volontaires en mensuel résiliable, puis étendez une fois que le gain est visible. L'engagement annuel se négocie après, pas avant.");
+    if (a.it === 'aucun' || a.it === 'presta') fallbacks.push("Sans informaticien en interne, mieux vaut un outil qui se met en route seul qu'une solution qui demanderait un projet à part entière.");
+    fallbacks.push("Sur vos usages, l'écart de qualité entre les grandes solutions du marché est aujourd'hui trop faible pour justifier un choix plus compliqué.");
+    while (out.length < 3 && fallbacks.length) out.push(fallbacks.shift());
+    return out.slice(0,3);
+  }
+
+  /* Notation par critère, pour la colonne de comparaison */
+  function criteria(key, a) {
+    var sol = SOLUTIONS[key];
+    var usages = a.usages || [];
+    var out = [];
+
+    /* Intégration à vos outils */
+    var lvl = 1, note = '';
+    if (key === 'copilot') {
+      if (a.suite === 'm365' && a.fichiers === 'sharepoint') { lvl = 3; note = 'Vos mails et vos fichiers sont déjà chez Microsoft.'; }
+      else if (a.suite === 'm365') { lvl = 2; note = 'Vos mails sont chez Microsoft, mais pas vos fichiers.'; }
+      else { lvl = 1; note = "Vous n'êtes pas dans l'univers Microsoft."; }
+    } else if (key === 'gemini') {
+      if (a.suite === 'google' && a.fichiers === 'drive') { lvl = 3; note = 'Vos mails et vos fichiers sont déjà chez Google.'; }
+      else if (a.suite === 'google') { lvl = 2; note = 'Vos mails sont chez Google, mais pas vos fichiers.'; }
+      else { lvl = 1; note = "Vous n'êtes pas dans l'univers Google."; }
+    } else {
+      var filesOk = (a.fichiers === 'sharepoint' || a.fichiers === 'drive');
+      lvl = filesOk ? 2 : 1;
+      note = filesOk ? 'Se connecte à votre espace de fichiers, sans y être natif.'
+                     : 'Fonctionne partout, en déposant les documents à la main.';
+      if (key === 'chatgpt' && filesOk) { lvl = 3; note = 'Se connecte à votre espace de fichiers et à de nombreux logiciels en ligne.'; }
+    }
+    out.push({ label: 'Intégration à vos outils', lvl: lvl, note: note });
+
+    /* Adéquation à vos priorités */
+    var hits = 0;
+    usages.forEach(function(u){ if (sol.strengths[u]) hits++; });
+    var matched = usages.filter(function(u){ return sol.strengths[u]; }).length;
+    var lvl2 = matched >= 3 ? 3 : (matched === 2 ? 3 : (matched === 1 ? 2 : 1));
+    if (key === 'claude' && usages.indexOf('ao') !== -1) lvl2 = 3;
+    if (key === 'copilot' && a.fichiers !== 'sharepoint' && usages.indexOf('recherche') !== -1) lvl2 = Math.min(lvl2, 2);
+    out.push({ label: 'Adéquation à vos priorités', lvl: lvl2, note: '' });
+
+    /* Données et hébergement */
+    if (key === 'mistral') {
+      out.push({ label: 'Données traitées en Europe', lvl: 3, note: 'Éditeur français, hors juridiction américaine.' });
+    } else {
+      out.push({ label: 'Données traitées en Europe', lvl: 2,
+        note: 'Éditeur américain, avec engagements contractuels et options de localisation.' });
+    }
+
+    /* Prise en main */
+    var lvl4 = 2, note4 = '';
+    if (key === 'chatgpt') { lvl4 = 3; note4 = 'Le plus connu de vos équipes, rien à réapprendre.'; }
+    else if (key === 'copilot' && a.suite === 'm365') { lvl4 = 3; note4 = 'Présent dans les applications déjà ouvertes toute la journée.'; }
+    else if (key === 'gemini' && a.suite === 'google') { lvl4 = 3; note4 = 'Présent dans Gmail et Docs, rien à installer.'; }
+    else if (key === 'claude') { lvl4 = 2; note4 = 'Simple, mais moins familier au démarrage.'; }
+    else if (key === 'mistral') { lvl4 = 2; note4 = 'Sobre et direct, écosystème plus étroit.'; }
+    if ((a.it === 'aucun' || a.it === 'presta') && lvl4 === 2) note4 += " Sans informaticien, prévoyez un temps de prise en main.";
+    out.push({ label: 'Prise en main sans informaticien', lvl: lvl4, note: note4 });
+
+    return out;
+  }
+
+  /* Pourquoi cette solution n'est pas en tête */
+  function whyNot(key, a) {
+    if (key === 'copilot') {
+      if (a.suite !== 'm365') return "Écarté parce que vos mails ne sont pas chez Microsoft : vous paieriez l'intégration sans en profiter.";
+      if (a.fichiers !== 'sharepoint') return "Écarté parce que vos documents ne sont pas dans SharePoint, là où il va chercher le contexte.";
+      if (a.effectif === '1') return "Écarté pour un démarrage en solo : il suppose un abonnement Microsoft 365 d'entreprise déjà en place.";
+      return "Solide, mais une autre solution colle mieux à vos priorités du moment.";
+    }
+    if (key === 'gemini') {
+      if (a.suite !== 'google') return "Écarté parce que vous n'êtes pas sur Google Workspace : hors de cet univers, il perd son principal avantage.";
+      return "Bon rapport valeur sur coût, mais en retrait sur vos priorités précises.";
+    }
+    if (key === 'claude') {
+      if ((a.usages || []).indexOf('ao') === -1 && (a.usages || []).indexOf('qualite') === -1) {
+        return "Excellent sur les dossiers longs, un profil moins décisif au vu des tâches que vous avez retenues.";
+      }
+      return "Très proche du premier choix. À reconsidérer si le travail documentaire prend le dessus.";
+    }
+    if (key === 'mistral') {
+      if (a.souverainete === 'jamais') return "Le meilleur choix le jour où un client vous demandera où partent ses documents. Ce n'est pas encore votre cas.";
+      return "Un cran en dessous sur l'intégration à vos outils, à garder en tête pour la souveraineté.";
+    }
+    if (key === 'chatgpt') return "Le plus polyvalent, mais une autre solution s'intègre mieux à ce que vous utilisez déjà.";
+    return "Une alternative crédible, moins alignée sur votre situation actuelle.";
+  }
+
+  function computeGains(a) {
+    var usages = a.usages || [];
+    var f = USER_FACTOR[a.effectif] || 1;
+    var abo = 0, auto = 0;
+    usages.forEach(function(u){
+      if (GAINS[u]) { abo += GAINS[u][0]; auto += GAINS[u][1]; }
+    });
+    function arrondi(x) { x = x * f; return x > 20 ? Math.round(x/5)*5 : Math.round(x); }
+    return { abo: arrondi(abo), auto: arrondi(auto), n: usages.length };
+  }
+
+  /* =====================================================================
+     4. Interface
+     ===================================================================== */
+  var answers = {};
+  var step = 0;
+  var lastResult = null;
+
+  var elQuiz = document.getElementById('quiz');
+  var elNum = document.getElementById('q-num');
+  var elTitle = document.getElementById('q-title');
+  var elHelp = document.getElementById('q-help');
+  var elOpts = document.getElementById('q-opts');
+  var elPrev = document.getElementById('btn-prev');
+  var elNext = document.getElementById('btn-next');
+  var elFill = document.getElementById('progress-fill');
+  var elPText = document.getElementById('progress-text');
+  var elRestart = document.getElementById('btn-restart');
+
+  function render() {
+    var q = QUESTIONS[step];
+    var val = answers[q.id];
+
+    elNum.textContent = 'Question ' + (step+1) + ' sur ' + QUESTIONS.length;
+    elTitle.textContent = q.title;
+    elHelp.textContent = q.help || '';
+    elHelp.hidden = !q.help;
+    elOpts.className = 'opts' + (q.cols === 2 ? ' opts--2' : '');
+    elOpts.innerHTML = '';
+
+    q.options.forEach(function(o){
+      var on = q.multi ? (val || []).indexOf(o.v) !== -1 : val === o.v;
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'opt';
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      b.innerHTML = '<span class="tick" aria-hidden="true">✓</span><span class="txt"><strong></strong><small></small></span>';
+      b.querySelector('strong').textContent = o.label;
+      b.querySelector('small').textContent = o.sub || '';
+      b.addEventListener('click', function(){ pick(q, o.v); });
+      elOpts.appendChild(b);
+    });
+
+    elPrev.hidden = step === 0;
+    elNext.hidden = !q.multi;
+    if (q.multi) {
+      var n = (val || []).length;
+      elNext.disabled = n === 0;
+      elNext.textContent = n === 0 ? 'Choisissez au moins une réponse' : 'Continuer →';
+      elNext.style.opacity = n === 0 ? '.5' : '1';
+    }
+
+    elFill.style.width = Math.round((step / QUESTIONS.length) * 100) + '%';
+    elPText.textContent = 'Question ' + (step+1) + ' sur ' + QUESTIONS.length;
+    elRestart.hidden = step === 0;
+  }
+
+  function pick(q, v) {
+    if (q.multi) {
+      var cur = answers[q.id] || [];
+      var i = cur.indexOf(v);
+      if (i !== -1) cur.splice(i,1);
+      else {
+        if (v === 'rien') cur = ['rien'];
+        else { cur = cur.filter(function(x){ return x !== 'rien'; }); if (!q.max || cur.length < q.max) cur.push(v); }
+      }
+      answers[q.id] = cur;
+      render();
+    } else {
+      answers[q.id] = v;
+      setTimeout(next, 140);
+    }
+  }
+
+  function next() {
+    if (step < QUESTIONS.length - 1) { step++; render(); scrollTop(); }
+    else finish();
+  }
+
+  function scrollTop() {
+    var y = document.getElementById('app').offsetTop - 80;
+    if (window.scrollY > y) window.scrollTo({ top: y, behavior: 'smooth' });
+  }
+
+  elPrev.addEventListener('click', function(){ if (step > 0) { step--; render(); } });
+  elNext.addEventListener('click', next);
+  elRestart.addEventListener('click', function(){
+    answers = {}; step = 0; lastResult = null;
+    document.getElementById('result').hidden = true;
+    document.getElementById('pivot').hidden = true;
+    document.getElementById('capture').hidden = true;
+    document.getElementById('final').hidden = true;
+    elQuiz.hidden = false;
+    render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  function finish() {
+    var r = score(answers);
+    var top = r.ranked[0];
+    var alt = r.ranked[1];
+    var reasons = buildReasons(top, answers);
+    var gains = computeGains(answers);
+    lastResult = { top: top, alt: alt, reasons: reasons, gains: gains };
+
+    /* --- Les trois colonnes de comparaison --- */
+    var podium = [r.ranked[0], r.ranked[1], r.ranked[2]];
+    var plans = document.getElementById('plans');
+    plans.innerHTML = '';
+
+    podium.forEach(function(key, i){
+      var sol = SOLUTIONS[key];
+      var rank = i + 1;
+      var art = document.createElement('article');
+      art.className = 'plan';
+      art.setAttribute('data-rank', String(rank));
+
+      var html = '';
+      if (rank === 1) html += '<div class="plan__badge">Recommandé pour vous</div>';
+      else html += '<p class="plan__rank">' + (rank === 2 ? 'Alternative' : 'Troisième option') + '</p>';
+
+      html += '<h3 class="plan__name"></h3><p class="plan__tag"></p>';
+      html += '<p class="plan__price"><b></b><span></span></p>';
+      html += '<ul class="plan__crit"></ul>';
+      html += '<ul class="plan__why"></ul>';
+      html += '<div class="plan__foot"></div>';
+      art.innerHTML = html;
+
+      art.querySelector('.plan__name').textContent = sol.name;
+      art.querySelector('.plan__tag').textContent = sol.tag;
+      art.querySelector('.plan__price b').textContent = sol.price;
+      art.querySelector('.plan__price span').textContent = sol.unit;
+
+      var critUl = art.querySelector('.plan__crit');
+      criteria(key, answers).forEach(function(c){
+        var li = document.createElement('li');
+        li.innerHTML = '<span class="c"></span><span class="dots" data-l="' + c.lvl + '" aria-label="' + c.lvl + ' sur 3"><i></i><i></i><i></i></span>' +
+                       (c.note ? '<span class="n"></span>' : '');
+        li.querySelector('.c').textContent = c.label;
+        if (c.note) li.querySelector('.n').textContent = c.note;
+        critUl.appendChild(li);
+      });
+
+      var whyUl = art.querySelector('.plan__why');
+      var lines = (rank === 1) ? reasons : buildReasons(key, answers).slice(0,2);
+      lines.forEach(function(t){ var li = document.createElement('li'); li.textContent = t; whyUl.appendChild(li); });
+
+      var foot = art.querySelector('.plan__foot');
+      if (rank === 1) {
+        var extra = (answers.effectif === '1')
+          ? "Commencez par un seul compte, en mensuel résiliable."
+          : "Démarrez à deux ou trois, en mensuel résiliable.";
+        foot.innerHTML = '<a class="btn btn--primary btn--sm" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">En parler 30 min →</a><p></p>';
+        foot.querySelector('p').textContent = extra + " L'engagement annuel se négocie une fois l'usage prouvé.";
+      } else {
+        foot.innerHTML = '<p></p>';
+        foot.querySelector('p').textContent = whyNot(key, answers);
+      }
+
+      plans.appendChild(art);
+    });
+
+    var al = document.getElementById('reco-alerts');
+    al.innerHTML = '';
+    r.alerts.forEach(function(a){
+      var d = document.createElement('div');
+      d.className = 'alert';
+      d.innerHTML = '<span class="ico" aria-hidden="true"></span><span><strong></strong><span class="tx"></span></span>';
+      d.querySelector('.ico').textContent = a.ico;
+      d.querySelector('strong').textContent = a.title;
+      d.querySelector('.tx').textContent = a.text;
+      al.appendChild(d);
+    });
+
+    document.getElementById('gain-usages').textContent = gains.n;
+    document.getElementById('gain-usages-d').textContent = gains.n > 1
+      ? 'tâches que vous avez identifiées comme les plus coûteuses en temps.'
+      : 'tâche que vous avez identifiée comme la plus coûteuse en temps.';
+    document.getElementById('gain-abo').textContent = '~ ' + gains.abo + ' h';
+    document.getElementById('gain-auto').textContent = '~ ' + gains.auto + ' h';
+
+    elQuiz.hidden = true;
+    elFill.style.width = '100%';
+    elPText.textContent = 'Votre résultat';
+    elRestart.hidden = false;
+    document.getElementById('result').hidden = false;
+    document.getElementById('pivot').hidden = false;
+    document.getElementById('capture').hidden = false;
+    document.getElementById('final').hidden = false;
+    scrollTop();
+  }
+
+  render();
+
+  /* =====================================================================
+     5. Capture de contact (Brevo)
+     ===================================================================== */
+  var cfg = window.__SITE_CONFIG || {};
+  var BREVO_KEY = cfg.BREVO_KEY;
+  var BREVO_LIST = cfg.BREVO_LIST_QUIZ || cfg.BREVO_LIST || 17;
+  var NOTIFY_TO = 'mathieu@kosm.io';
+
+  var form = document.getElementById('quiz-form');
+  var statusEl = document.getElementById('quiz-form-status');
+
+  function labelOf(qid, v) {
+    var q = QUESTIONS.filter(function(x){ return x.id === qid; })[0];
+    if (!q) return v;
+    var o = q.options.filter(function(x){ return x.v === v; })[0];
+    return o ? o.label : v;
+  }
+
+  function answersHtml() {
+    var rows = QUESTIONS.map(function(q){
+      var v = answers[q.id];
+      var txt = Array.isArray(v) ? v.map(function(x){ return labelOf(q.id, x); }).join(', ') : labelOf(q.id, v);
+      return '<tr><td style="padding:6px 10px;border-bottom:1px solid #eee;color:#5D6C73;">' + q.title +
+             '</td><td style="padding:6px 10px;border-bottom:1px solid #eee;"><strong>' + (txt || 'non renseigné') + '</strong></td></tr>';
+    }).join('');
+    return '<table style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:13px;width:100%;">' + rows + '</table>';
+  }
+
+  function summaryHtml(firstname) {
+    var top = SOLUTIONS[lastResult.top];
+    var alt = SOLUTIONS[lastResult.alt];
+    var why = lastResult.reasons.map(function(t){ return '<li style="margin-bottom:8px;">' + t + '</li>'; }).join('');
+    return '' +
+      '<div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.6;color:#1F2D3D;max-width:640px;">' +
+      '<p>Bonjour ' + firstname + ',</p>' +
+      '<p>Voici la synthèse de votre diagnostic, tel que vous venez de le remplir sur le site.</p>' +
+      '<h2 style="font-size:18px;margin:24px 0 8px;">Notre recommandation : ' + top.name + '</h2>' +
+      '<p style="color:#5D6C73;margin:0 0 12px;">' + top.tag + '</p>' +
+      '<ul style="padding-left:18px;margin:0 0 16px;">' + why + '</ul>' +
+      '<p><strong>Budget indicatif :</strong> ' + top.budget + '</p>' +
+      '<p><strong>L\'alternative à garder en tête :</strong> ' + alt.name + '.</p>' +
+      '<h2 style="font-size:18px;margin:28px 0 8px;">Le temps en jeu</h2>' +
+      '<p>Avec un simple abonnement bien utilisé, de l\'ordre de <strong>' + lastResult.gains.abo + ' heures par mois</strong> pour votre entreprise. ' +
+      'En automatisant réellement les processus concernés, de l\'ordre de <strong>' + lastResult.gains.auto + ' heures par mois</strong>. ' +
+      'Ce sont des ordres de grandeur issus de nos interventions dans la filière, à confirmer en regardant vos processus réels.</p>' +
+      '<h2 style="font-size:18px;margin:28px 0 8px;">Les trois conditions à réunir</h2>' +
+      '<ol style="padding-left:18px;">' +
+      '<li style="margin-bottom:8px;">Vérifier ce que vous payez déjà. Une partie des fonctions est peut-être incluse dans votre abonnement bureautique actuel.</li>' +
+      '<li style="margin-bottom:8px;">Commencer petit et en mensuel résiliable, avec deux ou trois personnes volontaires, avant tout engagement annuel.</li>' +
+      '<li style="margin-bottom:8px;">Poser une règle écrite d\'une page : ce qu\'on confie à l\'outil, ce qu\'on ne lui confie jamais, qui relit avant envoi.</li>' +
+      '</ol>' +
+      '<p style="margin-top:28px;">Le choix de l\'outil compte moins que ce que vous allez en faire. Si vous voulez qu\'on regarde ensemble lesquels de vos processus méritent d\'être automatisés, mon agenda est ouvert : ' +
+      '<a href="https://cal.com/kosmio/ia-automatisation">cal.com/kosmio/ia-automatisation</a></p>' +
+      '<p>Mathieu Pesin<br>Kosmio · Parcours IA Filière Bois<br><a href="mailto:mathieu@kosm.io">mathieu@kosm.io</a></p>' +
+      '</div>';
+  }
+
+  if (form) {
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      if (!lastResult) return;
+
+      var btn = form.querySelector('button[type="submit"]');
+      var fd = new FormData(form);
+      var email = (fd.get('email') || '').trim();
+      var firstname = (fd.get('firstname') || '').trim();
+      var company = (fd.get('company') || '').trim();
+
+      if (!firstname || !email) { statusEl.textContent = 'Merci d\'indiquer votre prénom et votre email.'; return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { statusEl.textContent = 'Cette adresse email ne semble pas valide.'; return; }
+      if (!BREVO_KEY) { statusEl.textContent = 'Le formulaire est momentanément indisponible. Écrivez-nous à mathieu@kosm.io, on vous envoie la synthèse à la main.'; return; }
+
+      btn.disabled = true; btn.textContent = 'Envoi…'; statusEl.textContent = '';
+
+      var reco = SOLUTIONS[lastResult.top].name;
+      var usagesTxt = (answers.usages || []).map(function(v){ return labelOf('usages', v); }).join(' | ');
+      var headers = { 'api-key': BREVO_KEY, 'Content-Type': 'application/json', 'accept': 'application/json' };
+
+      try {
+        var richAttrs = {
+          FIRSTNAME: firstname,
+          SOURCE: 'outil-choix-ia',
+          UTM: 'reco=' + reco + '; effectif=' + (answers.effectif||'') + '; usages=' + usagesTxt,
+          COMPANY: company,
+          RECO: reco,
+          USAGES: usagesTxt
+        };
+        var minAttrs = { FIRSTNAME: firstname, SOURCE: 'outil-choix-ia', UTM: 'reco=' + reco };
+
+        async function upsert(attrs) {
+          var r = await fetch('https://api.brevo.com/v3/contacts', {
+            method: 'POST', headers: headers,
+            body: JSON.stringify({ email: email, attributes: attrs, listIds: [BREVO_LIST], updateEnabled: true })
+          });
+          return r;
+        }
+
+        var r = await upsert(richAttrs);
+        if (!r.ok && r.status !== 204) {
+          // Attributs personnalisés non déclarés dans Brevo : on retente avec le strict nécessaire
+          r = await upsert(minAttrs);
+          if (!r.ok && r.status !== 204) {
+            var t = await r.text();
+            if (r.status === 400 && t.indexOf('already exist') !== -1) {
+              await fetch('https://api.brevo.com/v3/contacts/' + encodeURIComponent(email), {
+                method: 'PUT', headers: headers,
+                body: JSON.stringify({ attributes: minAttrs, listIds: [BREVO_LIST] })
+              });
+            } else { throw new Error('contact ' + r.status); }
+          }
+        }
+
+        // Synthèse au prospect
+        await fetch('https://api.brevo.com/v3/smtp/email', {
+          method: 'POST', headers: headers,
+          body: JSON.stringify({
+            to: [{ email: email, name: firstname }],
+            sender: { email: 'mathieu@kosm.io', name: 'Mathieu Pesin — Kosmio' },
+            replyTo: { email: 'mathieu@kosm.io', name: 'Mathieu Pesin' },
+            subject: 'Votre recommandation : ' + reco,
+            htmlContent: summaryHtml(firstname),
+            tags: ['outil-choix-ia', 'lead-magnet']
+          })
+        });
+
+        // Notification interne avec le détail des réponses
+        await fetch('https://api.brevo.com/v3/smtp/email', {
+          method: 'POST', headers: headers,
+          body: JSON.stringify({
+            to: [{ email: NOTIFY_TO, name: 'Mathieu Pesin' }],
+            sender: { email: 'mathieu@kosm.io', name: 'Outil choix IA' },
+            replyTo: { email: email, name: firstname },
+            subject: 'Nouveau diagnostic IA · ' + (company || firstname) + ' · reco ' + reco,
+            htmlContent: '<div style="font-family:Arial,sans-serif;font-size:14px;color:#1F2D3D;">' +
+              '<p><strong>' + firstname + '</strong> (' + email + ')' + (company ? ' · ' + company : '') + '</p>' +
+              '<p>Recommandation calculée : <strong>' + reco + '</strong> · alternative : ' + SOLUTIONS[lastResult.alt].name + '</p>' +
+              '<p>Gain estimé : ' + lastResult.gains.abo + ' h/mois avec abonnement, ' + lastResult.gains.auto + ' h/mois automatisé.</p>' +
+              '<h3 style="font-size:15px;">Réponses</h3>' + answersHtml() + '</div>',
+            tags: ['outil-choix-ia', 'notification']
+          })
+        });
+
+        form.reset();
+        form.hidden = true;
+        statusEl.innerHTML = '<strong>C\'est envoyé.</strong> Votre synthèse arrive dans votre boîte mail, vérifiez les indésirables si elle se fait attendre.';
+      } catch (err) {
+        console.error(err);
+        btn.disabled = false; btn.textContent = 'Recevoir ma synthèse →';
+        statusEl.textContent = "L'envoi a échoué. Écrivez-nous à mathieu@kosm.io, on vous envoie la synthèse à la main.";
+      }
+    });
+  }
+
+  /* ===== Menu mobile ===== */
+  (function(){
+    var btn = document.querySelector('.nav-toggle');
+    var nav = document.getElementById('nav-primary');
+    if (!btn || !nav) return;
+    btn.addEventListener('click', function(){
+      var open = nav.classList.toggle('primary--open');
+      btn.setAttribute('aria-expanded', open);
+    });
+    nav.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ nav.classList.remove('primary--open'); btn.setAttribute('aria-expanded','false'); });
+    });
+  })();
+
+})();
+</script>
+</body>
+</html>
