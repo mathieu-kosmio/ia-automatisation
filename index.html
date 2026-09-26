@@ -42,32 +42,6 @@
   .brand { display:flex; align-items:center; gap:var(--space-3); text-decoration:none;}
   .brand-logo { height:32px; width:auto; display:block; }
   .brand-name { font-family:var(--font-display); font-weight:700; font-size:.95rem; color:var(--ink-900); letter-spacing:var(--tracking-tight); }
-  nav.primary { display:none; gap: var(--space-6);}
-  nav.primary a { color: var(--ink-700); text-decoration:none; font-weight:500; font-size:.95rem;}
-  nav.primary a:hover { color: var(--xf-green-600); }
-  @media (min-width:1024px){ nav.primary{ display:flex; } }
-
-  /* ============ Hamburger mobile ============ */
-  .nav-toggle {
-    display:flex; align-items:center; justify-content:center;
-    width:40px; height:40px; border:none; background:none; cursor:pointer;
-    color: var(--ink-900);
-  }
-  @media (min-width:1024px){ .nav-toggle { display:none; } }
-  nav.primary.primary--open {
-    display:flex; flex-direction:column; gap:0;
-    position:absolute; top:72px; left:0; right:0;
-    background:rgba(255,255,255,0.97); backdrop-filter:blur(12px);
-    border-bottom:1px solid rgba(201,191,177,0.4);
-    padding: var(--space-4) var(--space-5);
-    z-index:49;
-  }
-  nav.primary.primary--open a {
-    padding: var(--space-3) 0;
-    border-bottom: 1px solid var(--grey-300);
-    font-size: 1.05rem;
-  }
-  nav.primary.primary--open a:last-child { border-bottom:none; }
 
   /* ============ SR only ============ */
   .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
@@ -360,6 +334,8 @@
   .reveal { opacity:0; transform: translateY(20px); transition: opacity .8s var(--ease-out), transform .8s var(--ease-out);}
   .reveal.in { opacity:1; transform:none;}
 </style>
+<link rel="stylesheet" href="assets/site-nav.css?v=1" />
+<script src="assets/site-nav.js?v=1" defer></script>
 </head>
 <body>
 
@@ -374,14 +350,23 @@
       <a href="#terrain">Terrain</a>
       <a href="#etudes">Résultats</a>
       <a href="#offre">Offre &amp; tarifs</a>
-      <a href="choix-ia.html">Quel outil IA&nbsp;?</a>
+      <div class="nav-dd">
+        <button type="button" class="nav-dd__btn" aria-expanded="false" aria-controls="nav-outils">Outils<svg class="nav-dd__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="nav-dd__menu" id="nav-outils">
+          <a href="choix-ia.html"><span class="nav-dd__title">Quel outil IA&nbsp;?</span><span class="nav-dd__desc">Trouver l'abonnement adapté à vos usages</span></a>
+          <a href="https://processotheque.kosmio.dev/" target="_blank" rel="noopener"><span class="nav-dd__title">Processothèque <span class="nav-dd__ext" aria-hidden="true">↗</span></span><span class="nav-dd__desc">Le référentiel des processus métier de la filière bois</span></a>
+          <div class="nav-dd__item is-soon"><span class="nav-dd__title">Souveraineté <span class="nav-dd__tag">Bientôt</span></span><span class="nav-dd__desc">Vos outils IA sur un serveur privé souverain</span></div>
+        </div>
+      </div>
       <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
+      <a class="btn btn--primary nav-cta" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">Réserver un échange →</a>
     </nav>
-    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-primary" aria-label="Menu">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-primary" aria-label="Ouvrir le menu">
+      <svg class="nav-toggle__open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg class="nav-toggle__close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
     </button>
-    <a class="btn btn--primary btn--sm" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">Réserver un échange →</a>
+    <a class="btn btn--primary btn--sm header-cta" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">Réserver un échange →</a>
   </div>
 </header>
 
@@ -948,20 +933,6 @@
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
   },{threshold:0.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-  // Hamburger mobile
-  (function(){
-    const btn = document.querySelector('.nav-toggle');
-    const nav = document.getElementById('nav-primary');
-    if(!btn || !nav) return;
-    btn.addEventListener('click', function(){
-      const open = nav.classList.toggle('primary--open');
-      btn.setAttribute('aria-expanded', open);
-    });
-    nav.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click', function(){ nav.classList.remove('primary--open'); btn.setAttribute('aria-expanded','false'); });
-    });
-  })();
 
   // Sticky CTA mobile — appears after hero leaves viewport
   (function(){

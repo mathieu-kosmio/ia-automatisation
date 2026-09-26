@@ -1,0 +1,115 @@
+/* Menu principal commun : index.html, choix-ia.html, Articles/*.html
+   Burger sous 1180px, menu en ligne au-delà. Le sous-menu « Outils » est un
+   popover sur ordinateur et un accordéon dans le burger. */
+
+nav.primary { display:none; align-items:center; gap: var(--space-6, 1.5rem); margin-left:auto; }
+nav.primary > a,
+.nav-dd__btn {
+  color: var(--ink-700); text-decoration:none; font-weight:500; font-size:.95rem;
+  white-space:nowrap; position:relative;
+}
+nav.primary > a:hover,
+.nav-dd__btn:hover,
+.nav-dd__btn[aria-expanded="true"] { color: var(--xf-green-600); }
+nav.primary > a.is-current,
+.nav-dd__btn.is-current { color: var(--xf-green-600); font-weight:600; }
+
+/* ---- Bouton burger ---- */
+.nav-toggle {
+  display:flex; align-items:center; justify-content:center; order:3;
+  width:44px; height:44px; margin-left: var(--space-2, .5rem); margin-right:-10px;
+  border:none; background:none; cursor:pointer; color: var(--ink-900); border-radius: var(--radius-sm, 4px);
+}
+.nav-toggle:focus-visible,
+.nav-dd__btn:focus-visible,
+nav.primary a:focus-visible { outline:none; box-shadow: var(--shadow-focus, 0 0 0 3px rgba(0,177,148,.35)); border-radius: var(--radius-sm, 4px); }
+.nav-toggle .nav-toggle__close { display:none; }
+.nav-toggle[aria-expanded="true"] .nav-toggle__open { display:none; }
+.nav-toggle[aria-expanded="true"] .nav-toggle__close { display:block; }
+
+/* ---- Bouton « Réserver » de l'en-tête : masqué sur petit écran, repris dans le burger ---- */
+header .header-cta { display:none; margin-left:auto; white-space:nowrap; }
+@media (min-width:640px){ header .header-cta { display:inline-flex; } }
+nav.primary .nav-cta { display:none; }
+
+/* ---- Sous-menu « Outils » ---- */
+.nav-dd { position:relative; }
+.nav-dd__btn {
+  display:inline-flex; align-items:center; gap:.35rem;
+  background:none; border:none; padding:0; cursor:pointer; font-family:inherit; line-height:inherit;
+}
+.nav-dd__chev { transition: transform .2s ease; }
+.nav-dd__btn[aria-expanded="true"] .nav-dd__chev { transform: rotate(180deg); }
+.nav-dd__menu { display:none; }
+.nav-dd__menu a,
+.nav-dd__item {
+  display:flex; flex-direction:column; gap:2px;
+  padding: .7rem .85rem; border-radius: var(--radius-md, 8px);
+  text-decoration:none; color: var(--ink-900);
+}
+.nav-dd__menu a:hover { background: var(--xf-green-50, #E6F7F4); }
+.nav-dd__menu a:hover .nav-dd__title { color: var(--xf-green-600); }
+.nav-dd__title { font-weight:600; font-size:.95rem; display:flex; align-items:center; gap:.5rem; }
+.nav-dd__desc { font-size:.82rem; color: var(--grey-600, #5D6C73); line-height:1.35; }
+.nav-dd__ext { font-weight:400; color: var(--grey-600, #5D6C73); }
+.nav-dd__item.is-soon { cursor:default; }
+.nav-dd__item.is-soon .nav-dd__title { color: var(--ink-700); }
+.nav-dd__tag {
+  font-size:.68rem; font-weight:600; letter-spacing:.04em; text-transform:uppercase;
+  padding:.1rem .45rem; border-radius:999px;
+  background: var(--xf-gold-50, #F8EFE2); color: var(--xf-gold-600, #9F7338);
+}
+a.nav-dd__cur .nav-dd__title { color: var(--xf-green-600); }
+
+/* ---- Burger ouvert (sous 1180px) ---- */
+@media (max-width:1179.98px){
+  nav.primary.primary--open {
+    display:flex; flex-direction:column; align-items:stretch; gap:0;
+    position:absolute; top:72px; left:0; right:0; z-index:49;
+    max-height: calc(100vh - 72px); overflow-y:auto;
+    background: var(--white, #fff);
+    border-bottom: 1px solid rgba(201,191,177,.5);
+    box-shadow: 0 12px 24px rgba(31,45,61,.08);
+    padding: var(--space-3, .75rem) var(--gutter-mobile, 1rem) var(--space-5, 1.25rem);
+  }
+  nav.primary.primary--open > a,
+  nav.primary.primary--open .nav-dd__btn {
+    display:flex; width:100%; padding: .85rem 0; font-size:1.05rem;
+    border-bottom: 1px solid var(--grey-300, #C9BFB1);
+  }
+  nav.primary.primary--open .nav-dd__btn { justify-content:space-between; text-align:left; }
+  nav.primary.primary--open .nav-dd__menu { padding: .25rem 0 .5rem; border-bottom: 1px solid var(--grey-300, #C9BFB1); }
+  nav.primary.primary--open .nav-dd__btn[aria-expanded="true"] { border-bottom-color: transparent; }
+  nav.primary.primary--open .nav-dd__btn[aria-expanded="true"] + .nav-dd__menu { display:block; }
+  nav.primary.primary--open > a.nav-cta,
+  nav.primary.primary--open > a.nav-cta:hover {
+    display:flex; align-items:center; justify-content:center; height:48px; padding: 0 1.5rem;
+    margin-top: var(--space-5, 1.25rem); border-bottom:none; color: var(--white, #fff); font-size:1rem; font-weight:600;
+  }
+  /* à partir de 640px le bouton de l'en-tête reste visible : pas de doublon dans le panneau */
+  @media (min-width:640px){ nav.primary.primary--open > a.nav-cta { display:none; } }
+}
+
+/* ---- Menu en ligne (1180px et plus) ---- */
+@media (min-width:1180px){
+  nav.primary { display:flex; }
+  .nav-toggle { display:none; }
+  header .header-cta { margin-left: var(--space-6, 1.5rem); }
+  nav.primary > a.is-current::after,
+  .nav-dd__btn.is-current::after {
+    content:""; position:absolute; left:0; right:0; bottom:-6px;
+    height:2px; background: var(--xf-green-500, #00B194); border-radius:2px;
+  }
+  .nav-dd__menu {
+    position:absolute; top: calc(100% + 14px); left:50%; transform: translateX(-50%);
+    width: 300px; padding: .4rem; z-index:60;
+    background:#fff; border: 1px solid rgba(201,191,177,.55); border-radius: var(--radius-lg, 12px);
+    box-shadow: var(--shadow-lg, 0 12px 40px rgba(31,45,61,.12));
+  }
+  /* pont invisible pour ne pas perdre le survol entre le bouton et le panneau */
+  .nav-dd__menu::before { content:""; position:absolute; left:0; right:0; top:-16px; height:16px; }
+  .nav-dd__btn[aria-expanded="true"] + .nav-dd__menu { display:block; }
+}
+@media (min-width:1180px) and (hover:hover){
+  .nav-dd:hover .nav-dd__menu { display:block; }
+}

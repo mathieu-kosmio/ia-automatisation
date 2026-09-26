@@ -48,10 +48,6 @@ body{font-family:var(--font-body);font-size:1.0625rem;line-height:1.65;color:var
 .brand{display:flex;align-items:center;gap:.75rem;text-decoration:none}
 .brand-logo{height:32px;width:auto;display:block}
 .brand-name{font-family:var(--font-display);font-weight:700;font-size:.95rem;color:var(--ink-900);letter-spacing:-.02em}
-.site-nav{display:none;gap:1.5rem}
-.site-nav a{color:var(--ink-700);text-decoration:none;font-weight:500;font-size:.95rem}
-.site-nav a:hover{color:var(--xf-green-600)}
-@media(min-width:1024px){.site-nav{display:flex}}
 .btn{display:inline-flex;align-items:center;gap:.75rem;
   padding:0 1.5rem;height:40px;font-family:var(--font-body);font-size:.875rem;
   font-weight:600;letter-spacing:.02em;border-radius:var(--radius-sm);
@@ -59,18 +55,6 @@ body{font-family:var(--font-body);font-size:1.0625rem;line-height:1.65;color:var
   transition:background .25s var(--ease-out),transform .25s var(--ease-out)}
 .btn--primary{background:var(--xf-green-500);color:var(--white)}
 .btn--primary:hover{background:var(--xf-green-600);transform:translateY(-2px)}
-.nav-toggle{display:flex;align-items:center;justify-content:center;
-  width:40px;height:40px;border:none;background:none;cursor:pointer;color:var(--ink-900)}
-@media(min-width:1024px){.nav-toggle{display:none}}
-.site-nav.open{
-  display:flex;flex-direction:column;gap:0;
-  position:absolute;top:72px;left:0;right:0;
-  background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);
-  border-bottom:1px solid rgba(201,191,177,0.4);
-  padding:1rem 1.5rem;z-index:99;
-}
-.site-nav.open a{padding:.75rem 0;border-bottom:1px solid var(--grey-300);font-size:1.05rem}
-.site-nav.open a:last-child{border-bottom:none}
 
 /* ── SITE FOOTER (shared with main site) ── */
 .site-footer{
@@ -241,6 +225,8 @@ body{font-family:var(--font-body);font-size:1.0625rem;line-height:1.65;color:var
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
+<link rel="stylesheet" href="../assets/site-nav.css?v=1" />
+<script src="../assets/site-nav.js?v=1" defer></script>
 </head>
 <body>
 
@@ -251,18 +237,28 @@ body{font-family:var(--font-body);font-size:1.0625rem;line-height:1.65;color:var
       <img src="../assets/logo-white.svg" alt="IA & Automatisation" class="brand-logo">
       <span class="brand-name">IA &amp; Automatisation</span>
     </a>
-    <nav class="site-nav" id="nav-primary">
+    <nav class="primary" id="nav-primary" aria-label="Principal">
       <a href="../index.html#methode">Méthode</a>
       <a href="../index.html#terrain">Terrain</a>
       <a href="../index.html#etudes">Résultats</a>
       <a href="../index.html#offre">Offre &amp; tarifs</a>
+      <div class="nav-dd">
+        <button type="button" class="nav-dd__btn" aria-expanded="false" aria-controls="nav-outils">Outils<svg class="nav-dd__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="nav-dd__menu" id="nav-outils">
+          <a href="../choix-ia.html"><span class="nav-dd__title">Quel outil IA&nbsp;?</span><span class="nav-dd__desc">Trouver l'abonnement adapté à vos usages</span></a>
+          <a href="https://processotheque.kosmio.dev/" target="_blank" rel="noopener"><span class="nav-dd__title">Processothèque <span class="nav-dd__ext" aria-hidden="true">↗</span></span><span class="nav-dd__desc">Le référentiel des processus métier de la filière bois</span></a>
+          <div class="nav-dd__item is-soon"><span class="nav-dd__title">Souveraineté <span class="nav-dd__tag">Bientôt</span></span><span class="nav-dd__desc">Vos outils IA sur un serveur privé souverain</span></div>
+        </div>
+      </div>
       <a href="../index.html#faq">FAQ</a>
       <a href="../index.html#contact">Contact</a>
+      <a class="btn btn--primary nav-cta" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">Réserver un échange →</a>
     </nav>
-    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-primary" aria-label="Menu" onclick="var n=document.getElementById('nav-primary');n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-primary" aria-label="Ouvrir le menu">
+      <svg class="nav-toggle__open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg class="nav-toggle__close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
     </button>
-    <a class="btn btn--primary" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">Réserver un échange →</a>
+    <a class="btn btn--primary header-cta" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">Réserver un échange →</a>
   </div>
 </header>
 
