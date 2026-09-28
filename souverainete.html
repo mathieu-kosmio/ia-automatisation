@@ -144,11 +144,43 @@
   .step .step__price-wrap { margin-top:auto; }
   .step .step__price { margin: var(--space-5) 0 0; padding-top: var(--space-4); border-top:1px solid var(--grey-300); }
   .step .step__price b { display:block; font-family: var(--font-display); font-size: 1.5rem; color: var(--ink-900); letter-spacing: var(--tracking-tight); }
+  .step .step__price small { display:block; margin-top: var(--space-1); color: var(--grey-600); font-size: var(--text-small); }
   .callout {
     margin-top: var(--space-6); padding: var(--space-5) var(--space-6);
     background: var(--xf-green-50); border:1px solid rgba(0,177,148,.25); border-left:4px solid var(--xf-green-500);
     border-radius: var(--radius-md); font-weight:600; line-height: var(--lh-base); color: var(--ink-900);
   }
+
+  /* ===== S6 bis · Tarifs ===== */
+  .entry-grid { display:grid; gap: var(--space-5); grid-template-columns:1fr; margin-bottom: var(--space-6); }
+  @media (min-width:768px){ .entry-grid { grid-template-columns: 1fr 1fr; } }
+  .entry { background: var(--white); border:1px solid var(--grey-300); border-radius: var(--radius-lg); padding: var(--space-6); }
+  .entry__label, .tier__users { font-family: var(--font-mono); font-size: var(--text-micro); font-weight:700; text-transform:uppercase; letter-spacing: var(--tracking-mono); color: var(--xf-green-600); margin:0 0 var(--space-2); }
+  .entry h3 { font-size: 1.25rem; margin-bottom: var(--space-3); }
+  .entry__price b, .tier__price b { font-family: var(--font-display); font-weight:700; letter-spacing: var(--tracking-tight); color: var(--ink-900); }
+  .entry__price { margin:0 0 var(--space-3); }
+  .entry__price b { font-size: 1.6rem; line-height:1.2; }
+  .entry p:not(.entry__label):not(.entry__price) { margin:0; color: var(--ink-700); line-height: var(--lh-base); font-size:.95rem; }
+  .tiers { display:grid; gap: var(--space-5); grid-template-columns:1fr; }
+  @media (min-width:1024px){ .tiers { grid-template-columns: repeat(3, 1fr); } }
+  .tier { background: var(--white); border:1px solid var(--grey-300); border-top:4px solid var(--xf-green-500); border-radius: var(--radius-lg); padding: var(--space-6); display:flex; flex-direction:column; }
+  .tier__name { font-size: var(--text-h3); margin-bottom: var(--space-2); }
+  .tier__price { margin: var(--space-4) 0 var(--space-1); color: var(--grey-600); font-size:.95rem; }
+  .tier__price b { font-size: 2.25rem; line-height:1; margin-right: var(--space-1); }
+  .tier__setup { margin:0 0 var(--space-5); color: var(--grey-600); font-size: var(--text-small); }
+  .tier ul { list-style:none; margin:0 0 var(--space-5); padding: var(--space-5) 0 0; border-top:1px solid var(--grey-300); display:grid; gap: var(--space-2); }
+  .tier li { display:flex; gap: var(--space-2); align-items:flex-start; font-size:.92rem; line-height:1.45; color: var(--ink-700); }
+  .tier li::before { content:"✓"; color: var(--xf-green-600); font-weight:700; flex:0 0 auto; }
+  .tier__fed { margin: auto 0 0; padding-top: var(--space-4); border-top:1px solid var(--grey-300); font-size: var(--text-small); color: var(--ink-700); line-height: var(--lh-base); }
+  .tier__fed b { color: var(--ink-900); }
+  .tier-notes { display:grid; gap: var(--space-6); grid-template-columns:1fr; margin-top: var(--space-6); background: var(--white); border:1px solid var(--grey-300); border-radius: var(--radius-lg); padding: var(--space-6); }
+  @media (min-width:900px){ .tier-notes { grid-template-columns: 1fr 1fr; } }
+  .tier-notes h3 { font-size: 1.1rem; margin-bottom: var(--space-3); }
+  .tier-notes ul { list-style:none; margin:0; padding:0; display:grid; gap: var(--space-2); }
+  .tier-notes li { display:flex; gap: var(--space-2); align-items:flex-start; font-size:.95rem; line-height: var(--lh-base); color: var(--ink-700); }
+  .tier-notes li::before { content:"✓"; color: var(--xf-green-600); font-weight:700; flex:0 0 auto; }
+  .tier-notes p { margin:0 0 var(--space-3); font-size:.95rem; line-height: var(--lh-base); color: var(--ink-700); }
+  .tier-notes p:last-child { margin-bottom:0; }
 
   /* ===== S7 · Réseaux ===== */
   .networks { background: var(--km-sage-50); }
@@ -209,8 +241,8 @@
         <button type="button" class="nav-dd__btn is-current" aria-expanded="false" aria-controls="nav-outils">Outils<svg class="nav-dd__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>
         <div class="nav-dd__menu" id="nav-outils">
           <a href="choix-ia.html"><span class="nav-dd__title">Quel outil IA&nbsp;?</span><span class="nav-dd__desc">Trouver l'abonnement adapté à vos usages</span></a>
-          <a href="https://processotheque.kosmio.dev/" target="_blank" rel="noopener"><span class="nav-dd__title">Processothèque <span class="nav-dd__ext" aria-hidden="true">↗</span></span><span class="nav-dd__desc">Le référentiel des processus métier de la filière bois</span></a>
           <a href="souverainete.html" class="nav-dd__cur" aria-current="page"><span class="nav-dd__title">Souveraineté</span><span class="nav-dd__desc">Vos outils IA sur un serveur à votre nom</span></a>
+          <a href="https://processotheque.kosmio.dev/" target="_blank" rel="noopener"><span class="nav-dd__title">Processothèque <span class="nav-dd__ext" aria-hidden="true">↗</span></span><span class="nav-dd__desc">Le référentiel des processus métier de la filière bois</span></a>
         </div>
       </div>
       <a href="index.html#faq">FAQ</a>
@@ -468,14 +500,113 @@
         <div class="num">02</div>
         <h3>Le pilote · 3 mois</h3>
         <p>Votre espace IA privé est installé et testé sur deux ou trois de vos vrais dossiers. En fin de pilote, on teste ensemble la restauration et la sortie, que vous continuiez ou non.</p>
+        <div class="step__price-wrap">
+          <p class="step__price"><b>Mise en place + 3&nbsp;mois</b><small>au tarif de la formule choisie</small></p>
+        </div>
       </div>
       <div class="step reveal">
         <div class="num">03</div>
         <h3>L'accompagnement dans la durée</h3>
         <p>On maintient, on sécurise, on fait évoluer vos assistants. Vous gardez les clés.</p>
+        <div class="step__price-wrap">
+          <p class="step__price"><b>Dès 149&nbsp;€&nbsp;HT / mois</b><small><a href="#tarifs">Voir les tarifs</a></small></p>
+        </div>
       </div>
     </div>
     <p class="callout reveal">Programme pilote ouvert : 5 places pour des entreprises de la filière bois, de la forêt au produit fini, d'ici fin 2026.</p>
+  </div>
+</section>
+
+<!-- ============ S6 bis · TARIFS ============ -->
+<section class="bg-alt" id="tarifs">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Tarifs</span>
+      <h2>Démarrez en toute sérénité avec nos abonnements pro.</h2>
+      <p class="t-lead">Tarifs de lancement, hors taxes, proposés pendant la phase pilote. Ils vous permettent de tester l'offre en sachant exactement ce que vous payez.</p>
+    </div>
+
+    <div class="entry-grid">
+      <article class="entry reveal">
+        <p class="entry__label">Pour commencer</p>
+        <h3>Le diagnostic · 1 jour</h3>
+        <p class="entry__price"><b>1&nbsp;500&nbsp;€&nbsp;HT</b></p>
+        <p>600&nbsp;€&nbsp;HT par entreprise en format collectif, organisé avec une fédération ou un réseau.</p>
+      </article>
+      <article class="entry reveal">
+        <p class="entry__label">Pour tester</p>
+        <h3>Le pilote · 3 mois</h3>
+        <p class="entry__price"><b>Mise en place + 3&nbsp;mois d'abonnement</b></p>
+        <p>Au tarif de la formule choisie ci-dessous. Les tests de restauration et de sortie sont inclus en fin de pilote.</p>
+      </article>
+    </div>
+
+    <div class="tiers">
+      <article class="tier reveal">
+        <h3 class="tier__name">Starter</h3>
+        <p class="tier__users">1 à 3 utilisateurs</p>
+        <p class="tier__price"><b>149&nbsp;€</b> HT / mois</p>
+        <p class="tier__setup">Mise en place : 1&nbsp;490&nbsp;€&nbsp;HT</p>
+        <ul>
+          <li>3 assistants personnels et 2 assistants d'équipe</li>
+          <li>50 Go de stockage</li>
+          <li>10&nbsp;€ de crédit IA inclus chaque mois</li>
+          <li>Un budget IA global</li>
+          <li>Sauvegardes quotidiennes</li>
+          <li>Support standard</li>
+          <li>Accès sécurisé (SSO, VPN) en option</li>
+        </ul>
+        <p class="tier__fed"><b>Via une fédération :</b> 119&nbsp;€&nbsp;HT / mois, mise en place 900&nbsp;€&nbsp;HT</p>
+      </article>
+      <article class="tier reveal">
+        <h3 class="tier__name">Team</h3>
+        <p class="tier__users">Jusqu'à 10 utilisateurs</p>
+        <p class="tier__price"><b>329&nbsp;€</b> HT / mois</p>
+        <p class="tier__setup">Mise en place : 2&nbsp;900&nbsp;€&nbsp;HT</p>
+        <ul>
+          <li>10 assistants personnels et 5 assistants d'équipe</li>
+          <li>200 Go de stockage</li>
+          <li>30&nbsp;€ de crédit IA inclus chaque mois</li>
+          <li>Un budget IA global et par utilisateur</li>
+          <li>Sauvegardes quotidiennes</li>
+          <li>Support prioritaire</li>
+          <li>Accès sécurisé (SSO, VPN) inclus</li>
+        </ul>
+        <p class="tier__fed"><b>Via une fédération :</b> 249&nbsp;€&nbsp;HT / mois, mise en place 1&nbsp;200&nbsp;€&nbsp;HT</p>
+      </article>
+      <article class="tier reveal">
+        <h3 class="tier__name">Business</h3>
+        <p class="tier__users">Jusqu'à 25 utilisateurs</p>
+        <p class="tier__price"><b>649&nbsp;€</b> HT / mois</p>
+        <p class="tier__setup">Mise en place : 5&nbsp;900&nbsp;€&nbsp;HT</p>
+        <ul>
+          <li>25 assistants personnels et 10 assistants d'équipe ou plus</li>
+          <li>500 Go de stockage</li>
+          <li>100&nbsp;€ de crédit IA inclus chaque mois</li>
+          <li>Un budget IA par équipe et par assistant</li>
+          <li>Sauvegardes renforcées</li>
+          <li>Support prioritaire</li>
+          <li>Accès sécurisé (SSO, VPN) inclus</li>
+        </ul>
+        <p class="tier__fed"><b>Via une fédération :</b> sur devis</p>
+      </article>
+    </div>
+
+    <div class="tier-notes reveal">
+      <div>
+        <h3>Dans toutes les formules</h3>
+        <ul>
+          <li>Vos documents, vos assistants et votre historique sur un serveur à votre nom, en France</li>
+          <li>Sortie possible à tout moment, avec vos données et vos assistants</li>
+          <li>La possibilité d'utiliser vos propres comptes chez les fournisseurs de modèles, facturés directement, sans marge de notre part</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Au-delà du crédit IA inclus</h3>
+        <p>Vous choisissez : une enveloppe fixe, bloquée au plafond ; une consommation à l'usage, plafonnée, au coût du fournisseur majoré de 10 à 15&nbsp;% de frais de gestion ; ou vos propres comptes fournisseurs.</p>
+        <p>Le niveau 03, avec un modèle installé chez vous, est chiffré sur devis.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -503,7 +634,7 @@
       <details class="reveal"><summary>Je suis exploitant forestier, scieur ou fabricant : est-ce pour moi&nbsp;?</summary><p>Oui. Vos tarifs, vos contrats d'achat de bois, vos volumes et vos fichiers clients méritent la même protection que les plans d'un bureau d'études. Le diagnostic part de vos documents et de vos outils, quel que soit votre métier.</p></details>
       <details class="reveal"><summary>Faut-il un informaticien en interne&nbsp;?</summary><p>Non. L'installation, la maintenance, les sauvegardes et la sécurité sont prises en charge. Vos équipes utilisent une interface web simple, comme un assistant classique.</p></details>
       <details class="reveal"><summary>C'est obligatoire pour travailler avec les marchés publics ou les grands donneurs d'ordre&nbsp;?</summary><p>Pas systématiquement, mais la question de la localisation des données revient de plus en plus dans les cahiers des charges, les chartes fournisseurs et les demandes des grands clients. Mieux vaut pouvoir répondre précisément le jour où elle se pose.</p></details>
-      <details class="reveal"><summary>Combien ça coûte&nbsp;?</summary><p>Le diagnostic a un prix fixe. La suite dépend du nombre d'utilisateurs et du niveau de protection choisi : on vous le chiffre à l'issue du diagnostic, sans engagement.</p></details>
+      <details class="reveal"><summary>Combien ça coûte&nbsp;?</summary><p>Le diagnostic coûte 1&nbsp;500&nbsp;€&nbsp;HT. Les abonnements suivent une grille publique, de 149 à 649&nbsp;€&nbsp;HT par mois selon le nombre d'utilisateurs, avec des frais de mise en place. Tout est détaillé dans la section <a href="#tarifs">Tarifs</a>. Le modèle installé chez vous se chiffre sur devis.</p></details>
       <details class="reveal"><summary>Et si l'outil ou le modèle que j'utilise disparaît&nbsp;?</summary><p>Votre espace n'est lié à aucun modèle en particulier. On bascule vers un autre, vos documents et vos assistants restent en place.</p></details>
     </div>
   </div>
