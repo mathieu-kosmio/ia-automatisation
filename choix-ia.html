@@ -167,6 +167,9 @@
   .alert { display:flex; gap: var(--space-3); align-items:flex-start; padding: var(--space-4); border-radius: var(--radius-md); background: var(--xf-gold-50); border:1px solid rgba(186,135,72,.3); margin-top: var(--space-4); font-size:.92rem; line-height: var(--lh-base); }
   .alert .ico { flex:0 0 auto; font-size:1.1rem; line-height:1.3; }
   .alert strong { display:block; margin-bottom:2px; }
+  .alert .tx { display:block; }
+  .alert__link { display:inline-block; margin-top: var(--space-2); color: var(--xf-green-600); font-weight:600; text-decoration:none; }
+  .alert__link:hover { color: var(--xf-green-600); text-decoration:underline; text-underline-offset:.2em; }
 
   /* ===== Pivot usage ===== */
   .pivot { background: var(--ink-900); color:#fff; padding-block: clamp(2.5rem,6vw,4.5rem); }
@@ -730,6 +733,29 @@
     if (forced && ranked[0] !== forced) {
       ranked = [forced].concat(ranked.filter(function(k){ return k !== forced; }));
     }
+
+    /* --- Alerte souveraineté : dépend de la solution arrivée en tête, donc après le classement --- */
+    var demandeSouv = a.souverainete === 'contrat' || a.souverainete === 'evoque' || a.souverainete === 'perso';
+    var docsSensibles = sensible.indexOf('clients') !== -1 || sensible.indexOf('technique') !== -1;
+    if (demandeSouv || docsSensibles) {
+      var lienSouv = { href: 'souverainete.html', label: 'Comprendre la souveraineté en 5 minutes' };
+      if (ranked[0] !== 'mistral') {
+        alerts.push({
+          ico: '🔑',
+          title: 'Et vos documents sensibles ?',
+          text: 'Pour vos usages courants, ' + SOLUTIONS[ranked[0]].name + " fera très bien l'affaire. Vos plans, notes de calcul ou documents clients, en revanche, sont traités sur les serveurs de l'éditeur, selon ses conditions et ses prix. Il existe des solutions où ces documents restent sur un serveur à votre nom et où vous pouvez changer de modèle à tout moment.",
+          link: lienSouv
+        });
+      } else {
+        alerts.push({
+          ico: '🔑',
+          title: 'Aller plus loin sur vos documents sensibles',
+          text: "Un éditeur européen est un bon premier pas. Pour les documents les plus sensibles, vous pouvez aller plus loin : un espace IA sur un serveur à votre nom, qui garde vos assistants et votre historique chez vous, et vous laisse changer de modèle à tout moment.",
+          link: lienSouv
+        });
+      }
+    }
+
     return { ranked: ranked, scores: s, alerts: alerts };
   }
 
@@ -1014,6 +1040,14 @@
       d.querySelector('.ico').textContent = a.ico;
       d.querySelector('strong').textContent = a.title;
       d.querySelector('.tx').textContent = a.text;
+      if (a.link) {
+        var lk = document.createElement('a');
+        lk.className = 'alert__link';
+        lk.href = a.link.href;
+        lk.textContent = a.link.label + ' →';
+        var tx = d.querySelector('.tx');
+        tx.parentNode.insertBefore(lk, tx.nextSibling);
+      }
       al.appendChild(d);
     });
 
