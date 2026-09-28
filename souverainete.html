@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>IA souveraine pour la filière bois · Gardez la main sur vos données | PerfIA</title>
+<meta name="description" content="Utiliser l'IA sans perdre la main sur vos plans, vos documents clients et vos coûts. Trois niveaux de protection expliqués simplement, pour les bureaux d'études et entreprises de la filière bois." />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="IA souveraine pour la filière bois · Gardez la main sur vos données" />
+<meta property="og:description" content="Utiliser l'IA sans perdre la main sur vos plans, vos documents clients et vos coûts. Trois niveaux de protection expliqués simplement, pour les bureaux d'études et entreprises de la filière bois." />
+<meta property="og:url" content="https://ia-automatisation.kosm.io/souverainete.html" />
+<meta property="og:image" content="https://ia-automatisation.kosm.io/assets/og-cover.png" />
+<meta property="og:locale" content="fr_FR" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="canonical" href="https://ia-automatisation.kosm.io/souverainete.html" />
+
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@600;700&display=swap">
+<link rel="stylesheet" href="design-system/tokens.css" />
+
+<style>
+  html { scroll-padding-top: 88px; }
+  .wrap { max-width: var(--container-xl); margin-inline:auto; padding-inline: var(--gutter-mobile); }
+  @media (min-width:768px){ .wrap{ padding-inline: var(--gutter-tablet);} }
+  @media (min-width:1024px){ .wrap{ padding-inline: var(--gutter-desktop);} }
+
+  /* ===== Header (identique au site) ===== */
+  header.site {
+    position: sticky; top:0; z-index:50;
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid rgba(201,191,177,0.4);
+  }
+  header.site .wrap { display:flex; align-items:center; justify-content:space-between; height:72px; gap:var(--space-4); }
+  .brand { display:flex; align-items:center; gap:var(--space-3); text-decoration:none;}
+  .brand-logo { height:32px; width:auto; display:block; }
+  .brand-name { font-family:var(--font-display); font-weight:700; font-size:.95rem; color:var(--ink-900); letter-spacing:var(--tracking-tight); }
+
+  /* ===== Sections communes ===== */
+  main section { padding-block: clamp(4rem, 8vw, 7rem); }
+  .section-head { max-width: 56rem; margin-bottom: var(--space-7); }
+  .section-head h2 { font-size: var(--text-h1); margin-top: var(--space-4); margin-bottom: var(--space-4); }
+  .section-head .t-lead { margin:0; }
+  .bg-alt { background: var(--color-bg-alt); }
+  .reveal { opacity:0; transform: translateY(20px); transition: opacity .8s var(--ease-out), transform .8s var(--ease-out); }
+  .reveal.in { opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce){ .reveal { opacity:1; transform:none; } }
+
+  /* ===== S1 · Hero ===== */
+  .hero {
+    background: radial-gradient(1100px 560px at 85% -10%, rgba(0,177,148,0.18), transparent 60%),
+                radial-gradient(900px 500px at 0% 110%, rgba(186,135,72,0.18), transparent 60%),
+                var(--ink-900);
+    color: var(--white);
+  }
+  main section.hero { padding-block: clamp(4rem, 9vw, 8rem); }
+  .hero .eyebrow { color: var(--xf-green-500); }
+  .hero h1 {
+    color: var(--white); font-size: var(--text-display-2); line-height: 1.02;
+    max-width: 17ch; margin: var(--space-5) 0 var(--space-5);
+  }
+  .hero h1 em { font-style: italic; color: var(--xf-green-500); }
+  .hero .lead { font-size: var(--text-lead); line-height: var(--lh-base); color: rgba(255,255,255,0.78); max-width: 52ch; margin: 0 0 var(--space-7); }
+  .hero .ctas { display:flex; flex-wrap:wrap; gap: var(--space-4); }
+  .hero .btn--secondary { color: var(--white); border-color: rgba(255,255,255,.6); }
+  .hero .btn--secondary:hover { background: var(--white); color: var(--ink-900); }
+
+  /* ===== S2 · Questions ===== */
+  .q-grid { display:grid; gap: var(--space-5); grid-template-columns: 1fr; }
+  @media (min-width:900px){ .q-grid { grid-template-columns: repeat(3, 1fr); } }
+  .q-card { background: var(--white); border:1px solid var(--grey-300); border-radius: var(--radius-lg); padding: var(--space-6); }
+  .q-card h3 { font-size: 1.25rem; line-height: var(--lh-snug); margin-bottom: var(--space-3); }
+  .q-card p { margin:0; color: var(--ink-700); font-size: .98rem; line-height: var(--lh-base); }
+
+  /* ===== S3 · Niveaux (Carte Niveau du design system) ===== */
+  .lv-grid { display:grid; gap: var(--space-5); grid-template-columns: 1fr; }
+  @media (min-width:1024px){ .lv-grid { grid-template-columns: repeat(3, 1fr); } }
+  .lv-grid .level-card { padding: var(--space-6); display:flex; flex-direction:column; }
+  .lv-label {
+    font-family: var(--font-mono); font-size: var(--text-micro); font-weight:700;
+    text-transform: uppercase; letter-spacing: var(--tracking-mono); margin: 0 0 var(--space-3);
+  }
+  .level-card[data-level="1"] .lv-label { color: var(--km-sage-600); }
+  .level-card[data-level="2"] .lv-label { color: var(--xf-green-600); }
+  .level-card[data-level="3"] .lv-label { color: var(--xf-gold-600); }
+  .lv-grid .level-card h3 { font-size: var(--text-h3); margin-bottom: var(--space-3); }
+  .lv-grid .lv-desc { color: var(--ink-700); line-height: var(--lh-base); margin: 0 0 var(--space-5); }
+  .lv-uses { margin-top:auto; padding-top: var(--space-4); border-top:1px solid var(--grey-300); }
+  .lv-uses span { display:block; font-family: var(--font-mono); font-size: var(--text-micro); font-weight:700; text-transform:uppercase; letter-spacing: var(--tracking-mono); color: var(--grey-600); margin-bottom: var(--space-1); }
+  .lv-uses p { margin:0; font-weight:600; line-height: var(--lh-base); }
+  .lv-note { font-size: var(--text-small); color: var(--grey-600); line-height: var(--lh-base); max-width: 62ch; margin: var(--space-6) 0 0; }
+
+  /* ===== S4 · Schéma ===== */
+  .schema-card { background: var(--white); border:1px solid var(--grey-300); border-radius: var(--radius-lg); padding: clamp(1rem, 3vw, var(--space-7)); }
+  .schema svg { display:block; width:100%; height:auto; }
+  .schema .sch-h { display:none; }
+  .schema .sch-v { max-width: 440px; margin-inline:auto; }
+  @media (min-width:1024px){
+    .schema .sch-h { display:block; }
+    .schema .sch-v { display:none; }
+  }
+  .schema text { font-family: var(--font-body); fill: var(--ink-900); }
+  .schema .sch-title { font-family: var(--font-display); font-size:20px; font-weight:700; }
+  .schema .sch-t { font-size:16px; font-weight:600; }
+  .schema .sch-sub { font-size:15px; fill: var(--ink-700); }
+  .schema .sch-box { fill: var(--white); stroke: var(--ink-900); stroke-width:1.5; }
+  .schema .sch-space { fill: var(--xf-green-50); stroke: var(--ink-900); stroke-width:1.5; }
+  .schema .sch-pill { fill: var(--white); stroke: var(--ink-900); stroke-width:1.2; }
+  .schema .sch-dot { fill: var(--xf-green-500); }
+  .schema .sch-switch { fill: var(--xf-sand-100); stroke: var(--xf-gold-500); stroke-width:2.5; }
+  .schema .sch-target { fill: var(--white); stroke: var(--ink-900); stroke-width:1.5; }
+  .schema .sch-target--opt { fill: var(--xf-sand-100); stroke-dasharray: 6 5; }
+  .schema .sch-accent { fill: var(--xf-gold-500); }
+  .schema .sch-arrow { fill:none; stroke: var(--xf-green-500); stroke-width:2.5; stroke-linecap:round; }
+  .schema .sch-head { fill: var(--xf-green-500); }
+  .schema .sch-icon { fill:none; stroke: var(--ink-900); stroke-width:1.5; }
+  .schema-caption { margin: var(--space-5) 0 0; font-weight:600; line-height: var(--lh-base); max-width: 62ch; }
+
+  /* ===== S5 · Sortie ===== */
+  .exit { background: var(--ink-900); color: var(--white); }
+  .exit .grid { display:grid; gap: var(--space-7); grid-template-columns: 1fr; align-items:start; }
+  @media (min-width:900px){ .exit .grid { grid-template-columns: 1.1fr .9fr; } }
+  .exit .eyebrow { color: var(--xf-green-500); }
+  .exit h2 { color: var(--white); font-size: var(--text-h1); max-width: 18ch; margin-top: var(--space-4); }
+  .exit p { color: rgba(255,255,255,.78); font-size: var(--text-lead); line-height: var(--lh-base); max-width: 54ch; margin:0; }
+  .exit-card { background: rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.14); border-radius: var(--radius-lg); padding: var(--space-6); }
+  .exit-card h3 { color: var(--white); font-size: 1.2rem; margin-bottom: var(--space-4); }
+  .exit-card ul { list-style:none; margin:0; padding:0; display:grid; gap: var(--space-3); }
+  .exit-card li { display:flex; gap: var(--space-3); align-items:flex-start; color: rgba(255,255,255,.88); line-height: var(--lh-base); }
+  .exit-card li::before { content:"✓"; color: var(--xf-green-500); font-weight:700; flex:0 0 auto; }
+
+  /* ===== S6 · Parcours ===== */
+  .steps { display:grid; gap: var(--space-5); grid-template-columns: 1fr; }
+  @media (min-width:900px){ .steps { grid-template-columns: repeat(3, 1fr); } }
+  .step { background: var(--white); border:1px solid var(--grey-300); border-radius: var(--radius-lg); padding: var(--space-6); display:flex; flex-direction:column; transition: transform .3s var(--ease-out); }
+  .step:hover { transform: translateY(-4px); }
+  .step .num { font-family: var(--font-mono); font-size:.75rem; font-weight:700; color: var(--xf-green-600); letter-spacing: var(--tracking-mono); }
+  .step h3 { font-size: 1.25rem; line-height: var(--lh-snug); margin: var(--space-3) 0; }
+  .step p { color: var(--ink-700); font-size: .95rem; line-height: var(--lh-base); margin:0; }
+  .step .step__price-wrap { margin-top:auto; }
+  .step .step__price { margin: var(--space-5) 0 0; padding-top: var(--space-4); border-top:1px solid var(--grey-300); }
+  .step .step__price b { display:block; font-family: var(--font-display); font-size: 1.5rem; color: var(--ink-900); letter-spacing: var(--tracking-tight); }
+  .callout {
+    margin-top: var(--space-6); padding: var(--space-5) var(--space-6);
+    background: var(--xf-green-50); border:1px solid rgba(0,177,148,.25); border-left:4px solid var(--xf-green-500);
+    border-radius: var(--radius-md); font-weight:600; line-height: var(--lh-base); color: var(--ink-900);
+  }
+
+  /* ===== S7 · Réseaux ===== */
+  .networks { background: var(--km-sage-50); }
+  .networks .inner { max-width: 56rem; }
+  .networks h2 { font-size: var(--text-h2); margin-top: var(--space-4); }
+  .networks p { color: var(--ink-700); font-size: var(--text-lead); line-height: var(--lh-base); max-width: 62ch; margin: 0 0 var(--space-6); }
+
+  /* ===== S8 · FAQ (même composant que l'accueil) ===== */
+  .faq details {
+    background: var(--white); border:1px solid var(--grey-300); border-radius: var(--radius-md);
+    padding: var(--space-5) var(--space-6); margin-bottom: var(--space-3); cursor:pointer;
+    transition: border-color .2s ease;
+  }
+  .faq details[open]{ border-color: var(--xf-green-500); }
+  .faq summary { font-family: var(--font-display); font-weight:700; font-size: 1.1rem; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:var(--space-4); }
+  .faq summary::-webkit-details-marker { display:none; }
+  .faq summary::after { content:"+"; font-size: 1.6rem; color: var(--xf-green-600); transition: transform .3s ease; }
+  .faq details[open] summary::after { transform: rotate(45deg); }
+  .faq summary:focus-visible { outline:none; box-shadow: var(--shadow-focus); border-radius: var(--radius-sm); }
+  .faq details p { margin: var(--space-4) 0 0; color: var(--ink-700); line-height: var(--lh-base); }
+  .faq .inner { max-width: 56rem; }
+
+  /* ===== S9 · Appel final (repris de l'accueil) ===== */
+  .final {
+    background:
+      radial-gradient(800px 400px at 90% 100%, rgba(186,135,72,0.25), transparent 60%),
+      radial-gradient(800px 400px at 10% 0%, rgba(0,177,148,0.25), transparent 60%),
+      var(--ink-900);
+    color: var(--white);
+  }
+  .final h2 { color: var(--white); font-size: var(--text-h1); max-width: 20ch; margin-bottom: var(--space-6); }
+
+  /* ===== Footer (identique à choix-ia.html) ===== */
+  footer.site { background: var(--ink-900); color: rgba(255,255,255,.65); padding-block: var(--space-7); font-size:.85rem; border-top:1px solid rgba(255,255,255,.08); }
+  footer.site .wrap { display:flex; flex-direction:column; gap: var(--space-4); align-items:center; text-align:center; }
+  footer.site a { color: rgba(255,255,255,.8); }
+  .footer-brands { display:flex; align-items:center; gap: var(--space-4); }
+  .footer-brands img { height:26px; width:auto; }
+  .footer-brands .x { color: rgba(255,255,255,.35); }
+</style>
+<link rel="stylesheet" href="assets/site-nav.css?v=1" />
+<script src="assets/site-nav.js?v=1" defer></script>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <img src="assets/logo-white.svg" alt="IA &amp; Automatisation" class="brand-logo">
+      <span class="brand-name">IA &amp; Automatisation</span>
+    </a>
+    <nav class="primary" id="nav-primary" aria-label="Principal">
+      <a href="index.html#methode">Méthode</a>
+      <a href="index.html#terrain">Terrain</a>
+      <a href="index.html#etudes">Résultats</a>
+      <a href="index.html#offre">Offre &amp; tarifs</a>
+      <div class="nav-dd">
+        <button type="button" class="nav-dd__btn is-current" aria-expanded="false" aria-controls="nav-outils">Outils<svg class="nav-dd__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="nav-dd__menu" id="nav-outils">
+          <a href="choix-ia.html"><span class="nav-dd__title">Quel outil IA&nbsp;?</span><span class="nav-dd__desc">Trouver l'abonnement adapté à vos usages</span></a>
+          <a href="https://processotheque.kosmio.dev/" target="_blank" rel="noopener"><span class="nav-dd__title">Processothèque <span class="nav-dd__ext" aria-hidden="true">↗</span></span><span class="nav-dd__desc">Le référentiel des processus métier de la filière bois</span></a>
+          <a href="souverainete.html" class="nav-dd__cur" aria-current="page"><span class="nav-dd__title">Souveraineté</span><span class="nav-dd__desc">Vos outils IA sur un serveur à votre nom</span></a>
+        </div>
+      </div>
+      <a href="index.html#faq">FAQ</a>
+      <a href="index.html#contact">Contact</a>
+      <a class="btn btn--primary nav-cta" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">Réserver un échange →</a>
+    </nav>
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-primary" aria-label="Ouvrir le menu">
+      <svg class="nav-toggle__open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg class="nav-toggle__close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+    </button>
+    <a class="btn btn--primary btn--sm header-cta" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">Réserver un échange →</a>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ S1 · HERO ============ -->
+<section class="hero" id="haut">
+  <div class="wrap">
+    <span class="eyebrow">Souveraineté</span>
+    <h1>Utilisez l'IA sans perdre la main sur vos <em>données.</em></h1>
+    <p class="lead">Vos plans, vos notes de calcul et les documents de vos clients valent cher. Voici, sans jargon, comment les protéger quand vous travaillez avec l'IA, et comment garder la liberté de changer d'outil.</p>
+    <div class="ctas">
+      <a class="btn btn--primary btn--lg" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">Réserver un diagnostic →</a>
+      <a class="btn btn--secondary btn--lg" href="#niveaux">Comprendre en 3 minutes ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ S2 · VOS QUESTIONS ============ -->
+<section class="bg-alt" id="questions">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Vos questions</span>
+      <h2>Trois questions qui reviennent du terrain</h2>
+    </div>
+    <div class="q-grid">
+      <article class="q-card reveal">
+        <h3>Où partent mes plans&nbsp;?</h3>
+        <p>Quand vous déposez un document dans un assistant IA grand public, il est traité sur les serveurs de l'éditeur, selon ses propres conditions. Pour un courrier, c'est sans enjeu. Pour une pièce de marché ou un plan client, la question mérite d'être posée.</p>
+      </article>
+      <article class="q-card reveal">
+        <h3>Et si l'outil change ses prix ou ses règles&nbsp;?</h3>
+        <p>Plus vos habitudes reposent sur un seul outil, plus il est coûteux d'en changer. Vos modèles de documents, vos assistants et votre historique restent chez lui.</p>
+      </article>
+      <article class="q-card reveal">
+        <h3>Et si je veux arrêter&nbsp;?</h3>
+        <p>Récupérer ses données, ses réglages et ses assistants doit être simple et prévu dès le départ, avant d'en avoir besoin.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ S3 · TROIS NIVEAUX ============ -->
+<section id="niveaux">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Trois niveaux de protection</span>
+      <h2>Trois niveaux, comme pour vos locaux</h2>
+      <p class="t-lead">Un bureau d'études connaît bien la différence entre partager un espace, louer un local et être propriétaire des murs. La souveraineté de l'IA fonctionne de la même façon.</p>
+    </div>
+    <div class="lv-grid">
+      <article class="level-card reveal" data-level="1">
+        <div class="level-card__numeral" aria-hidden="true">01</div>
+        <p class="lv-label">Niveau 01 · Espace partagé</p>
+        <h3>L'abonnement professionnel</h3>
+        <p class="lv-desc">Vous utilisez un assistant du marché avec un compte professionnel. Vos données ne servent pas à entraîner le modèle, mais elles sont traitées chez l'éditeur, selon ses conditions.</p>
+        <div class="lv-uses"><span>Pour quels usages</span><p>Rédaction courante, veille, courriers</p></div>
+      </article>
+      <article class="level-card reveal" data-level="2">
+        <div class="level-card__numeral" aria-hidden="true">02</div>
+        <p class="lv-label">Niveau 02 · Local à votre nom</p>
+        <h3>Votre espace IA privé</h3>
+        <p class="lv-desc">Vos documents, vos assistants et votre historique sont sur un serveur à votre nom, en France. Les documents sensibles sont confiés à des modèles hébergés en Europe, et vous changez de modèle quand vous voulez.</p>
+        <div class="lv-uses"><span>Pour quels usages</span><p>Pièces de marché, notes techniques, archives projets</p></div>
+      </article>
+      <article class="level-card reveal" data-level="3">
+        <div class="level-card__numeral" aria-hidden="true">03</div>
+        <p class="lv-label">Niveau 03 · Propriétaire des murs</p>
+        <h3>Le modèle chez vous</h3>
+        <p class="lv-desc">Le modèle d'IA lui-même tourne sur une machine que vous contrôlez. Rien ne sort, au prix d'un investissement plus important.</p>
+        <div class="lv-uses"><span>Pour quels usages</span><p>Documents couverts par une clause de confidentialité stricte</p></div>
+      </article>
+    </div>
+    <p class="lv-note reveal">Un même bureau d'études peut combiner les niveaux : le niveau 01 pour la veille, le niveau 02 pour ses dossiers clients. C'est le rôle du diagnostic de faire ce tri avec vous.</p>
+  </div>
+</section>
+
+<!-- ============ S4 · COMMENT ÇA MARCHE ============ -->
+<section class="bg-alt" id="fonctionnement">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Fonctionnement</span>
+      <h2>Comment ça marche, en une image</h2>
+    </div>
+
+    <figure class="schema schema-card reveal" style="margin:0;">
+      <!-- Version horizontale, écrans de 1024 px et plus -->
+      <svg class="sch-h" viewBox="0 0 1040 400" role="img" aria-label="Schéma : votre équipe utilise votre espace IA, un serveur à votre nom en France qui contient vos documents, vos assistants et votre historique. Un aiguillage choisit le modèle selon la sensibilité du document : un modèle européen pour les documents sensibles, un modèle du marché pour les usages courants, ou en option un modèle installé chez vous.">
+        <defs>
+          <marker id="sch-ah-h" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="sch-head"/></marker>
+        </defs>
+
+        <!-- 1. Votre équipe -->
+        <rect class="sch-box" x="10" y="140" width="150" height="120" rx="12"/>
+        <g class="sch-icon" transform="translate(85 180)">
+          <circle cx="-12" cy="-8" r="8"/><path d="M-28 16 a16 14 0 0 1 32 0"/>
+          <circle cx="12" cy="-8" r="8"/><path d="M-4 16 a16 14 0 0 1 32 0"/>
+        </g>
+        <text class="sch-t" x="85" y="236" text-anchor="middle">Votre équipe</text>
+
+        <path class="sch-arrow" d="M162 200 L208 200" marker-end="url(#sch-ah-h)"/>
+
+        <!-- 2. Votre espace IA -->
+        <rect class="sch-space" x="214" y="24" width="336" height="352" rx="16"/>
+        <text class="sch-title" x="382" y="66" text-anchor="middle">Votre espace IA</text>
+        <text class="sch-sub" x="382" y="92" text-anchor="middle">serveur à votre nom, en France</text>
+        <rect class="sch-accent" x="362" y="104" width="40" height="3" rx="1.5"/>
+        <rect class="sch-pill" x="252" y="134" width="260" height="56" rx="28"/>
+        <circle class="sch-dot" cx="280" cy="162" r="6"/>
+        <text class="sch-t" x="392" y="168" text-anchor="middle">Vos documents</text>
+        <rect class="sch-pill" x="252" y="212" width="260" height="56" rx="28"/>
+        <circle class="sch-dot" cx="280" cy="240" r="6"/>
+        <text class="sch-t" x="392" y="246" text-anchor="middle">Vos assistants</text>
+        <rect class="sch-pill" x="252" y="290" width="260" height="56" rx="28"/>
+        <circle class="sch-dot" cx="280" cy="318" r="6"/>
+        <text class="sch-t" x="392" y="324" text-anchor="middle">Votre historique</text>
+
+        <path class="sch-arrow" d="M552 200 L596 200" marker-end="url(#sch-ah-h)"/>
+
+        <!-- 3. Aiguillage -->
+        <polygon class="sch-switch" points="600,200 672,142 744,200 672,258"/>
+        <text class="sch-t" x="672" y="206" text-anchor="middle">Aiguillage</text>
+        <text class="sch-sub" x="672" y="292" text-anchor="middle">choisit le modèle</text>
+        <text class="sch-sub" x="672" y="312" text-anchor="middle">selon la sensibilité</text>
+        <text class="sch-sub" x="672" y="332" text-anchor="middle">du document</text>
+
+        <!-- 4. Modèles -->
+        <path class="sch-arrow" d="M746 200 C778 200 772 82 800 82" marker-end="url(#sch-ah-h)"/>
+        <path class="sch-arrow" d="M746 200 L800 200" marker-end="url(#sch-ah-h)"/>
+        <path class="sch-arrow" d="M746 200 C778 200 772 318 800 318" marker-end="url(#sch-ah-h)"/>
+
+        <rect class="sch-target" x="804" y="42" width="226" height="80" rx="12"/>
+        <text class="sch-t" x="917" y="76" text-anchor="middle">Modèle européen</text>
+        <text class="sch-sub" x="917" y="100" text-anchor="middle">documents sensibles</text>
+
+        <rect class="sch-target" x="804" y="160" width="226" height="80" rx="12"/>
+        <text class="sch-t" x="917" y="194" text-anchor="middle">Modèle du marché</text>
+        <text class="sch-sub" x="917" y="218" text-anchor="middle">usages courants</text>
+
+        <rect class="sch-target sch-target--opt" x="804" y="278" width="226" height="80" rx="12"/>
+        <text class="sch-t" x="917" y="312" text-anchor="middle">Modèle chez vous</text>
+        <text class="sch-sub" x="917" y="336" text-anchor="middle">option</text>
+      </svg>
+
+      <!-- Version verticale, écrans de moins de 1024 px -->
+      <svg class="sch-v" viewBox="0 0 360 872" role="img" aria-label="Schéma : votre équipe utilise votre espace IA, un serveur à votre nom en France qui contient vos documents, vos assistants et votre historique. Un aiguillage choisit le modèle selon la sensibilité du document : un modèle européen pour les documents sensibles, un modèle du marché pour les usages courants, ou en option un modèle installé chez vous.">
+        <defs>
+          <marker id="sch-ah-v" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="sch-head"/></marker>
+        </defs>
+
+        <rect class="sch-box" x="90" y="8" width="180" height="60" rx="12"/>
+        <g class="sch-icon" transform="translate(126 38) scale(.7)">
+          <circle cx="-12" cy="-8" r="8"/><path d="M-28 16 a16 14 0 0 1 32 0"/>
+          <circle cx="12" cy="-8" r="8"/><path d="M-4 16 a16 14 0 0 1 32 0"/>
+        </g>
+        <text class="sch-t" x="198" y="44" text-anchor="middle">Votre équipe</text>
+
+        <path class="sch-arrow" d="M180 70 L180 104" marker-end="url(#sch-ah-v)"/>
+
+        <rect class="sch-space" x="8" y="108" width="344" height="300" rx="16"/>
+        <text class="sch-title" x="180" y="146" text-anchor="middle">Votre espace IA</text>
+        <text class="sch-sub" x="180" y="170" text-anchor="middle">serveur à votre nom, en France</text>
+        <rect class="sch-accent" x="160" y="182" width="40" height="3" rx="1.5"/>
+        <rect class="sch-pill" x="36" y="204" width="288" height="52" rx="26"/>
+        <circle class="sch-dot" cx="62" cy="230" r="6"/>
+        <text class="sch-t" x="186" y="236" text-anchor="middle">Vos documents</text>
+        <rect class="sch-pill" x="36" y="270" width="288" height="52" rx="26"/>
+        <circle class="sch-dot" cx="62" cy="296" r="6"/>
+        <text class="sch-t" x="186" y="302" text-anchor="middle">Vos assistants</text>
+        <rect class="sch-pill" x="36" y="336" width="288" height="52" rx="26"/>
+        <circle class="sch-dot" cx="62" cy="362" r="6"/>
+        <text class="sch-t" x="186" y="368" text-anchor="middle">Votre historique</text>
+
+        <path class="sch-arrow" d="M180 410 L180 444" marker-end="url(#sch-ah-v)"/>
+
+        <polygon class="sch-switch" points="104,504 180,448 256,504 180,560"/>
+        <text class="sch-t" x="180" y="510" text-anchor="middle">Aiguillage</text>
+        <text class="sch-sub" x="180" y="588" text-anchor="middle">choisit le modèle selon</text>
+        <text class="sch-sub" x="180" y="608" text-anchor="middle">la sensibilité du document</text>
+
+        <path class="sch-arrow" d="M104 504 L24 504 L24 824" />
+        <path class="sch-arrow" d="M24 668 L50 668" marker-end="url(#sch-ah-v)"/>
+        <path class="sch-arrow" d="M24 746 L50 746" marker-end="url(#sch-ah-v)"/>
+        <path class="sch-arrow" d="M24 824 L50 824" marker-end="url(#sch-ah-v)"/>
+
+        <rect class="sch-target" x="54" y="636" width="298" height="64" rx="12"/>
+        <text class="sch-t" x="203" y="663" text-anchor="middle">Modèle européen</text>
+        <text class="sch-sub" x="203" y="686" text-anchor="middle">documents sensibles</text>
+
+        <rect class="sch-target" x="54" y="714" width="298" height="64" rx="12"/>
+        <text class="sch-t" x="203" y="741" text-anchor="middle">Modèle du marché</text>
+        <text class="sch-sub" x="203" y="764" text-anchor="middle">usages courants</text>
+
+        <rect class="sch-target sch-target--opt" x="54" y="792" width="298" height="64" rx="12"/>
+        <text class="sch-t" x="203" y="819" text-anchor="middle">Modèle chez vous</text>
+        <text class="sch-sub" x="203" y="842" text-anchor="middle">option</text>
+      </svg>
+
+      <figcaption class="schema-caption">Vous changez de modèle sans rien refaire : vos documents et vos assistants restent dans votre espace.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ S5 · LA PREUVE PAR LA SORTIE ============ -->
+<section class="exit" id="sortie">
+  <div class="wrap">
+    <div class="grid">
+      <div class="reveal">
+        <span class="eyebrow">Réversibilité</span>
+        <h2>Si on disparaît vendredi, vous travaillez lundi</h2>
+        <p>C'est le test que nous appliquons à chaque installation. Le serveur, le nom de domaine, les clés d'accès et les sauvegardes sont à votre nom. La documentation et les fichiers d'installation vous sont remis. Un autre prestataire peut reprendre l'exploitation sans rien reconstruire.</p>
+      </div>
+      <div class="exit-card reveal">
+        <h3>Ce que vous récupérez à tout moment</h3>
+        <ul>
+          <li>Vos documents et vos conversations, dans des formats standards</li>
+          <li>Vos assistants et leurs réglages</li>
+          <li>Les accès au serveur et aux fournisseurs de modèles</li>
+          <li>Les sauvegardes et la procédure pour les restaurer</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ S6 · LE PARCOURS ============ -->
+<section id="parcours">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Le parcours</span>
+      <h2>Par où commencer</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="num">01</div>
+        <h3>Le diagnostic · 1 jour</h3>
+        <p>On fait le point sur les outils IA déjà utilisés chez vous, les données qui sortent, et ce que vos contrats vous imposent. Vous repartez avec un niveau de protection par usage et trois cas d'usage prioritaires.</p>
+        <div class="step__price-wrap">
+          <p class="step__price"><b>1&nbsp;500&nbsp;€&nbsp;HT</b></p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="num">02</div>
+        <h3>Le pilote · 3 mois</h3>
+        <p>Votre espace IA privé est installé et testé sur deux ou trois de vos vrais dossiers. En fin de pilote, on teste ensemble la restauration et la sortie, que vous continuiez ou non.</p>
+      </div>
+      <div class="step reveal">
+        <div class="num">03</div>
+        <h3>L'accompagnement dans la durée</h3>
+        <p>On maintient, on sécurise, on fait évoluer vos assistants. Vous gardez les clés.</p>
+      </div>
+    </div>
+    <p class="callout reveal">Programme pilote ouvert : 5 places pour des bureaux d'études et entreprises de la filière, d'ici fin 2026.</p>
+  </div>
+</section>
+
+<!-- ============ S7 · VOUS ANIMEZ UN RÉSEAU ? ============ -->
+<section class="networks" id="reseaux">
+  <div class="wrap">
+    <div class="inner reveal">
+      <span class="eyebrow">Réseaux et fédérations</span>
+      <h2>Vous fédérez des entreprises de la filière&nbsp;?</h2>
+      <p>Institut, syndicat, interprofession, pôle : vos adhérents se posent les mêmes questions. Une base de connaissances métier commune, des assistants partagés et une formation collective, avec pour chaque adhérent un espace privé et étanche. La fédération n'a accès à aucune donnée individuelle.</p>
+      <a class="btn btn--secondary" href="mailto:mathieu@kosm.io?subject=Offre%20mutualis%C3%A9e%20souverainet%C3%A9">En parler →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ S8 · FAQ ============ -->
+<section class="faq" id="faq-souverainete">
+  <div class="wrap">
+    <div class="inner">
+      <div class="section-head reveal" style="margin-bottom:var(--space-6);">
+        <span class="eyebrow">Questions fréquentes</span>
+        <h2>Vos questions sur la souveraineté</h2>
+      </div>
+      <details class="reveal"><summary>Est-ce que c'est aussi performant que ChatGPT&nbsp;?</summary><p>Pour la grande majorité des usages d'un bureau d'études, oui : votre espace peut utiliser les meilleurs modèles du marché pour les tâches courantes, et des modèles européens pour les documents sensibles. C'est vous qui décidez de la règle.</p></details>
+      <details class="reveal"><summary>Faut-il un informaticien en interne&nbsp;?</summary><p>Non. L'installation, la maintenance, les sauvegardes et la sécurité sont prises en charge. Vos équipes utilisent une interface web simple, comme un assistant classique.</p></details>
+      <details class="reveal"><summary>C'est obligatoire pour répondre aux marchés publics&nbsp;?</summary><p>Pas systématiquement, mais la question de la localisation des données revient de plus en plus dans les cahiers des charges et les chartes fournisseurs. Mieux vaut pouvoir répondre précisément le jour où elle se pose.</p></details>
+      <details class="reveal"><summary>Combien ça coûte&nbsp;?</summary><p>Le diagnostic a un prix fixe. La suite dépend du nombre d'utilisateurs et du niveau de protection choisi : on vous le chiffre à l'issue du diagnostic, sans engagement.</p></details>
+      <details class="reveal"><summary>Et si l'outil ou le modèle que j'utilise disparaît&nbsp;?</summary><p>Votre espace n'est lié à aucun modèle en particulier. On bascule vers un autre, vos documents et vos assistants restent en place.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ S9 · APPEL FINAL ============ -->
+<section class="final" id="contact">
+  <div class="wrap reveal">
+    <span class="eyebrow" style="color:var(--xf-green-500);">Diagnostic</span>
+    <h2 style="margin-top:var(--space-5);">On regarde ensemble ce que vous devez protéger</h2>
+    <a class="btn btn--primary btn--lg" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">Réserver un diagnostic →</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="footer-brands">
+      <img src="assets/Logos-Kosmio-Xylofutur/logo-kosmio-blanc.svg" alt="Kosmio">
+      <span class="x">✕</span>
+      <img src="assets/Logos-Kosmio-Xylofutur/logo-xylofutur-blanc-web.png" alt="Xylofutur">
+    </div>
+    <div>© 2026 Kosmio × Xylofutur · Parcours IA Filière Bois</div>
+    <div><a href="index.html">Retour au site</a> · <a href="mailto:mathieu@kosm.io?subject=Mentions%20légales">Mentions légales</a> · <a href="mailto:mathieu@kosm.io?subject=Confidentialité">Confidentialité</a></div>
+  </div>
+</footer>
+
+<script>
+  // Apparition au défilement, comme sur l'accueil
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) { els.forEach(function(el){ el.classList.add('in'); }); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    els.forEach(function(el){ io.observe(el); });
+  })();
+</script>
+</body>
+</html>
