@@ -184,6 +184,19 @@
   .gain .d { font-size:.85rem; color: rgba(255,255,255,.65); line-height: var(--lh-base); margin:0; }
   .disclaimer { font-size:.78rem; color: rgba(255,255,255,.45); max-width:70ch; line-height:1.5; }
 
+  /* ===== Encart souveraineté (après le résultat) ===== */
+  .souv { background: var(--white); padding-block: clamp(2.5rem,6vw,4rem); }
+  .souv__card {
+    max-width: 860px; margin-inline:auto; display:grid; gap: var(--space-5); align-items:center;
+    background: var(--xf-sand-100); border:1px solid rgba(201,191,177,.7); border-left:4px solid var(--xf-green-500);
+    border-radius: var(--radius-lg); padding: clamp(1.5rem,4vw,var(--space-7));
+  }
+  @media (min-width:768px){ .souv__card { grid-template-columns: 1fr auto; gap: var(--space-7); } }
+  .souv__card h2 { font-size: var(--text-h2); margin: var(--space-4) 0 var(--space-4); }
+  .souv__card h3 { font-size: 1.1rem; color: var(--xf-green-600); margin: 0 0 var(--space-2); }
+  .souv__card p { margin:0; color: var(--ink-700); font-size: var(--text-lead); line-height: var(--lh-base); }
+  .souv__card .btn { justify-self:start; white-space:nowrap; }
+
   /* ===== Capture ===== */
   .capture { background: var(--km-sage-50); padding-block: clamp(2.5rem,6vw,4rem); }
   .capture .inner { max-width: 720px; margin-inline:auto; text-align:center; }
@@ -335,6 +348,21 @@
     <div style="margin-top:var(--space-7); display:flex; gap:var(--space-4); flex-wrap:wrap;">
       <a class="btn btn--primary btn--lg" href="https://cal.com/kosmio/ia-automatisation" target="_blank" rel="noopener">Parlons de vos processus (30 min, gratuit) →</a>
       <a class="btn btn--secondary btn--lg" href="index.html#etudes" style="color:#fff;border-color:rgba(255,255,255,.5);">Voir des exemples concrets ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ENCART SOUVERAINETÉ (affiché avec le résultat) ============ -->
+<section class="souv" id="souverainete-encart" hidden>
+  <div class="wrap">
+    <div class="souv__card">
+      <div>
+        <span class="eyebrow">Souveraineté</span>
+        <h2>Déployez votre IA souveraine et résiliente.</h2>
+        <h3>Comment&nbsp;?</h3>
+        <p>Parcourez nos offres de déploiement d'agents sur un environnement dont vous êtes le propriétaire.</p>
+      </div>
+      <a class="btn btn--primary" href="souverainete.html">Découvrir les offres →</a>
     </div>
   </div>
 </section>
@@ -959,6 +987,7 @@
     answers = {}; step = 0; lastResult = null;
     document.getElementById('result').hidden = true;
     document.getElementById('pivot').hidden = true;
+    document.getElementById('souverainete-encart').hidden = true;
     document.getElementById('capture').hidden = true;
     document.getElementById('final').hidden = true;
     elQuiz.hidden = false;
@@ -1064,6 +1093,7 @@
     elRestart.hidden = false;
     document.getElementById('result').hidden = false;
     document.getElementById('pivot').hidden = false;
+    document.getElementById('souverainete-encart').hidden = false;
     document.getElementById('capture').hidden = false;
     document.getElementById('final').hidden = false;
     scrollTop();
