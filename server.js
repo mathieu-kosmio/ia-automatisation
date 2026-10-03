@@ -45,6 +45,8 @@ const MIME = {
   '.webp': 'image/webp',
   '.ico': 'image/x-icon',
   '.pdf': 'application/pdf',
+  '.mp4': 'video/mp4',
+  '.vtt': 'text/vtt; charset=utf-8',
   '.md': 'text/plain; charset=utf-8',
   '.woff': 'font/woff',
   '.woff2': 'font/woff2',
@@ -348,10 +350,24 @@ function serveStatic(req, res, pathname) {
       });
     }
     const type = MIME[path.extname(file).toLowerCase()] || 'application/octet-stream';
-    const cache = /\.(css|js|svg|png|jpe?g|webp|woff2?|ico)$/i.test(file)
+    const cache = /\.(css|js|svg|png|jpe?g|webp|woff2?|ico|mp4|vtt)$/i.test(file)
       ? 'public, max-age=86400'
       : 'no-cache';
-    res.writeHead(200, { 'Content-Type': type, 'Cache-Control': cache, 'Content-Length': st.size });
+    /* Lecture partielle (Range) : indispensable pour la vidéo sur Safari et pour se déplacer dans la timeline */
+    const m = /^bytes=(\d*)-(\d*)$/.exec(req.headers.range || '');
+    if (m && (m[1] || m[2])) {
+      let start = m[1] ? parseInt(m[1], 10) : st.size - parseInt(m[2], 10);
+      let end = m[1] && m[2] ? parseInt(m[2], 10) : st.size - 1;
+      if (start < 0) start = 0;
+      if (end >= st.size) end = st.size - 1;
+      if (start > end || start >= st.size) {
+        res.writeHead(416, { 'Content-Range': 'bytes */' + st.size }); return res.end();
+      }
+      res.writeHead(206, { 'Content-Type': type, 'Cache-Control': cache, 'Accept-Ranges': 'bytes',
+        'Content-Range': 'bytes ' + start + '-' + end + '/' + st.size, 'Content-Length': end - start + 1 });
+      return fs.createReadStream(file, { start: start, end: end }).pipe(res);
+    }
+    res.writeHead(200, { 'Content-Type': type, 'Cache-Control': cache, 'Accept-Ranges': 'bytes', 'Content-Length': st.size });
     fs.createReadStream(file).pipe(res);
   });
 }
