@@ -169,6 +169,28 @@
   .section-head h2 em, h2 em { font-style: italic; color: var(--xf-green-600); }
   .level-card--featured { /* same size as others in 2x2 grid */ }
 
+  /* ============ CTA diagnostic IA (perfia-eval) ============ */
+  .diag-cta { background: var(--white); padding-block: clamp(3rem, 6vw, 5rem); border-bottom: 1px solid rgba(201,191,177,.4); }
+  .diag-card {
+    display:grid; gap: var(--space-6); align-items:center;
+    background:#fff; border:1px solid rgba(201,191,177,.7); border-radius: var(--radius-lg);
+    padding: clamp(1.5rem, 4vw, var(--space-7)); box-shadow: var(--shadow-md);
+  }
+  @media (min-width:768px){ .diag-card { grid-template-columns: 1fr auto; gap: var(--space-8); } }
+  .diag-card h2 { font-size: var(--text-h2); margin: var(--space-4) 0; }
+  .diag-card .t-lead { max-width: 54ch; margin: 0 0 var(--space-5); }
+  .diag-points { list-style:none; padding:0; margin: 0 0 var(--space-6); display:flex; flex-wrap:wrap; gap: var(--space-2); }
+  .diag-points li {
+    font-family: var(--font-mono); font-size:.68rem; font-weight:700; text-transform:uppercase;
+    letter-spacing: var(--tracking-mono); color: var(--xf-green-600); background: var(--xf-green-50);
+    padding: 6px 12px; border-radius: var(--radius-pill);
+  }
+  .diag-qr { display:none; margin:0; padding: var(--space-5); background: var(--xf-sand-100); border-radius: var(--radius-md); text-align:center; }
+  @media (min-width:768px){ .diag-qr { display:block; } }
+  .diag-qr img { display:block; width:168px; height:168px; margin-inline:auto; border-radius: var(--radius-sm); }
+  .diag-qr figcaption { margin-top: var(--space-3); font-size:.85rem; line-height:1.4; color: var(--ink-700); max-width: 20ch; margin-inline:auto; }
+  .diag-qr figcaption span { display:block; margin-top: var(--space-1); font-family: var(--font-mono); font-size:.68rem; color: var(--grey-600); }
+
   /* ============ Accroche souveraineté ============ */
   .teaser { display:grid; gap: var(--space-5); align-items:center; }
   @media (min-width:768px){ .teaser { grid-template-columns: 1fr auto; gap: var(--space-7); } }
@@ -551,6 +573,29 @@
       </ul>
     </div>
     <div class="visual reveal" aria-hidden="true"><span>Le bois sait travailler.<br>L'IA aussi.</span></div>
+  </div>
+</section>
+
+<!-- ============ DIAGNOSTIC IA (perfia-eval) ============ -->
+<section class="diag-cta" id="diagnostic">
+  <div class="wrap" style="max-width:1040px;">
+    <div class="diag-card reveal">
+      <div>
+        <span class="eyebrow">Diagnostic IA gratuit</span>
+        <h2>Où en est votre entreprise avec l'IA&nbsp;? <em>Votre feuille de route en 7 minutes.</em></h2>
+        <p class="t-lead">Situez-vous sur trois axes (vos usages de l'IA, vos données, votre cadre) et choisissez les cas d'usage qui parlent à votre métier. Vous repartez avec vos prochaines étapes et une matrice de priorités, à garder en PDF.</p>
+        <ul class="diag-points">
+          <li>5 à 7 minutes</li>
+          <li>Aucun compte à créer</li>
+          <li>Feuille de route en PDF</li>
+        </ul>
+        <a class="btn btn--primary btn--lg" href="https://perfia-eval.kosm.io/?utm_source=site-accueil" target="_blank" rel="noopener">Faire mon diagnostic →</a>
+      </div>
+      <figure class="diag-qr">
+        <img src="assets/qr-perfia-eval.svg" width="168" height="168" alt="QR code menant au diagnostic IA PerfIA sur perfia-eval.kosm.io">
+        <figcaption>Plus pratique sur téléphone&nbsp;: scannez ce code.<span>perfia-eval.kosm.io</span></figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
