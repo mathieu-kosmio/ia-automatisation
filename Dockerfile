@@ -11,7 +11,10 @@
 #   SITE_URL        (optionnel, https://ia-automatisation.kosm.io par défaut)
 #   NOTIFY_EMAIL    (optionnel, mathieu@kosm.io par défaut)
 
-FROM node:22-alpine
+# Version épinglée : un tag flottant (node:22-alpine) reste figé sur la
+# version présente dans le cache de build. 24.22.1 corrige les CVE de la
+# publication de sécurité Node du 21/10/2026. À remonter à chaque publication.
+FROM node:24.22.1-alpine
 
 WORKDIR /app
 

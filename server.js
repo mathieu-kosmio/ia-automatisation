@@ -330,15 +330,22 @@ function json(res, code, obj) {
 
 /* ---------- Fichiers statiques ---------- */
 function serveStatic(req, res, pathname) {
-  for (const rx of DENY) {
-    if (rx.test(pathname)) { res.writeHead(404); return res.end('Not found'); }
-  }
-
-  let rel = decodeURIComponent(pathname);
+  /* Un encodage invalide (/%zz) ou un octet nul (/%00) lèverait une exception
+     non rattrapée et arrêterait le processus : on répond 400. */
+  let rel;
+  try { rel = decodeURIComponent(pathname); } catch (e) { rel = null; }
+  if (rel === null || rel.indexOf('\0') !== -1) { res.writeHead(400); return res.end('Bad request'); }
   if (rel.endsWith('/')) rel += 'index.html';
   const file = path.join(ROOT, rel);
   if (!file.startsWith(ROOT + path.sep) && file !== path.join(ROOT, 'index.html')) {
     res.writeHead(403); return res.end('Forbidden');
+  }
+
+  /* La liste d'exclusion porte sur le chemin décodé et normalisé, sinon
+     /%2egit/config, /%73erver.js ou /.//server.js la contournent. */
+  const relPath = '/' + path.relative(ROOT, file).split(path.sep).join('/');
+  for (const rx of DENY) {
+    if (rx.test(relPath)) { res.writeHead(404); return res.end('Not found'); }
   }
 
   fs.stat(file, function (err, st) {

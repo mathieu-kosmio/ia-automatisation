@@ -1,0 +1,16 @@
+# Ce qui n'a rien à faire dans l'image : server.js sert tout le dossier /app.
+.git
+.gitignore
+.dockerignore
+.claude
+**/.DS_Store
+config.js
+Dockerfile
+
+# Documents internes, publiés jusqu'ici à la racine du site
+SPECIFICATIONS_SITE_WEB.md
+SPEC_*.md
+design-system/DESIGN_SYSTEM.md
+
+# Ancienne fonction serverless, remplacée par POST /api/lead dans server.js
+api/
